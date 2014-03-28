@@ -1,0 +1,12 @@
+DwhExporter
+
+Author: Henrik Thorburn (sg0211570) : henrik.thorburn@sabre.com
+
+To build a standalone app:
+mvn install
+cd ix-dwhexporter-app
+mvn appassembler:assemble
+
+You now have a target/DwhExporterApp directory with bin, run, repo
+
+This directory can be zipped and shipped for standalone execution.
