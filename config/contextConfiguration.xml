@@ -9,9 +9,9 @@
   <webServiceDataLoader username="Admin">
 
 
-    <jsonPlatformServices defaultURL="http://10.136.197.203:8111/asx/ws/unprotected_json/"/>  
-    <soapPlatformServices defaultURL="http://10.136.197.203:8111/"/>  
-    <domainServices defaultURL="http://10.136.197.203:8111"/>
+    <jsonPlatformServices defaultURL="http://192.168.1.65:8111/asx/ws/unprotected_json/"/>
+    <soapPlatformServices defaultURL="http://192.168.1.65:8111/"/>
+    <domainServices defaultURL="http://192.168.1.65:8111"/>
 
       <!--
       <jsonPlatformServices defaultURL="http://ltxl0486.dev.sabre.com:7000/asx/ws/unprotected_json/"/>

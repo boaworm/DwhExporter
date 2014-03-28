@@ -27,13 +27,10 @@ public class Main {
         Properties p = new Properties();
         p.load(new FileInputStream(exportInterfaceProperties));
 
-        // BookingSelector bookingSelector = new StaticBookingSelectorImpl(ixCtx);
         DataWarehouseExporter exporter = new DataWarehouseExporter();
 
         Class exportTargetImplementationClass = Class.forName((String)p.get("DWHExporter_OutputClass"));
         ExportDBConnectionHandler exportDBConnectionHandler = (ExportDBConnectionHandler) exportTargetImplementationClass.newInstance();
-
-        BookingSelector bs = new StaticBookingSelectorImpl();
 
         Class bookingSelectorImplementationClass = Class.forName((String)p.get("DWHExporter_BookingSelectorClass"));
         BookingSelector bookingSelector = (BookingSelector) bookingSelectorImplementationClass.newInstance();
