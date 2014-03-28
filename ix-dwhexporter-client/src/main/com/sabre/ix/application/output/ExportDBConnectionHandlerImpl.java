@@ -1,5 +1,6 @@
-package com.sabre.ix.application;
+package com.sabre.ix.application.output;
 
+import com.sabre.ix.application.logic.ProcessStatus;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -51,7 +52,7 @@ public class ExportDBConnectionHandlerImpl implements ExportDBConnectionHandler 
         if (sessionFactory == null) {
             Class.forName(driver);
             Configuration cfg = new Configuration();
-            cfg.configure("com/sabre/ix/application/dwstaging.cfg.xml");
+            cfg.configure("com/sabre/ix/application/dao/dwstaging.cfg.xml");
             sessionFactory = cfg.buildSessionFactory();
             Connection con = DriverManager.getConnection(connectionString, userName, password);
             return sessionFactory.openSession(con);

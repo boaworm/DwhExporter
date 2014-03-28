@@ -1,10 +1,9 @@
-package com.sabre.ix.application;
+package com.sabre.ix.application.input;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import uk.org.xml.sax.DocumentHandler;
 
 import javax.xml.soap.*;
 import javax.xml.transform.OutputKeys;

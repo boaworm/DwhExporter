@@ -1,17 +1,14 @@
 package com.sabre.ix.application;
 
-import com.calidris.java.sql.DBConnection;
-import com.calidris.java.sql.DBConnectionFactory;
+import com.sabre.ix.application.dao.FileDataRaw;
+import com.sabre.ix.application.input.BookingSelector;
+import com.sabre.ix.application.logic.DWMapper;
+import com.sabre.ix.application.output.ExportDBConnectionHandler;
 import com.sabre.ix.client.Booking;
-import com.sabre.ix.client.BookingServices;
 import com.sabre.ix.client.context.Context;
-import com.sabre.ix.client.context.ContextFactory;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;

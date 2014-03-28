@@ -1,4 +1,4 @@
-package com.sabre.ix.application;
+package com.sabre.ix.application.output;
 
 import org.hibernate.Session;
 

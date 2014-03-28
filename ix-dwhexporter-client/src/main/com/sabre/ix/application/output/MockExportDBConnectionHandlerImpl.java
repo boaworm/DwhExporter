@@ -1,5 +1,6 @@
-package com.sabre.ix.application;
+package com.sabre.ix.application.output;
 
+import com.sabre.ix.application.output.ExportDBConnectionHandler;
 import org.hibernate.*;
 import org.hibernate.stat.SessionStatistics;
 
