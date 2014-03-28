@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!-- $Id: log4j.xml,v 1.26.2.1 2004/09/19 22:18:42 starksm Exp $ -->
+<!--
+   | For more configuration infromation and examples see the Jakarta Log4j
+   | owebsite: http://jakarta.apache.org/log4j
+ -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+  <!-- ================================= -->
+  <!-- Send messages to a socket         -->
+  <!-- ================================= -->
+  <!--
+    <appender name="CHAINSAW" class="org.apache.log4j.net.SocketAppender">
+        <param name="RemoteHost" value="localhost"/>
+        <param name="Port" value="4445"/>
+        <param name="LocationInfo" value="false"/>
+        <layout class="org.apache.log4j.xml.XMLLayout">
+        </layout>
+    </appender>
+-->
+  <!-- ================================= -->
+  <!-- Preserve messages in a local file -->
+  <!-- ================================= -->
+  <!-- A size limit rolling appender -->
+  <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="/home/henrik/logs/ideaOutput.log"/>
+    <param name="Append" value="true"/>
+    <!-- Max File Size and Backup Count. Max space on disk-> multiply these together -->
+    <param name="MaxFileSize" value="10000KB"/>
+    <param name="MaxBackupIndex" value="50"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %-5p [%c{1}] (%t) %m%n"/>
+    </layout>
+  </appender>
+  <!-- ============================== -->
+  <!-- Append messages to the console -->
+  <!-- ============================== -->
+  <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+    <param name="Target" value="System.out"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <!-- The default pattern: Date Priority [Category] Message\n -->
+      <param name="ConversionPattern" value="%d{ISO8601} %-5p [%c{1}] (%t) %m%n"/>
+    </layout>
+  </appender>
+  <!-- ================ -->
+  <!-- Limit categories -->
+  <!-- ================ -->
+  <!-- Limit the org.apache category to INFO as its DEBUG is verbose -->
+  <category name="org.apache">
+    <priority value="ERROR"/>
+  </category>
+  <category name="org.exolab">
+    <priority value="ERROR"/>
+  </category>
+  <category name="junit">
+    <priority value="WARN"/>
+  </category>
+  <category name="com.calidris">
+    <priority value="WARN"/>
+  </category>
+  <category name="org.hibernate">
+    <priority value="ERROR"/>
+  </category>
+  <category name="com.sabre">
+    <priority value="WARN"/>
+  </category>
+  <category name="com.calidris.java.sql">
+    <priority value="WARN"/>
+  </category>
+  <category name="com.sabre.asx.util.TomcatRunner">
+    <priority value="DEBUG"/>
+  </category>
+  <category name="com.calidris.integrityserver.condition">
+    <priority value="TRACE"/>
+  </category>
+  <category name="com.sabre.ix.application">
+    <priority value="TRACE"/>
+  </category>
+  <!--
+    <category name="com.sabre.asx.integration.airberlin">
+        <priority value="DEBUG"/>
+    </category>
+	-->
+  <category name="event-logger" additivity="false">
+    <priority value="fatal"/>
+    <appender-ref ref="EventAsyncAppender"/>
+  </category>
+  <category name="event-error-logger" additivity="false">
+    <priority value="fatal"/>
+    <appender-ref ref="EventAsyncAppender"/>
+  </category>
+  <category name="event-monitor-logger" additivity="false">
+    <priority value="fatal"/>
+    <appender-ref ref="EventAsyncAppender"/>
+  </category>
+  <!-- ======================= -->
+  <!-- Setup the Root category -->
+  <!-- ======================= -->
+  <root>
+    <priority value="INFO"/>
+    <appender-ref ref="CONSOLE"/>
+    <!--
+        <appender-ref ref="FILE"/>
+		-->
+    <!--appender-ref ref="CHAINSAW"/-->
+  </root>
+</log4j:configuration>
