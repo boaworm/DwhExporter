@@ -10,3 +10,5 @@ mvn appassembler:assemble
 You now have a target/DwhExporterApp directory with bin, run, repo
 
 This directory can be zipped and shipped for standalone execution.
+
+.
