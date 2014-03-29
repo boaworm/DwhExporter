@@ -199,7 +199,8 @@ public class DataWarehouseExporter {
             Booking booking;
             try {
                 log.debug("About to load booking " + bookingId + " from ODS");
-                booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DefaultBooking");
+                booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DwhExporterBooking");
+                // booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DefaultBooking");
             } catch (Exception e) {
                 log.warn("Could not load booking " + bookingId + " because of exception: " + e.getMessage());
                 return;
@@ -225,7 +226,7 @@ public class DataWarehouseExporter {
                             throw e;
                         }
 
-                        /*
+
                         System.out.println("Row " + rowIndex);
                         System.out.println("getPaxname " + row.getPaxname());
                         System.out.println("getTixDepApt " + row.getTixDepApt());
@@ -239,7 +240,7 @@ public class DataWarehouseExporter {
                         System.out.println("getTixInformationFreetext " + row.getTixInformationFreetext());
                         System.out.println("getMiscellaneousChargeOrderFreetext " + row.getMiscellaneousChargeOrderFreetext());
                         System.out.println("");
-                        */
+
                         lastExportedRows = rows;
                     }
                 } catch (NullPointerException e) {
