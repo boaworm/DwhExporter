@@ -154,7 +154,7 @@ public class MockExportDBConnectionHandlerImpl implements ExportDBConnectionHand
 
             @Override
             public Serializable save(Object object) throws HibernateException {
-                System.out.println(object.toString());
+                // System.out.println(object.toString());
                 return null;
             }
 
