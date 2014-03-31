@@ -16,7 +16,9 @@
     <artifactId>ix-dwhexporter-client</artifactId>
     <packaging>jar</packaging>
     <name>DataWarehouseExporter Client</name>
-    <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public</url>
+    <!--
+    <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public-jdk7.runtime</url>
+    -->
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -194,22 +196,26 @@
             <groupId>sabre.ixtoolkit</groupId>
             <artifactId>ix-client-api</artifactId>
             <version>6.2.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>sabre.ixtoolkit</groupId>
             <artifactId>ix-client-api</artifactId>
             <version>6.2.0-SNAPSHOT</version>
+            <type>jar</type>
             <classifier>sources</classifier>
         </dependency>
         <dependency>
             <groupId>sabre.ixtoolkit</groupId>
             <artifactId>ix-client-impl</artifactId>
             <version>6.2.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>sabre.ixtoolkit</groupId>
             <artifactId>ix-client-impl</artifactId>
             <version>6.2.0-SNAPSHOT</version>
+            <type>jar</type>
             <classifier>sources</classifier>
         </dependency>
         <dependency>
