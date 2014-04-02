@@ -1,0 +1,1996 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10.11.2011 16:28:21 by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="com.sabre.ix.application.dao.FileDataRaw" table="FileDataRaw" dynamic-insert="true">
+        <id name="rowNumber" type="java.lang.Long" unsaved-value="0">
+            <column name="RowNumber"/>
+            <generator class="identity"/>
+        </id>
+        <property name="recordStatus" type="java.lang.Character">
+            <column name="RecordStatus" length="1"/>
+        </property>
+        <property name="dateOfExtraction" type="string">
+            <column name="DateOfExtraction" length="12"/>
+        </property>
+        <property name="documentClass" type="string">
+            <column name="DocumentClass" length="3"/>
+        </property>
+        <property name="recordIdentifier" type="java.lang.Character">
+            <column name="RecordIdentifier" length="1"/>
+        </property>
+        <property name="issueDate" type="string">
+            <column name="IssueDate" length="10"/>
+        </property>
+        <property name="issueAirline" type="string">
+            <column name="IssueAirline" length="3"/>
+        </property>
+        <property name="documentNo" type="string">
+            <column name="DocumentNo" length="20"/>
+        </property>
+        <property name="couponNo" type="string">
+            <column name="CouponNo" length="1"/>
+        </property>
+        <property name="serialNo" type="string">
+            <column name="SerialNo" length="1"/>
+        </property>
+        <property name="refCarrCd1" type="string">
+            <column name="RefCarrCd1" length="3"/>
+        </property>
+        <property name="refCpnNos1" type="string">
+            <column name="RefCpnNos1" length="4"/>
+        </property>
+        <property name="refDocNo1" type="string">
+            <column name="RefDocNo1" length="10"/>
+        </property>
+        <property name="refCarrCd2" type="string">
+            <column name="RefCarrCd2" length="3"/>
+        </property>
+        <property name="refCpnNos2" type="string">
+            <column name="RefCpnNos2" length="4"/>
+        </property>
+        <property name="refDocNo2" type="string">
+            <column name="RefDocNo2" length="10"/>
+        </property>
+        <property name="refCarrCd3" type="string">
+            <column name="RefCarrCd3" length="3"/>
+        </property>
+        <property name="refCpnNos3" type="string">
+            <column name="RefCpnNos3" length="4"/>
+        </property>
+        <property name="refDocNo3" type="string">
+            <column name="RefDocNo3" length="10"/>
+        </property>
+        <property name="refCarrCd4" type="string">
+            <column name="RefCarrCd4" length="3"/>
+        </property>
+        <property name="refCpnNos4" type="string">
+            <column name="RefCpnNos4" length="4"/>
+        </property>
+        <property name="refDocNo4" type="string">
+            <column name="RefDocNo4" length="10"/>
+        </property>
+        <property name="refCarrCd5" type="string">
+            <column name="RefCarrCd5" length="3"/>
+        </property>
+        <property name="refCpnNos5" type="string">
+            <column name="RefCpnNos5" length="4"/>
+        </property>
+        <property name="refDocNo5" type="string">
+            <column name="RefDocNo5" length="10"/>
+        </property>
+        <property name="refCarrCd6" type="string">
+            <column name="RefCarrCd6" length="3"/>
+        </property>
+        <property name="refCpnNos6" type="string">
+            <column name="RefCpnNos6" length="4"/>
+        </property>
+        <property name="refDocNo6" type="string">
+            <column name="RefDocNo6" length="10"/>
+        </property>
+        <property name="refCarrCd7" type="string">
+            <column name="RefCarrCd7" length="3"/>
+        </property>
+        <property name="refCpnNos7" type="string">
+            <column name="RefCpnNos7" length="4"/>
+        </property>
+        <property name="refDocNo7" type="string">
+            <column name="RefDocNo7" length="10"/>
+        </property>
+        <property name="refCarrCd8" type="string">
+            <column name="RefCarrCd8" length="3"/>
+        </property>
+        <property name="refCpnNos8" type="string">
+            <column name="RefCpnNos8" length="4"/>
+        </property>
+        <property name="refDocNo8" type="string">
+            <column name="RefDocNo8" length="10"/>
+        </property>
+        <property name="refCarrCd9" type="string">
+            <column name="RefCarrCd9" length="3"/>
+        </property>
+        <property name="refCpnNos9" type="string">
+            <column name="RefCpnNos9" length="4"/>
+        </property>
+        <property name="refDocNo9" type="string">
+            <column name="RefDocNo9" length="10"/>
+        </property>
+        <property name="refCarrCd10" type="string">
+            <column name="RefCarrCd10" length="3"/>
+        </property>
+        <property name="refCpnNos10" type="string">
+            <column name="RefCpnNos10" length="4"/>
+        </property>
+        <property name="refDocNo10" type="string">
+            <column name="RefDocNo10" length="10"/>
+        </property>
+        <property name="refCarrCd11" type="string">
+            <column name="RefCarrCd11" length="3"/>
+        </property>
+        <property name="refCpnNos11" type="string">
+            <column name="RefCpnNos11" length="4"/>
+        </property>
+        <property name="refDocNo11" type="string">
+            <column name="RefDocNo11" length="10"/>
+        </property>
+        <property name="refCarrCd12" type="string">
+            <column name="RefCarrCd12" length="3"/>
+        </property>
+        <property name="refCpnNos12" type="string">
+            <column name="RefCpnNos12" length="4"/>
+        </property>
+        <property name="refDocNo12" type="string">
+            <column name="RefDocNo12" length="10"/>
+        </property>
+        <property name="refCarrCd13" type="string">
+            <column name="RefCarrCd13" length="3"/>
+        </property>
+        <property name="refCpnNos13" type="string">
+            <column name="RefCpnNos13" length="4"/>
+        </property>
+        <property name="refDocNo13" type="string">
+            <column name="RefDocNo13" length="10"/>
+        </property>
+        <property name="refCarrCd14" type="string">
+            <column name="RefCarrCd14" length="3"/>
+        </property>
+        <property name="refCpnNos14" type="string">
+            <column name="RefCpnNos14" length="4"/>
+        </property>
+        <property name="refDocNo14" type="string">
+            <column name="RefDocNo14" length="10"/>
+        </property>
+        <property name="refCarrCd15" type="string">
+            <column name="RefCarrCd15" length="3"/>
+        </property>
+        <property name="refCpnNos15" type="string">
+            <column name="RefCpnNos15" length="4"/>
+        </property>
+        <property name="refDocNo15" type="string">
+            <column name="RefDocNo15" length="10"/>
+        </property>
+        <property name="refCarrCd16" type="string">
+            <column name="RefCarrCd16" length="3"/>
+        </property>
+        <property name="refCpnNos16" type="string">
+            <column name="RefCpnNos16" length="4"/>
+        </property>
+        <property name="refDocNo16" type="string">
+            <column name="RefDocNo16" length="10"/>
+        </property>
+        <property name="refCarrCd17" type="string">
+            <column name="RefCarrCd17" length="3"/>
+        </property>
+        <property name="refCpnNos17" type="string">
+            <column name="RefCpnNos17" length="4"/>
+        </property>
+        <property name="refDocNo17" type="string">
+            <column name="RefDocNo17" length="10"/>
+        </property>
+        <property name="refCarrCd18" type="string">
+            <column name="RefCarrCd18" length="3"/>
+        </property>
+        <property name="refCpnNos18" type="string">
+            <column name="RefCpnNos18" length="4"/>
+        </property>
+        <property name="refDocNo18" type="string">
+            <column name="RefDocNo18" length="10"/>
+        </property>
+        <property name="refCarrCd19" type="string">
+            <column name="RefCarrCd19" length="3"/>
+        </property>
+        <property name="refCpnNos19" type="string">
+            <column name="RefCpnNos19" length="4"/>
+        </property>
+        <property name="refDocNo19" type="string">
+            <column name="RefDocNo19" length="10"/>
+        </property>
+        <property name="refCarrCd20" type="string">
+            <column name="RefCarrCd20" length="3"/>
+        </property>
+        <property name="refCpnNos20" type="string">
+            <column name="RefCpnNos20" length="4"/>
+        </property>
+        <property name="refDocNo20" type="string">
+            <column name="RefDocNo20" length="10"/>
+        </property>
+        <property name="refCarrCd21" type="string">
+            <column name="RefCarrCd21" length="3"/>
+        </property>
+        <property name="refCpnNos21" type="string">
+            <column name="RefCpnNos21" length="4"/>
+        </property>
+        <property name="refDocNo21" type="string">
+            <column name="RefDocNo21" length="10"/>
+        </property>
+        <property name="refCarrCd22" type="string">
+            <column name="RefCarrCd22" length="3"/>
+        </property>
+        <property name="refCpnNos22" type="string">
+            <column name="RefCpnNos22" length="4"/>
+        </property>
+        <property name="refDocNo22" type="string">
+            <column name="RefDocNo22" length="10"/>
+        </property>
+        <property name="refCarrCd23" type="string">
+            <column name="RefCarrCd23" length="3"/>
+        </property>
+        <property name="refCpnNos23" type="string">
+            <column name="RefCpnNos23" length="4"/>
+        </property>
+        <property name="refDocNo23" type="string">
+            <column name="RefDocNo23" length="10"/>
+        </property>
+        <property name="refCarrCd24" type="string">
+            <column name="RefCarrCd24" length="3"/>
+        </property>
+        <property name="refCpnNos24" type="string">
+            <column name="RefCpnNos24" length="4"/>
+        </property>
+        <property name="refDocNo24" type="string">
+            <column name="RefDocNo24" length="10"/>
+        </property>
+        <property name="refCarrCd25" type="string">
+            <column name="RefCarrCd25" length="3"/>
+        </property>
+        <property name="refCpnNos25" type="string">
+            <column name="RefCpnNos25" length="4"/>
+        </property>
+        <property name="refDocNo25" type="string">
+            <column name="RefDocNo25" length="10"/>
+        </property>
+        <property name="mainDocNo" type="string">
+            <column name="MainDocNo" length="20"/>
+        </property>
+        <property name="couponUseInd" type="string">
+            <column name="CouponUseInd" length="4"/>
+        </property>
+        <property name="noOfCpns" type="string">
+            <column name="NoOfCpns" length="1"/>
+        </property>
+        <property name="pnr" type="string">
+            <column name="PNR" length="13"/>
+        </property>
+        <property name="gds" type="string">
+            <column name="GDS" length="10"/>
+        </property>
+        <property name="origIssueDate" type="string">
+            <column name="OrigIssueDate" length="10"/>
+        </property>
+        <property name="amissueAgnt" type="string">
+            <column name="AMIssueAgnt" length="7"/>
+        </property>
+        <property name="origAgnt" type="string">
+            <column name="OrigAgnt" length="7"/>
+        </property>
+        <property name="origAgntCntry" type="string">
+            <column name="OrigAgntCntry" length="2"/>
+        </property>
+        <property name="origAgntSalesChannel" type="string">
+            <column name="OrigAgntSalesChannel" length="10"/>
+        </property>
+        <property name="issueAgnt" type="string">
+            <column name="IssueAgnt" length="7"/>
+        </property>
+        <property name="issueAgntCntryCode" type="string">
+            <column name="IssueAgntCntryCode" length="2"/>
+        </property>
+        <property name="issueAgntSalesChannel" type="string">
+            <column name="IssueAgntSalesChannel" length="10"/>
+        </property>
+        <property name="iatauser" type="string">
+            <column name="IATAUser" length="10"/>
+        </property>
+        <property name="issueAgntPos" type="string">
+            <column name="IssueAgntPOS" length="3"/>
+        </property>
+        <property name="salesSource" type="string">
+            <column name="SalesSource" length="6"/>
+        </property>
+        <property name="vatcntryCode" type="string">
+            <column name="VATCntryCode" length="2"/>
+        </property>
+        <property name="paxname" type="string">
+            <column name="PAXName" length="49"/>
+        </property>
+        <property name="firstVouchDt" type="string">
+            <column name="FirstVouchDt" length="10"/>
+        </property>
+        <property name="tixFlightDt" type="string">
+            <column name="TixFlightDt" length="10"/>
+        </property>
+        <property name="tixDepApt" type="string">
+            <column name="TixDepApt" length="3"/>
+        </property>
+        <property name="tixDestApt" type="string">
+            <column name="TixDestApt" length="3"/>
+        </property>
+        <property name="tixOperCarr" type="string">
+            <column name="TixOperCarr" length="3"/>
+        </property>
+        <property name="tixOperFlNo" type="string">
+            <column name="TixOperFlNo" length="4"/>
+        </property>
+        <property name="tixMarkCarr" type="string">
+            <column name="TixMarkCarr" length="3"/>
+        </property>
+        <property name="tixMarkFlNo" type="string">
+            <column name="TixMarkFlNo" length="4"/>
+        </property>
+        <property name="flownFlightDt" type="string">
+            <column name="FlownFlightDt" length="10"/>
+        </property>
+        <property name="flownDepApt" type="string">
+            <column name="FlownDepApt" length="3"/>
+        </property>
+        <property name="flownDestApt" type="string">
+            <column name="FlownDestApt" length="3"/>
+        </property>
+        <property name="flightGroupCd" type="string">
+            <column name="FlightGroupCd" length="2"/>
+        </property>
+        <property name="flownFlNo" type="string">
+            <column name="FlownFlNo" length="4"/>
+        </property>
+        <property name="farebaseCode" type="string">
+            <column name="FarebaseCode" length="15"/>
+        </property>
+        <property name="tourCode" type="string">
+            <column name="TourCode" length="15"/>
+        </property>
+        <property name="ticketedRbd" type="string">
+            <column name="TicketedRBD" length="1"/>
+        </property>
+        <property name="operatingClass" type="string">
+            <column name="OperatingClass" length="1"/>
+        </property>
+        <property name="flownCabin" type="string">
+            <column name="FlownCabin" length="1"/>
+        </property>
+        <property name="formOfPaymCd1" type="string">
+            <column name="FormOfPaymCd1" length="2"/>
+        </property>
+        <property name="formOfPaymDtl1" type="string">
+            <column name="FormOfPaymDtl1" length="30"/>
+        </property>
+        <property name="formOfPaymVal1" type="string">
+            <column name="FormOfPaymVal1" length="12"/>
+        </property>
+        <property name="formOfPaymCd2" type="string">
+            <column name="FormOfPaymCd2" length="2"/>
+        </property>
+        <property name="formOfPaymDtl2" type="string">
+            <column name="FormOfPaymDtl2" length="30"/>
+        </property>
+        <property name="formOfPaymVal2" type="string">
+            <column name="FormOfPaymVal2" length="12"/>
+        </property>
+        <property name="crncyOfTxn" type="string">
+            <column name="CrncyOfTxn" length="3"/>
+        </property>
+        <property name="exchangeRate" type="string">
+            <column name="ExchangeRate" length="12"/>
+        </property>
+        <property name="accountingDate" type="string">
+            <column name="AccountingDate" length="10"/>
+        </property>
+        <property name="provFinInd" type="string">
+            <column name="ProvFinInd" length="1"/>
+        </property>
+        <property name="endorsementText" type="string">
+            <column name="EndorsementText" length="150"/>
+        </property>
+        <property name="fareCalc" type="string">
+            <column name="FareCalc" length="500"/>
+        </property>
+        <property name="frquntFlyerCd" type="string">
+            <column name="FrquntFlyerCd" length="16"/>
+        </property>
+        <property name="stopoverInd" type="string">
+            <column name="StopoverInd" length="1"/>
+        </property>
+        <property name="intDomTixInd" type="string">
+            <column name="IntDomTixInd" length="1"/>
+        </property>
+        <property name="intDomCpnInd" type="string">
+            <column name="IntDomCpnInd" length="1"/>
+        </property>
+        <property name="codeshareInd" type="string">
+            <column name="CodeshareInd" length="1"/>
+        </property>
+        <property name="spaind" type="string">
+            <column name="SPAInd" length="1"/>
+        </property>
+        <property name="issInConnWith" type="string">
+            <column name="IssInConnWith" length="10"/>
+        </property>
+        <property name="aircraftReg" type="string">
+            <column name="AircraftReg" length="8"/>
+        </property>
+        <property name="aircraftType" type="string">
+            <column name="AircraftType" length="8"/>
+        </property>
+        <property name="inboundCity" type="string">
+            <column name="InboundCity" length="3"/>
+        </property>
+        <property name="inboundCarr" type="string">
+            <column name="InboundCarr" length="2"/>
+        </property>
+        <property name="outboundCity" type="string">
+            <column name="OutboundCity" length="3"/>
+        </property>
+        <property name="outboundCarr" type="string">
+            <column name="OutboundCarr" length="2"/>
+        </property>
+        <property name="trueOrigDest" type="string">
+            <column name="TrueOrigDest" length="6"/>
+        </property>
+        <property name="electrInd" type="string">
+            <column name="ElectrInd" length="1"/>
+        </property>
+        <property name="onlineOrigDest" type="string">
+            <column name="OnlineOrigDest" length="6"/>
+        </property>
+        <property name="inwClearingMonth" type="string">
+            <column name="InwClearingMonth" length="10"/>
+        </property>
+        <property name="nonRevInd" type="string">
+            <column name="NonRevInd" length="1"/>
+        </property>
+        <property name="mcoreason" type="string">
+            <column name="MCOReason" length="100"/>
+        </property>
+        <property name="memoViolationType" type="java.lang.Character">
+            <column name="MemoViolationType" length="1"/>
+        </property>
+        <property name="paxType" type="string">
+            <column name="PaxType" length="1"/>
+        </property>
+        <property name="commissionRate" type="string">
+            <column name="CommissionRate" length="12"/>
+        </property>
+        <property name="iwbBillCommission" type="string">
+            <column name="IwbBillCommission" length="12"/>
+        </property>
+        <property name="sectorDiscount" type="string">
+            <column name="SectorDiscount" length="12"/>
+        </property>
+        <property name="noOfPax" type="string">
+            <column name="NoOfPax" length="2"/>
+        </property>
+        <property name="sectorFare" type="string">
+            <column name="SectorFare" length="12"/>
+        </property>
+        <property name="sectorFareNet" type="string">
+            <column name="SectorFareNet" length="12"/>
+        </property>
+        <property name="sectorCommission" type="string">
+            <column name="SectorCommission" length="12"/>
+        </property>
+        <property name="taxCode1" type="string">
+            <column name="TaxCode1" length="9"/>
+        </property>
+        <property name="taxValue1" type="string">
+            <column name="TaxValue1" length="12"/>
+        </property>
+        <property name="taxNetValue1" type="string">
+            <column name="TaxNetValue1" length="12"/>
+        </property>
+        <property name="taxCode2" type="string">
+            <column name="TaxCode2" length="9"/>
+        </property>
+        <property name="taxValue2" type="string">
+            <column name="TaxValue2" length="12"/>
+        </property>
+        <property name="taxNetValue2" type="string">
+            <column name="TaxNetValue2" length="12"/>
+        </property>
+        <property name="taxCode3" type="string">
+            <column name="TaxCode3" length="9"/>
+        </property>
+        <property name="taxValue3" type="string">
+            <column name="TaxValue3" length="12"/>
+        </property>
+        <property name="taxNetValue3" type="string">
+            <column name="TaxNetValue3" length="12"/>
+        </property>
+        <property name="taxCode4" type="string">
+            <column name="TaxCode4" length="9"/>
+        </property>
+        <property name="taxValue4" type="string">
+            <column name="TaxValue4" length="12"/>
+        </property>
+        <property name="taxNetValue4" type="string">
+            <column name="TaxNetValue4" length="12"/>
+        </property>
+        <property name="taxCode5" type="string">
+            <column name="TaxCode5" length="9"/>
+        </property>
+        <property name="taxValue5" type="string">
+            <column name="TaxValue5" length="12"/>
+        </property>
+        <property name="taxNetValue5" type="string">
+            <column name="TaxNetValue5" length="12"/>
+        </property>
+        <property name="taxCode6" type="string">
+            <column name="TaxCode6" length="9"/>
+        </property>
+        <property name="taxValue6" type="string">
+            <column name="TaxValue6" length="12"/>
+        </property>
+        <property name="taxNetValue6" type="string">
+            <column name="TaxNetValue6" length="12"/>
+        </property>
+        <property name="taxCode7" type="string">
+            <column name="TaxCode7" length="9"/>
+        </property>
+        <property name="taxValue7" type="string">
+            <column name="TaxValue7" length="12"/>
+        </property>
+        <property name="taxNetValue7" type="string">
+            <column name="TaxNetValue7" length="12"/>
+        </property>
+        <property name="taxCode8" type="string">
+            <column name="TaxCode8" length="9"/>
+        </property>
+        <property name="taxValue8" type="string">
+            <column name="TaxValue8" length="12"/>
+        </property>
+        <property name="taxNetValue8" type="string">
+            <column name="TaxNetValue8" length="12"/>
+        </property>
+        <property name="taxCode9" type="string">
+            <column name="TaxCode9" length="9"/>
+        </property>
+        <property name="taxValue9" type="string">
+            <column name="TaxValue9" length="12"/>
+        </property>
+        <property name="taxNetValue9" type="string">
+            <column name="TaxNetValue9" length="12"/>
+        </property>
+        <property name="taxCode10" type="string">
+            <column name="TaxCode10" length="9"/>
+        </property>
+        <property name="taxValue10" type="string">
+            <column name="TaxValue10" length="12"/>
+        </property>
+        <property name="taxNetValue10" type="string">
+            <column name="TaxNetValue10" length="12"/>
+        </property>
+        <property name="taxCode11" type="string">
+            <column name="TaxCode11" length="9"/>
+        </property>
+        <property name="taxValue11" type="string">
+            <column name="TaxValue11" length="12"/>
+        </property>
+        <property name="taxNetValue11" type="string">
+            <column name="TaxNetValue11" length="12"/>
+        </property>
+        <property name="taxCode12" type="string">
+            <column name="TaxCode12" length="9"/>
+        </property>
+        <property name="taxValue12" type="string">
+            <column name="TaxValue12" length="12"/>
+        </property>
+        <property name="taxNetValue12" type="string">
+            <column name="TaxNetValue12" length="12"/>
+        </property>
+        <property name="taxCode13" type="string">
+            <column name="TaxCode13" length="9"/>
+        </property>
+        <property name="taxValue13" type="string">
+            <column name="TaxValue13" length="12"/>
+        </property>
+        <property name="taxNetValue13" type="string">
+            <column name="TaxNetValue13" length="12"/>
+        </property>
+        <property name="taxCode14" type="string">
+            <column name="TaxCode14" length="9"/>
+        </property>
+        <property name="taxValue14" type="string">
+            <column name="TaxValue14" length="12"/>
+        </property>
+        <property name="taxNetValue14" type="string">
+            <column name="TaxNetValue14" length="12"/>
+        </property>
+        <property name="taxCode15" type="string">
+            <column name="TaxCode15" length="9"/>
+        </property>
+        <property name="taxValue15" type="string">
+            <column name="TaxValue15" length="12"/>
+        </property>
+        <property name="taxNetValue15" type="string">
+            <column name="TaxNetValue15" length="12"/>
+        </property>
+        <property name="taxCode16" type="string">
+            <column name="TaxCode16" length="9"/>
+        </property>
+        <property name="taxValue16" type="string">
+            <column name="TaxValue16" length="12"/>
+        </property>
+        <property name="taxNetValue16" type="string">
+            <column name="TaxNetValue16" length="12"/>
+        </property>
+        <property name="taxCode17" type="string">
+            <column name="TaxCode17" length="9"/>
+        </property>
+        <property name="taxValue17" type="string">
+            <column name="TaxValue17" length="12"/>
+        </property>
+        <property name="taxNetValue17" type="string">
+            <column name="TaxNetValue17" length="12"/>
+        </property>
+        <property name="taxCode18" type="string">
+            <column name="TaxCode18" length="9"/>
+        </property>
+        <property name="taxValue18" type="string">
+            <column name="TaxValue18" length="12"/>
+        </property>
+        <property name="taxNetValue18" type="string">
+            <column name="TaxNetValue18" length="12"/>
+        </property>
+        <property name="taxCode19" type="string">
+            <column name="TaxCode19" length="9"/>
+        </property>
+        <property name="taxValue19" type="string">
+            <column name="TaxValue19" length="12"/>
+        </property>
+        <property name="taxNetValue19" type="string">
+            <column name="TaxNetValue19" length="12"/>
+        </property>
+        <property name="taxCode20" type="string">
+            <column name="TaxCode20" length="9"/>
+        </property>
+        <property name="taxValue20" type="string">
+            <column name="TaxValue20" length="12"/>
+        </property>
+        <property name="taxNetValue20" type="string">
+            <column name="TaxNetValue20" length="12"/>
+        </property>
+        <property name="taxCode21" type="string">
+            <column name="TaxCode21" length="9"/>
+        </property>
+        <property name="taxValue21" type="string">
+            <column name="TaxValue21" length="12"/>
+        </property>
+        <property name="taxNetValue21" type="string">
+            <column name="TaxNetValue21" length="12"/>
+        </property>
+        <property name="taxCode22" type="string">
+            <column name="TaxCode22" length="9"/>
+        </property>
+        <property name="taxValue22" type="string">
+            <column name="TaxValue22" length="12"/>
+        </property>
+        <property name="taxNetValue22" type="string">
+            <column name="TaxNetValue22" length="12"/>
+        </property>
+        <property name="taxCode23" type="string">
+            <column name="TaxCode23" length="9"/>
+        </property>
+        <property name="taxValue23" type="string">
+            <column name="TaxValue23" length="12"/>
+        </property>
+        <property name="taxNetValue23" type="string">
+            <column name="TaxNetValue23" length="12"/>
+        </property>
+        <property name="taxCode24" type="string">
+            <column name="TaxCode24" length="9"/>
+        </property>
+        <property name="taxValue24" type="string">
+            <column name="TaxValue24" length="12"/>
+        </property>
+        <property name="taxNetValue24" type="string">
+            <column name="TaxNetValue24" length="12"/>
+        </property>
+        <property name="taxCode25" type="string">
+            <column name="TaxCode25" length="9"/>
+        </property>
+        <property name="taxValue25" type="string">
+            <column name="TaxValue25" length="12"/>
+        </property>
+        <property name="taxNetValue25" type="string">
+            <column name="TaxNetValue25" length="12"/>
+        </property>
+        <property name="taxCode26" type="string">
+            <column name="TaxCode26" length="9"/>
+        </property>
+        <property name="taxValue26" type="string">
+            <column name="TaxValue26" length="12"/>
+        </property>
+        <property name="taxNetValue26" type="string">
+            <column name="TaxNetValue26" length="12"/>
+        </property>
+        <property name="taxCode27" type="string">
+            <column name="TaxCode27" length="9"/>
+        </property>
+        <property name="taxValue27" type="string">
+            <column name="TaxValue27" length="12"/>
+        </property>
+        <property name="taxNetValue27" type="string">
+            <column name="TaxNetValue27" length="12"/>
+        </property>
+        <property name="taxCode28" type="string">
+            <column name="TaxCode28" length="9"/>
+        </property>
+        <property name="taxValue28" type="string">
+            <column name="TaxValue28" length="12"/>
+        </property>
+        <property name="taxNetValue28" type="string">
+            <column name="TaxNetValue28" length="12"/>
+        </property>
+        <property name="taxCode29" type="string">
+            <column name="TaxCode29" length="9"/>
+        </property>
+        <property name="taxValue29" type="string">
+            <column name="TaxValue29" length="12"/>
+        </property>
+        <property name="taxNetValue29" type="string">
+            <column name="TaxNetValue29" length="12"/>
+        </property>
+        <property name="taxCode30" type="string">
+            <column name="TaxCode30" length="9"/>
+        </property>
+        <property name="taxValue30" type="string">
+            <column name="TaxValue30" length="12"/>
+        </property>
+        <property name="taxNetValue30" type="string">
+            <column name="TaxNetValue30" length="12"/>
+        </property>
+        <property name="taxCode31" type="string">
+            <column name="TaxCode31" length="9"/>
+        </property>
+        <property name="taxValue31" type="string">
+            <column name="TaxValue31" length="12"/>
+        </property>
+        <property name="taxNetValue31" type="string">
+            <column name="TaxNetValue31" length="12"/>
+        </property>
+        <property name="taxCode32" type="string">
+            <column name="TaxCode32" length="9"/>
+        </property>
+        <property name="taxValue32" type="string">
+            <column name="TaxValue32" length="12"/>
+        </property>
+        <property name="taxNetValue32" type="string">
+            <column name="TaxNetValue32" length="12"/>
+        </property>
+        <property name="taxCode33" type="string">
+            <column name="TaxCode33" length="9"/>
+        </property>
+        <property name="taxValue33" type="string">
+            <column name="TaxValue33" length="12"/>
+        </property>
+        <property name="taxNetValue33" type="string">
+            <column name="TaxNetValue33" length="12"/>
+        </property>
+        <property name="taxCode34" type="string">
+            <column name="TaxCode34" length="9"/>
+        </property>
+        <property name="taxValue34" type="string">
+            <column name="TaxValue34" length="12"/>
+        </property>
+        <property name="taxNetValue34" type="string">
+            <column name="TaxNetValue34" length="12"/>
+        </property>
+        <property name="taxCode35" type="string">
+            <column name="TaxCode35" length="9"/>
+        </property>
+        <property name="taxValue35" type="string">
+            <column name="TaxValue35" length="12"/>
+        </property>
+        <property name="taxNetValue35" type="string">
+            <column name="TaxNetValue35" length="12"/>
+        </property>
+        <property name="taxCode36" type="string">
+            <column name="TaxCode36" length="9"/>
+        </property>
+        <property name="taxValue36" type="string">
+            <column name="TaxValue36" length="12"/>
+        </property>
+        <property name="taxNetValue36" type="string">
+            <column name="TaxNetValue36" length="12"/>
+        </property>
+        <property name="taxCode37" type="string">
+            <column name="TaxCode37" length="9"/>
+        </property>
+        <property name="taxValue37" type="string">
+            <column name="TaxValue37" length="12"/>
+        </property>
+        <property name="taxNetValue37" type="string">
+            <column name="TaxNetValue37" length="12"/>
+        </property>
+        <property name="taxCode38" type="string">
+            <column name="TaxCode38" length="9"/>
+        </property>
+        <property name="taxValue38" type="string">
+            <column name="TaxValue38" length="12"/>
+        </property>
+        <property name="taxNetValue38" type="string">
+            <column name="TaxNetValue38" length="12"/>
+        </property>
+        <property name="taxCode39" type="string">
+            <column name="TaxCode39" length="9"/>
+        </property>
+        <property name="taxValue39" type="string">
+            <column name="TaxValue39" length="12"/>
+        </property>
+        <property name="taxNetValue39" type="string">
+            <column name="TaxNetValue39" length="12"/>
+        </property>
+        <property name="taxCode40" type="string">
+            <column name="TaxCode40" length="9"/>
+        </property>
+        <property name="taxValue40" type="string">
+            <column name="TaxValue40" length="12"/>
+        </property>
+        <property name="taxNetValue40" type="string">
+            <column name="TaxNetValue40" length="12"/>
+        </property>
+        <property name="taxCode41" type="string">
+            <column name="TaxCode41" length="9"/>
+        </property>
+        <property name="taxValue41" type="string">
+            <column name="TaxValue41" length="12"/>
+        </property>
+        <property name="taxNetValue41" type="string">
+            <column name="TaxNetValue41" length="12"/>
+        </property>
+        <property name="taxCode42" type="string">
+            <column name="TaxCode42" length="9"/>
+        </property>
+        <property name="taxValue42" type="string">
+            <column name="TaxValue42" length="12"/>
+        </property>
+        <property name="taxNetValue42" type="string">
+            <column name="TaxNetValue42" length="12"/>
+        </property>
+        <property name="taxCode43" type="string">
+            <column name="TaxCode43" length="9"/>
+        </property>
+        <property name="taxValue43" type="string">
+            <column name="TaxValue43" length="12"/>
+        </property>
+        <property name="taxNetValue43" type="string">
+            <column name="TaxNetValue43" length="12"/>
+        </property>
+        <property name="taxCode44" type="string">
+            <column name="TaxCode44" length="9"/>
+        </property>
+        <property name="taxValue44" type="string">
+            <column name="TaxValue44" length="12"/>
+        </property>
+        <property name="taxNetValue44" type="string">
+            <column name="TaxNetValue44" length="12"/>
+        </property>
+        <property name="taxCode45" type="string">
+            <column name="TaxCode45" length="9"/>
+        </property>
+        <property name="taxValue45" type="string">
+            <column name="TaxValue45" length="12"/>
+        </property>
+        <property name="taxNetValue45" type="string">
+            <column name="TaxNetValue45" length="12"/>
+        </property>
+        <property name="taxCode46" type="string">
+            <column name="TaxCode46" length="9"/>
+        </property>
+        <property name="taxValue46" type="string">
+            <column name="TaxValue46" length="12"/>
+        </property>
+        <property name="taxNetValue46" type="string">
+            <column name="TaxNetValue46" length="12"/>
+        </property>
+        <property name="taxCode47" type="string">
+            <column name="TaxCode47" length="9"/>
+        </property>
+        <property name="taxValue47" type="string">
+            <column name="TaxValue47" length="12"/>
+        </property>
+        <property name="taxNetValue47" type="string">
+            <column name="TaxNetValue47" length="12"/>
+        </property>
+        <property name="taxCode48" type="string">
+            <column name="TaxCode48" length="9"/>
+        </property>
+        <property name="taxValue48" type="string">
+            <column name="TaxValue48" length="12"/>
+        </property>
+        <property name="taxNetValue48" type="string">
+            <column name="TaxNetValue48" length="12"/>
+        </property>
+        <property name="taxCode49" type="string">
+            <column name="TaxCode49" length="9"/>
+        </property>
+        <property name="taxValue49" type="string">
+            <column name="TaxValue49" length="12"/>
+        </property>
+        <property name="taxNetValue49" type="string">
+            <column name="TaxNetValue49" length="12"/>
+        </property>
+        <property name="taxCode50" type="string">
+            <column name="TaxCode50" length="9"/>
+        </property>
+        <property name="taxValue50" type="string">
+            <column name="TaxValue50" length="12"/>
+        </property>
+        <property name="taxNetValue50" type="string">
+            <column name="TaxNetValue50" length="12"/>
+        </property>
+        <property name="taxCode51" type="string">
+            <column name="TaxCode51" length="9"/>
+        </property>
+        <property name="taxValue51" type="string">
+            <column name="TaxValue51" length="12"/>
+        </property>
+        <property name="taxNetValue51" type="string">
+            <column name="TaxNetValue51" length="12"/>
+        </property>
+        <property name="taxCode52" type="string">
+            <column name="TaxCode52" length="9"/>
+        </property>
+        <property name="taxValue52" type="string">
+            <column name="TaxValue52" length="12"/>
+        </property>
+        <property name="taxNetValue52" type="string">
+            <column name="TaxNetValue52" length="12"/>
+        </property>
+        <property name="taxCode53" type="string">
+            <column name="TaxCode53" length="9"/>
+        </property>
+        <property name="taxValue53" type="string">
+            <column name="TaxValue53" length="12"/>
+        </property>
+        <property name="taxNetValue53" type="string">
+            <column name="TaxNetValue53" length="12"/>
+        </property>
+        <property name="taxCode54" type="string">
+            <column name="TaxCode54" length="9"/>
+        </property>
+        <property name="taxValue54" type="string">
+            <column name="TaxValue54" length="12"/>
+        </property>
+        <property name="taxNetValue54" type="string">
+            <column name="TaxNetValue54" length="12"/>
+        </property>
+        <property name="taxCode55" type="string">
+            <column name="TaxCode55" length="9"/>
+        </property>
+        <property name="taxValue55" type="string">
+            <column name="TaxValue55" length="12"/>
+        </property>
+        <property name="taxNetValue55" type="string">
+            <column name="TaxNetValue55" length="12"/>
+        </property>
+        <property name="taxCode56" type="string">
+            <column name="TaxCode56" length="9"/>
+        </property>
+        <property name="taxValue56" type="string">
+            <column name="TaxValue56" length="12"/>
+        </property>
+        <property name="taxNetValue56" type="string">
+            <column name="TaxNetValue56" length="12"/>
+        </property>
+        <property name="taxCode57" type="string">
+            <column name="TaxCode57" length="9"/>
+        </property>
+        <property name="taxValue57" type="string">
+            <column name="TaxValue57" length="12"/>
+        </property>
+        <property name="taxNetValue57" type="string">
+            <column name="TaxNetValue57" length="12"/>
+        </property>
+        <property name="taxCode58" type="string">
+            <column name="TaxCode58" length="9"/>
+        </property>
+        <property name="taxValue58" type="string">
+            <column name="TaxValue58" length="12"/>
+        </property>
+        <property name="taxNetValue58" type="string">
+            <column name="TaxNetValue58" length="12"/>
+        </property>
+        <property name="taxCode59" type="string">
+            <column name="TaxCode59" length="9"/>
+        </property>
+        <property name="taxValue59" type="string">
+            <column name="TaxValue59" length="12"/>
+        </property>
+        <property name="taxNetValue59" type="string">
+            <column name="TaxNetValue59" length="12"/>
+        </property>
+        <property name="taxCode60" type="string">
+            <column name="TaxCode60" length="9"/>
+        </property>
+        <property name="taxValue60" type="string">
+            <column name="TaxValue60" length="12"/>
+        </property>
+        <property name="taxNetValue60" type="string">
+            <column name="TaxNetValue60" length="12"/>
+        </property>
+        <property name="taxCode61" type="string">
+            <column name="TaxCode61" length="9"/>
+        </property>
+        <property name="taxValue61" type="string">
+            <column name="TaxValue61" length="12"/>
+        </property>
+        <property name="taxNetValue61" type="string">
+            <column name="TaxNetValue61" length="12"/>
+        </property>
+        <property name="taxCode62" type="string">
+            <column name="TaxCode62" length="9"/>
+        </property>
+        <property name="taxValue62" type="string">
+            <column name="TaxValue62" length="12"/>
+        </property>
+        <property name="taxNetValue62" type="string">
+            <column name="TaxNetValue62" length="12"/>
+        </property>
+        <property name="taxCode63" type="string">
+            <column name="TaxCode63" length="9"/>
+        </property>
+        <property name="taxValue63" type="string">
+            <column name="TaxValue63" length="12"/>
+        </property>
+        <property name="taxNetValue63" type="string">
+            <column name="TaxNetValue63" length="12"/>
+        </property>
+        <property name="taxCode64" type="string">
+            <column name="TaxCode64" length="9"/>
+        </property>
+        <property name="taxValue64" type="string">
+            <column name="TaxValue64" length="12"/>
+        </property>
+        <property name="taxNetValue64" type="string">
+            <column name="TaxNetValue64" length="12"/>
+        </property>
+        <property name="taxCode65" type="string">
+            <column name="TaxCode65" length="9"/>
+        </property>
+        <property name="taxValue65" type="string">
+            <column name="TaxValue65" length="12"/>
+        </property>
+        <property name="taxNetValue65" type="string">
+            <column name="TaxNetValue65" length="12"/>
+        </property>
+        <property name="taxCode66" type="string">
+            <column name="TaxCode66" length="9"/>
+        </property>
+        <property name="taxValue66" type="string">
+            <column name="TaxValue66" length="12"/>
+        </property>
+        <property name="taxNetValue66" type="string">
+            <column name="TaxNetValue66" length="12"/>
+        </property>
+        <property name="taxCode67" type="string">
+            <column name="TaxCode67" length="9"/>
+        </property>
+        <property name="taxValue67" type="string">
+            <column name="TaxValue67" length="12"/>
+        </property>
+        <property name="taxNetValue67" type="string">
+            <column name="TaxNetValue67" length="12"/>
+        </property>
+        <property name="taxCode68" type="string">
+            <column name="TaxCode68" length="9"/>
+        </property>
+        <property name="taxValue68" type="string">
+            <column name="TaxValue68" length="12"/>
+        </property>
+        <property name="taxNetValue68" type="string">
+            <column name="TaxNetValue68" length="12"/>
+        </property>
+        <property name="taxCode69" type="string">
+            <column name="TaxCode69" length="9"/>
+        </property>
+        <property name="taxValue69" type="string">
+            <column name="TaxValue69" length="12"/>
+        </property>
+        <property name="taxNetValue69" type="string">
+            <column name="TaxNetValue69" length="12"/>
+        </property>
+        <property name="taxCode70" type="string">
+            <column name="TaxCode70" length="9"/>
+        </property>
+        <property name="taxValue70" type="string">
+            <column name="TaxValue70" length="12"/>
+        </property>
+        <property name="taxNetValue70" type="string">
+            <column name="TaxNetValue70" length="12"/>
+        </property>
+        <property name="taxCode71" type="string">
+            <column name="TaxCode71" length="9"/>
+        </property>
+        <property name="taxValue71" type="string">
+            <column name="TaxValue71" length="12"/>
+        </property>
+        <property name="taxNetValue71" type="string">
+            <column name="TaxNetValue71" length="12"/>
+        </property>
+        <property name="taxCode72" type="string">
+            <column name="TaxCode72" length="9"/>
+        </property>
+        <property name="taxValue72" type="string">
+            <column name="TaxValue72" length="12"/>
+        </property>
+        <property name="taxNetValue72" type="string">
+            <column name="TaxNetValue72" length="12"/>
+        </property>
+        <property name="taxCode73" type="string">
+            <column name="TaxCode73" length="9"/>
+        </property>
+        <property name="taxValue73" type="string">
+            <column name="TaxValue73" length="12"/>
+        </property>
+        <property name="taxNetValue73" type="string">
+            <column name="TaxNetValue73" length="12"/>
+        </property>
+        <property name="taxCode74" type="string">
+            <column name="TaxCode74" length="9"/>
+        </property>
+        <property name="taxValue74" type="string">
+            <column name="TaxValue74" length="12"/>
+        </property>
+        <property name="taxNetValue74" type="string">
+            <column name="TaxNetValue74" length="12"/>
+        </property>
+        <property name="taxCode75" type="string">
+            <column name="TaxCode75" length="9"/>
+        </property>
+        <property name="taxValue75" type="string">
+            <column name="TaxValue75" length="12"/>
+        </property>
+        <property name="taxNetValue75" type="string">
+            <column name="TaxNetValue75" length="12"/>
+        </property>
+        <property name="taxCode76" type="string">
+            <column name="TaxCode76" length="9"/>
+        </property>
+        <property name="taxValue76" type="string">
+            <column name="TaxValue76" length="12"/>
+        </property>
+        <property name="taxNetValue76" type="string">
+            <column name="TaxNetValue76" length="12"/>
+        </property>
+        <property name="taxCode77" type="string">
+            <column name="TaxCode77" length="9"/>
+        </property>
+        <property name="taxValue77" type="string">
+            <column name="TaxValue77" length="12"/>
+        </property>
+        <property name="taxNetValue77" type="string">
+            <column name="TaxNetValue77" length="12"/>
+        </property>
+        <property name="taxCode78" type="string">
+            <column name="TaxCode78" length="9"/>
+        </property>
+        <property name="taxValue78" type="string">
+            <column name="TaxValue78" length="12"/>
+        </property>
+        <property name="taxNetValue78" type="string">
+            <column name="TaxNetValue78" length="12"/>
+        </property>
+        <property name="taxCode79" type="string">
+            <column name="TaxCode79" length="9"/>
+        </property>
+        <property name="taxValue79" type="string">
+            <column name="TaxValue79" length="12"/>
+        </property>
+        <property name="taxNetValue79" type="string">
+            <column name="TaxNetValue79" length="12"/>
+        </property>
+        <property name="taxCode80" type="string">
+            <column name="TaxCode80" length="9"/>
+        </property>
+        <property name="taxValue80" type="string">
+            <column name="TaxValue80" length="12"/>
+        </property>
+        <property name="taxNetValue80" type="string">
+            <column name="TaxNetValue80" length="12"/>
+        </property>
+        <property name="taxCode81" type="string">
+            <column name="TaxCode81" length="9"/>
+        </property>
+        <property name="taxValue81" type="string">
+            <column name="TaxValue81" length="12"/>
+        </property>
+        <property name="taxNetValue81" type="string">
+            <column name="TaxNetValue81" length="12"/>
+        </property>
+        <property name="taxCode82" type="string">
+            <column name="TaxCode82" length="9"/>
+        </property>
+        <property name="taxValue82" type="string">
+            <column name="TaxValue82" length="12"/>
+        </property>
+        <property name="taxNetValue82" type="string">
+            <column name="TaxNetValue82" length="12"/>
+        </property>
+        <property name="taxCode83" type="string">
+            <column name="TaxCode83" length="9"/>
+        </property>
+        <property name="taxValue83" type="string">
+            <column name="TaxValue83" length="12"/>
+        </property>
+        <property name="taxNetValue83" type="string">
+            <column name="TaxNetValue83" length="12"/>
+        </property>
+        <property name="taxCode84" type="string">
+            <column name="TaxCode84" length="9"/>
+        </property>
+        <property name="taxValue84" type="string">
+            <column name="TaxValue84" length="12"/>
+        </property>
+        <property name="taxNetValue84" type="string">
+            <column name="TaxNetValue84" length="12"/>
+        </property>
+        <property name="taxCode85" type="string">
+            <column name="TaxCode85" length="9"/>
+        </property>
+        <property name="taxValue85" type="string">
+            <column name="TaxValue85" length="12"/>
+        </property>
+        <property name="taxNetValue85" type="string">
+            <column name="TaxNetValue85" length="12"/>
+        </property>
+        <property name="taxCode86" type="string">
+            <column name="TaxCode86" length="9"/>
+        </property>
+        <property name="taxValue86" type="string">
+            <column name="TaxValue86" length="12"/>
+        </property>
+        <property name="taxNetValue86" type="string">
+            <column name="TaxNetValue86" length="12"/>
+        </property>
+        <property name="taxCode87" type="string">
+            <column name="TaxCode87" length="9"/>
+        </property>
+        <property name="taxValue87" type="string">
+            <column name="TaxValue87" length="12"/>
+        </property>
+        <property name="taxNetValue87" type="string">
+            <column name="TaxNetValue87" length="12"/>
+        </property>
+        <property name="taxCode88" type="string">
+            <column name="TaxCode88" length="9"/>
+        </property>
+        <property name="taxValue88" type="string">
+            <column name="TaxValue88" length="12"/>
+        </property>
+        <property name="taxNetValue88" type="string">
+            <column name="TaxNetValue88" length="12"/>
+        </property>
+        <property name="taxCode89" type="string">
+            <column name="TaxCode89" length="9"/>
+        </property>
+        <property name="taxValue89" type="string">
+            <column name="TaxValue89" length="12"/>
+        </property>
+        <property name="taxNetValue89" type="string">
+            <column name="TaxNetValue89" length="12"/>
+        </property>
+        <property name="taxCode90" type="string">
+            <column name="TaxCode90" length="9"/>
+        </property>
+        <property name="taxValue90" type="string">
+            <column name="TaxValue90" length="12"/>
+        </property>
+        <property name="taxNetValue90" type="string">
+            <column name="TaxNetValue90" length="12"/>
+        </property>
+        <property name="taxCode91" type="string">
+            <column name="TaxCode91" length="9"/>
+        </property>
+        <property name="taxValue91" type="string">
+            <column name="TaxValue91" length="12"/>
+        </property>
+        <property name="taxNetValue91" type="string">
+            <column name="TaxNetValue91" length="12"/>
+        </property>
+        <property name="taxCode92" type="string">
+            <column name="TaxCode92" length="9"/>
+        </property>
+        <property name="taxValue92" type="string">
+            <column name="TaxValue92" length="12"/>
+        </property>
+        <property name="taxNetValue92" type="string">
+            <column name="TaxNetValue92" length="12"/>
+        </property>
+        <property name="taxCode93" type="string">
+            <column name="TaxCode93" length="9"/>
+        </property>
+        <property name="taxValue93" type="string">
+            <column name="TaxValue93" length="12"/>
+        </property>
+        <property name="taxNetValue93" type="string">
+            <column name="TaxNetValue93" length="12"/>
+        </property>
+        <property name="taxCode94" type="string">
+            <column name="TaxCode94" length="9"/>
+        </property>
+        <property name="taxValue94" type="string">
+            <column name="TaxValue94" length="12"/>
+        </property>
+        <property name="taxNetValue94" type="string">
+            <column name="TaxNetValue94" length="12"/>
+        </property>
+        <property name="taxCode95" type="string">
+            <column name="TaxCode95" length="9"/>
+        </property>
+        <property name="taxValue95" type="string">
+            <column name="TaxValue95" length="12"/>
+        </property>
+        <property name="taxNetValue95" type="string">
+            <column name="TaxNetValue95" length="12"/>
+        </property>
+        <property name="taxCode96" type="string">
+            <column name="TaxCode96" length="9"/>
+        </property>
+        <property name="taxValue96" type="string">
+            <column name="TaxValue96" length="12"/>
+        </property>
+        <property name="taxNetValue96" type="string">
+            <column name="TaxNetValue96" length="12"/>
+        </property>
+        <property name="taxCode97" type="string">
+            <column name="TaxCode97" length="9"/>
+        </property>
+        <property name="taxValue97" type="string">
+            <column name="TaxValue97" length="12"/>
+        </property>
+        <property name="taxNetValue97" type="string">
+            <column name="TaxNetValue97" length="12"/>
+        </property>
+        <property name="taxCode98" type="string">
+            <column name="TaxCode98" length="9"/>
+        </property>
+        <property name="taxValue98" type="string">
+            <column name="TaxValue98" length="12"/>
+        </property>
+        <property name="taxNetValue98" type="string">
+            <column name="TaxNetValue98" length="12"/>
+        </property>
+        <property name="taxCode99" type="string">
+            <column name="TaxCode99" length="9"/>
+        </property>
+        <property name="taxValue99" type="string">
+            <column name="TaxValue99" length="12"/>
+        </property>
+        <property name="taxNetValue99" type="string">
+            <column name="TaxNetValue99" length="12"/>
+        </property>
+        <property name="timeOfExtraction" type="string">
+            <column name="TimeOfExtraction" length="12"/>
+        </property>
+        <property name="clientAirlineCode" type="string">
+            <column name="ClientAirlineCode" length="3"/>
+        </property>
+        <property name="reveraSource" type="string">
+            <column name="ReveraSource" length="19"/>
+        </property>
+        <property name="transactionNo" type="string">
+            <column name="TransactionNo" length="10"/>
+        </property>
+        <property name="migratedCoupon" type="string">
+            <column name="MigratedCoupon" length="1"/>
+        </property>
+        <property name="migratedUtil" type="string">
+            <column name="MigratedUtil" length="1"/>
+        </property>
+        <property name="sourceFileName" type="string">
+            <column name="SourceFileName" length="50"/>
+        </property>
+        <property name="sourceFileDateInt" type="java.lang.Integer">
+            <column name="SourceFileDateInt"/>
+        </property>
+        <property name="insertAuditDate" type="timestamp">
+            <column name="InsertAuditDate" length="23"/>
+        </property>
+        <property name="insertAuditJobSid" type="java.lang.Long">
+            <column name="InsertAuditJobSid"/>
+        </property>
+        <property name="insertAuditPackageSid" type="java.lang.Long">
+            <column name="InsertAuditPackageSid"/>
+        </property>
+        <property name="sourceFileDateTime" type="timestamp">
+            <column name="SourceFileDateTime" length="23"/>
+        </property>
+        <property name="tixConfidentialOffice" type="string">
+            <column name="TixConfidentialOffice" length="9"/>
+        </property>
+        <property name="baggageQuantity" type="string">
+            <column name="BaggageQuantity" length="10"/>
+        </property>
+        <property name="baggageWeight" type="string">
+            <column name="BaggageWeight" length="10"/>
+        </property>
+        <property name="baggageWeightUnit" type="string">
+            <column name="BaggageWeightUnit" length="1"/>
+        </property>
+        <property name="baggageType" type="string">
+            <column name="BaggageType" length="3"/>
+        </property>
+        <property name="tixDiscountInfo" type="string">
+            <column name="TixDiscountInfo" length="250"/>
+        </property>
+        <property name="tixType" type="string">
+            <column name="TixType" length="4"/>
+        </property>
+        <property name="tixBestBuyFare" type="string">
+            <column name="TixBestBuyFare" length="250"/>
+        </property>
+        <property name="tixPaymentRestriction" type="string">
+            <column name="TixPaymentRestriction" length="250"/>
+        </property>
+        <property name="tixInvoiceDate" type="string">
+            <column name="TixInvoiceDate" length="10"/>
+        </property>
+        <property name="tixFlightTime" type="string">
+            <column name="TixFlightTime" length="8"/>
+        </property>
+        <property name="tixDestDt" type="string">
+            <column name="TixDestDt" length="10"/>
+        </property>
+        <property name="tixDepTerminal" type="string">
+            <column name="TixDepTerminal" length="2"/>
+        </property>
+        <property name="tixDestTerminal" type="string">
+            <column name="TixDestTerminal" length="2"/>
+        </property>
+        <property name="tixDestTime" type="string">
+            <column name="TixDestTime" length="8"/>
+        </property>
+        <property name="tixCheckinTime" type="string">
+            <column name="TixCheckinTime" length="8"/>
+        </property>
+        <property name="tixEnteringType" type="string">
+            <column name="TixEnteringType" length="1"/>
+        </property>
+        <property name="tixType2" type="string">
+            <column name="TixType2" length="3"/>
+        </property>
+        <property name="tixQueueingOffice" type="string">
+            <column name="TixQueueingOffice" length="10"/>
+        </property>
+        <property name="origBookingDate" type="string">
+            <column name="OrigBookingDate" length="10"/>
+        </property>
+        <property name="origBookingTime" type="string">
+            <column name="OrigBookingTime" length="8"/>
+        </property>
+        <property name="origBookingPurgeDate" type="string">
+            <column name="OrigBookingPurgeDate" length="10"/>
+        </property>
+        <property name="bookingType" type="string">
+            <column name="BookingType" length="3"/>
+        </property>
+        <property name="bookingTicketedInd" type="string">
+            <column name="BookingTicketedInd" length="2"/>
+        </property>
+        <property name="compartment" type="string">
+            <column name="Compartment" length="1"/>
+        </property>
+        <property name="codeshareAgreement" type="string">
+            <column name="CodeshareAgreement" length="3"/>
+        </property>
+        <property name="groupBooking" type="string">
+            <column name="GroupBooking" length="1"/>
+        </property>
+        <property name="staffInd" type="string">
+            <column name="StaffInd" length="3"/>
+        </property>
+        <property name="paxcount" type="string">
+            <column name="PAXCount" length="3"/>
+        </property>
+        <property name="overbookingStatus" type="string">
+            <column name="OverbookingStatus" length="3"/>
+        </property>
+        <property name="overbookingStatusReason" type="string">
+            <column name="OverbookingStatusReason" length="3"/>
+        </property>
+        <property name="bookingStatus" type="string">
+            <column name="BookingStatus" length="3"/>
+        </property>
+        <property name="ssrextraSeatCode" type="string">
+            <column name="SSRExtraSeatCode" length="4"/>
+        </property>
+        <property name="ssrseatRow" type="string">
+            <column name="SSRSeatRow" length="10"/>
+        </property>
+        <property name="ssrseatColumn" type="java.lang.Character">
+            <column name="SSRSeatColumn" length="1"/>
+        </property>
+        <property name="ssrseatStatus" type="string">
+            <column name="SSRSeatStatus" length="3"/>
+        </property>
+        <property name="ssrseatType" type="string">
+            <column name="SSRSeatType" length="15"/>
+        </property>
+        <property name="paxInfInd" type="string">
+            <column name="PaxInfInd" length="3"/>
+        </property>
+        <property name="bookingPoscity" type="string">
+            <column name="BookingPOSCity" length="10"/>
+        </property>
+        <property name="bookingPosagent" type="string">
+            <column name="BookingPOSAgent" length="10"/>
+        </property>
+        <property name="bookingPosamaagent" type="string">
+            <column name="BookingPOSAMAAgent" length="24"/>
+        </property>
+        <property name="bookingPosagentType" type="string">
+            <column name="BookingPOSAgentType" length="1"/>
+        </property>
+        <property name="bookingDate" type="string">
+            <column name="BookingDate" length="12"/>
+        </property>
+        <property name="bookingTime" type="string">
+            <column name="BookingTime" length="12"/>
+        </property>
+        <property name="custEmail" type="string">
+            <column name="CustEmail" length="100"/>
+        </property>
+        <property name="custFax" type="string">
+            <column name="CustFax" length="100"/>
+        </property>
+        <property name="custPhoneBusiness" type="string">
+            <column name="CustPhoneBusiness" length="100"/>
+        </property>
+        <property name="custPhonePrivate" type="string">
+            <column name="CustPhonePrivate" length="100"/>
+        </property>
+        <property name="custCompanyCode" type="string">
+            <column name="CustCompanyCode" length="3"/>
+        </property>
+        <property name="custMailCompanyName" type="string">
+            <column name="CustMailCompanyName" length="50"/>
+        </property>
+        <property name="custMailName" type="string">
+            <column name="CustMailName" length="50"/>
+        </property>
+        <property name="custMailAddressLine1" type="string">
+            <column name="CustMailAddressLine1" length="50"/>
+        </property>
+        <property name="custMailAddressLine2" type="string">
+            <column name="CustMailAddressLine2" length="50"/>
+        </property>
+        <property name="custMailCity" type="string">
+            <column name="CustMailCity" length="50"/>
+        </property>
+        <property name="custMailZipcode" type="string">
+            <column name="CustMailZipcode" length="50"/>
+        </property>
+        <property name="custMailPo" type="string">
+            <column name="CustMailPO" length="50"/>
+        </property>
+        <property name="custMailState" type="string">
+            <column name="CustMailState" length="50"/>
+        </property>
+        <property name="custMailCountry" type="string">
+            <column name="CustMailCountry" length="50"/>
+        </property>
+        <property name="custBillCompanyName" type="string">
+            <column name="CustBillCompanyName" length="50"/>
+        </property>
+        <property name="custBillName" type="string">
+            <column name="CustBillName" length="50"/>
+        </property>
+        <property name="custBillAddressLine1" type="string">
+            <column name="CustBillAddressLine1" length="50"/>
+        </property>
+        <property name="custBillAddressLine2" type="string">
+            <column name="CustBillAddressLine2" length="50"/>
+        </property>
+        <property name="custBillCity" type="string">
+            <column name="CustBillCity" length="50"/>
+        </property>
+        <property name="custBillZipcode" type="string">
+            <column name="CustBillZipcode" length="50"/>
+        </property>
+        <property name="custBillPo" type="string">
+            <column name="CustBillPO" length="50"/>
+        </property>
+        <property name="custBillState" type="string">
+            <column name="CustBillState" length="50"/>
+        </property>
+        <property name="custBillCountry" type="string">
+            <column name="CustBillCountry" length="50"/>
+        </property>
+        <property name="tixUsedInd" type="string">
+            <column name="TixUsedInd" length="3"/>
+        </property>
+        <property name="tixInformationFreetext" type="string">
+            <column name="TixInformation_Freetext" length="999"/>
+        </property>
+        <property name="origIssueInformationFreetext" type="string">
+            <column name="OrigIssueInformation_Freetext" length="999"/>
+        </property>
+        <property name="endorsementFreetext" type="string">
+            <column name="Endorsement_Freetext" length="999"/>
+        </property>
+        <property name="tixInvoiceNoInfoFreetext" type="string">
+            <column name="TixInvoiceNoInfo_Freetext" length="999"/>
+        </property>
+        <property name="tixDiscountInfoFreetext" type="string">
+            <column name="TixDiscountInfo_Freetext" length="999"/>
+        </property>
+        <property name="tourcodeFreetext" type="string">
+            <column name="Tourcode_Freetext" length="999"/>
+        </property>
+        <property name="bookingCancelledInd" type="java.lang.Boolean">
+            <column name="BookingCancelledInd"/>
+        </property>
+        <property name="noPaxInGroup" type="java.lang.Integer">
+            <column name="NoPaxInGroup"/>
+        </property>
+        <property name="segType" type="string">
+            <column name="SegType" length="3"/>
+        </property>
+        <property name="reservationDate" type="string">
+            <column name="ReservationDate" length="10"/>
+        </property>
+        <property name="reservationTime" type="string">
+            <column name="ReservationTime" length="8"/>
+        </property>
+        <property name="paxNoTec" type="java.lang.Integer">
+            <column name="PaxNoTec"/>
+        </property>
+        <property name="creditCardNoHash" type="string">
+            <column name="CreditCardNoHash" length="40"/>
+        </property>
+        <property name="creditCardNo" type="string">
+            <column name="CreditCardNo" length="20"/>
+        </property>
+        <property name="paxDateOfBirth" type="string">
+            <column name="PaxDateOfBirth" length="70"/>
+        </property>
+        <property name="infDateOfBirth" type="string">
+            <column name="InfDateOfBirth" length="70"/>
+        </property>
+        <property name="infFirstName" type="string">
+            <column name="InfFirstName" length="56"/>
+        </property>
+        <property name="infLastName" type="string">
+            <column name="InfLastName" length="57"/>
+        </property>
+        <property name="otherServicesInformationFreetext" type="string">
+            <column name="OtherServicesInformation_Freetext" length="999"/>
+        </property>
+        <property name="osicompanyId" type="string">
+            <column name="OSICompanyId" length="2"/>
+        </property>
+        <property name="osibusinessPoints" type="string">
+            <column name="OSIBusinessPoints" length="2"/>
+        </property>
+        <property name="osicorporateName" type="string">
+            <column name="OSICorporateName" length="250"/>
+        </property>
+        <property name="fopinformationFreetext" type="string">
+            <column name="FOPInformation_Freetext" length="999"/>
+        </property>
+        <property name="paxTypeSbr" type="string">
+            <column name="PaxTypeSBR" length="3"/>
+        </property>
+        <property name="bookingProductCategory" type="string">
+            <column name="BookingProductCategory" length="15"/>
+        </property>
+        <property name="origBookingPosamaagent" type="string">
+            <column name="OrigBookingPOSAMAAgent" length="10"/>
+        </property>
+        <property name="bookingStatusBoarded" type="string">
+            <column name="BookingStatusBoarded" length="3"/>
+        </property>
+        <property name="queueingOfficeIdFreetext" type="string">
+            <column name="QueueingOfficeId_freetext" length="24"/>
+        </property>
+        <property name="origIssueAirline" type="string">
+            <column name="OrigIssueAirline" length="3"/>
+        </property>
+        <property name="tixPassportNo" type="string">
+            <column name="TixPassportNo" length="20"/>
+        </property>
+        <property name="tixPassportNoFreetext" type="string">
+            <column name="TixPassportNo_Freetext" length="999"/>
+        </property>
+        <property name="bookingStatusAssessed" type="string">
+            <column name="BookingStatusAssessed" length="2"/>
+        </property>
+        <property name="electronicFhFreetext" type="string">
+            <column name="ElectronicFH_Freetext" length="999"/>
+        </property>
+        <property name="manuelFhFreetext" type="string">
+            <column name="ManuelFH_Freetext" length="999"/>
+        </property>
+        <property name="ticketingCarrierDesignatorFreetext" type="string">
+            <column name="TicketingCarrierDesignator_Freetext" length="999"/>
+        </property>
+        <property name="miscellaneousInformationFreetext" type="string">
+            <column name="MiscellaneousInformation_Freetext" length="999"/>
+        </property>
+        <property name="miscellaneousTicketingInformationFreetext" type="string">
+            <column name="MiscellaneousTicketingInformation_Freetext" length="999"/>
+        </property>
+        <property name="fkFreetext" type="string">
+            <column name="FK_Freetext" length="999"/>
+        </property>
+        <property name="commissionFreetext" type="string">
+            <column name="Commission_Freetext" length="999"/>
+        </property>
+        <property name="paxfirstName" type="string">
+            <column name="PAXFirstName" length="49"/>
+        </property>
+        <property name="paxlastName" type="string">
+            <column name="PAXLastName" length="49"/>
+        </property>
+        <property name="sectorFareNotEur" type="string">
+            <column name="SectorFareNotEUR" length="12"/>
+        </property>
+        <property name="sectorTotalFareFanotEur" type="string">
+            <column name="SectorTotalFareFANotEUR" length="12"/>
+        </property>
+        <property name="sectorTotalFareFa" type="string">
+            <column name="SectorTotalFareFA" length="12"/>
+        </property>
+        <property name="sectorTotalFare" type="string">
+            <column name="SectorTotalFare" length="12"/>
+        </property>
+        <property name="sectorTotalFareNotEur" type="string">
+            <column name="SectorTotalFareNotEUR" length="12"/>
+        </property>
+        <property name="tixCurrency" type="string">
+            <column name="TixCurrency" length="3"/>
+        </property>
+        <property name="currency" type="string">
+            <column name="Currency" length="3"/>
+        </property>
+        <property name="tixIdTec" type="java.lang.Integer">
+            <column name="TixIdTec"/>
+        </property>
+        <property name="paxIdentCdFreetext" type="string">
+            <column name="PaxIdentCd_Freetext" length="70"/>
+        </property>
+        <property name="infIdentCdFreetext" type="string">
+            <column name="InfIdentCd_Freetext" length="70"/>
+        </property>
+        <property name="tixVoidRefundSalesInd" type="string">
+            <column name="TixVoidRefundSalesInd" length="1"/>
+        </property>
+        <property name="refundCategory" type="string">
+            <column name="RefundCategory" length="2"/>
+        </property>
+        <property name="tixFlightDtTime" type="timestamp">
+            <column name="TixFlightDtTime" length="23"/>
+        </property>
+        <property name="tixFlightDtUtc" type="timestamp">
+            <column name="TixFlightDtUTC" length="23"/>
+        </property>
+        <property name="affectedCoupon" type="java.lang.Integer">
+            <column name="AffectedCoupon"/>
+        </property>
+        <property name="purgeDate" type="timestamp">
+            <column name="purgeDate"/>
+        </property>
+        <property name="noOfInf" type="string">
+            <column name="NoOfInf" length="2"/>
+        </property>
+        <property name="flownCarr" type="string">
+            <column name="FlownCarr" length="3"/>
+        </property>
+        <property name="bookingDateFunctional" type="string">
+            <column name="BookingDateFunctional" length="12"/>
+        </property>
+        <property name="origBookingAgnt" type="string">
+            <column name="OrigBookingAgnt" length="7"/>
+        </property>
+        <property name="voluntaryInd" type="java.lang.Boolean">
+            <column name="VoluntaryInd"/>
+        </property>
+        <property name="segNoTech" type="java.lang.Integer">
+            <column name="SegNoTech"/>
+        </property>
+        <property name="refundableAmount" type="string">
+            <column name="RefundableAmount" length="12"/>
+        </property>
+        <property name="documentTotalAmount" type="string">
+            <column name="DocumentTotalAmount" length="12"/>
+        </property>
+        <property name="exchangeValueFare" type="string">
+            <column name="ExchangeValueFare" length="12"/>
+        </property>
+        <property name="exchangeRate2" type="string">
+            <column name="ExchangeRate2" length="12"/>
+        </property>
+        <property name="accountNo" type="string">
+            <column name="AccountNo" length="20"/>
+        </property>
+        <property name="agntSign" type="string">
+            <column name="AgntSign" length="8"/>
+        </property>
+        <property name="bookingCancelledDt" type="string">
+            <column name="BookingCancelledDt" length="10"/>
+        </property>
+        <property name="hostGds" type="string">
+            <column name="HostGDS" length="4"/>
+        </property>
+        <property name="frquntFlyerProgr" type="string">
+            <column name="FrquntFlyerProgr" length="20"/>
+        </property>
+        <property name="gender" type="string">
+            <column name="Gender" length="1"/>
+        </property>
+        <property name="paxtitle" type="string">
+            <column name="PAXTitle" length="10"/>
+        </property>
+        <property name="airlineCustVal" type="string">
+            <column name="AirlineCustVal" length="20"/>
+        </property>
+        <property name="segStatus" type="string">
+            <column name="SegStatus" length="4"/>
+        </property>
+        <property name="segLine" type="string">
+            <column name="SegLine" length="2"/>
+        </property>
+        <property name="emdtype" type="string">
+            <column name="EMDType" length="1"/>
+        </property>
+        <property name="ticketFreetext" type="string">
+            <column name="Ticket_Freetext" length="999"/>
+        </property>
+        <property name="optionFreetext" type="string">
+            <column name="Option_Freetext" length="999"/>
+        </property>
+        <property name="routingPartyFreetext" type="string">
+            <column name="RoutingParty_Freetext" length="999"/>
+        </property>
+        <property name="corporateRemarkFreetext" type="string">
+            <column name="CorporateRemark_Freetext" length="999"/>
+        </property>
+        <property name="invoiceRemarkFreetext" type="string">
+            <column name="InvoiceRemark_Freetext" length="999"/>
+        </property>
+        <property name="generalRemarkFreetext" type="string">
+            <column name="GeneralRemark_Freetext" length="999"/>
+        </property>
+        <property name="confidentialRemarkFreetext" type="string">
+            <column name="ConfidentialRemark_Freetext" length="999"/>
+        </property>
+        <property name="specialKeywordsFreetext" type="string">
+            <column name="SpecialKeywords_Freetext" length="999"/>
+        </property>
+        <property name="accountingInformationFreetext" type="string">
+            <column name="AccountingInformation_Freetext" length="999"/>
+        </property>
+        <property name="insuranceFreetext" type="string">
+            <column name="Insurance_Freetext" length="999"/>
+        </property>
+        <property name="issInConnWithCpn" type="string">
+            <column name="IssInConnWithCpn" length="1"/>
+        </property>
+        <property name="associationStatus" type="string">
+            <column name="AssociationStatus" length="4"/>
+        </property>
+        <property name="mcoreasonSubCode" type="string">
+            <column name="MCOReasonSubCode" length="100"/>
+        </property>
+        <property name="ebtunits" type="string">
+            <column name="EBTUnits" length="12"/>
+        </property>
+        <property name="ebtchargeQualifier" type="string">
+            <column name="EBTChargeQualifier" length="4"/>
+        </property>
+        <property name="ebtunitQualifier" type="string">
+            <column name="EBTUnitQualifier" length="4"/>
+        </property>
+        <property name="ebtchargeCrncy" type="string">
+            <column name="EBTChargeCrncy" length="4"/>
+        </property>
+        <property name="feeOwner" type="string">
+            <column name="FeeOwner" length="5"/>
+        </property>
+        <property name="consumedIssInd" type="string">
+            <column name="ConsumedIssInd" length="1"/>
+        </property>
+        <property name="involuntaryInd" type="string">
+            <column name="InvoluntaryInd" length="1"/>
+        </property>
+        <property name="tixModeInd" type="string">
+            <column name="TixModeInd" length="1"/>
+        </property>
+        <property name="emdtreatedAs" type="string">
+            <column name="EMDTreatedAs" length="3"/>
+        </property>
+        <property name="interlinableInd" type="string">
+            <column name="InterlinableInd" length="1"/>
+        </property>
+        <property name="oneWorldInd" type="string">
+            <column name="OneWorldInd" length="1"/>
+        </property>
+        <property name="mpasectorFare" type="string">
+            <column name="MPASectorFare" length="12"/>
+        </property>
+        <property name="fzagntNoBlank" type="string">
+            <column name="FZAgntNoBlank" length="8"/>
+        </property>
+        <property name="refundDate" type="string">
+            <column name="RefundDate" length="10"/>
+        </property>
+        <property name="fopcrncyCode" type="string">
+            <column name="FOPCrncyCode" length="4"/>
+        </property>
+        <property name="cfop" type="string">
+            <column name="CFOP" length="88"/>
+        </property>
+        <property name="specialServiceRequestFreetext" type="string">
+            <column name="SpecialServiceRequest_Freetext" length="999"/>
+        </property>
+        <property name="miscellaneousChargeOrderFreetext" type="string">
+            <column name="MiscellaneousChargeOrder_Freetext" length="999"/>
+        </property>
+        <property name="excessBaggageFreetext" type="string">
+            <column name="ExcessBaggage_Freetext" length="999"/>
+        </property>
+        <property name="serviceFreetext" type="string">
+            <column name="Service_Freetext" length="999"/>
+        </property>
+        <property name="tms" type="timestamp">
+            <column name="TMS"/>
+        </property>
+        <property name="sectorGrandTotalFare" type="string">
+            <column name="SectorGrandTotalFare" length="12" />
+        </property>
+        <property name="sectorGrandTotalFareNotEur" type="string">
+            <column name="SectorGrandTotalFareNotEUR" length="12" />
+        </property>
+        <property name="tixCurrencyGrand" type="string">
+            <column name="TixCurrencyGrand" length="3" />
+        </property>
+        <property name="billingAddressFreetext" type="string">
+            <column name="BillingAddress_Freetext" length="300" />
+        </property>
+        <property name="mailingAddressFreetext" type="string">
+            <column name="MailingAddress_Freetext" length="300" />
+        </property>
+
+        <!-- New in 6.0.0 -->
+        <property name="emdInd" type="string">
+            <column name="emdInd" length="1" />
+        </property>
+        <property name="fcmi" type="string">
+            <column name="fcmi" length="3" />
+        </property>
+        <property name="automatedFhFreetext" type="string">
+            <column name="automatedFhFreetext" length="300" />
+        </property>
+        <property name="parentPnr" type="string">
+            <column name="parentPnr" length="13" />
+        </property>
+        <property name="pnrSplitDate" type="timestamp">
+            <column name="pnrSplitDate"/>
+        </property>
+        <property name="negoSpacePnr" type="string">
+            <column name="negoSpacePnr" length="13" />
+        </property>
+        <!-- END NEW ONES -->
+
+    </class>
+</hibernate-mapping>

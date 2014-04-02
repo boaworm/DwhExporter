@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15.11.2011 16:32:15 by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="com.sabre.ix.application.dao.ProcessStatus" table="ProcessStatus"  dynamic-insert="true">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="prozessGruppe" type="string">
+            <column name="ProzessGruppe" length="50" not-null="true" />
+        </property>
+        <property name="who" type="string">
+            <column name="Who" length="20" not-null="true" />
+        </property>
+        <property name="prozess" type="string">
+            <column name="Prozess" length="100" />
+        </property>
+        <property name="startTime" type="timestamp">
+            <column name="StartTime" length="23" />
+        </property>
+        <property name="endTime" type="timestamp">
+            <column name="EndTime" length="23" />
+        </property>
+        <property name="status" type="string">
+            <column name="Status" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

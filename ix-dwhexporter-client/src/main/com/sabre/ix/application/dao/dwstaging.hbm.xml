@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="SetBigStringTryClob">true</property>
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.default_schema">SBRFeed</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.jdbc.batch_size ">20</property>
+        <mapping resource="com/sabre/ix/application/dao/FileDataRaw.hbm.xml"/>
+        <mapping resource="com/sabre/ix/application/dao/ProcessStatus.hbm.xml"/>
+    </session-factory>
+
+</hibernate-configuration>
