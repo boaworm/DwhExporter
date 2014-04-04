@@ -1,12 +1,10 @@
 package com.sabre.ix.application.logic;
 
-import com.calidris.java.text.AirlineDateFormat;
 import com.sabre.ix.application.dao.FileDataRaw;
 import com.sabre.ix.client.*;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,9 +42,9 @@ public class DWMapper {
                     //SSR INFT lines can be on the responsible adult
                     BookingName responsibleAdult = null;
                     Long responsibleAdultId = infant.getDynamicAttribute("ResponsibleAdult");
-                    if(responsibleAdultId != null) {
-                        for(BookingName bookingName : booking.getBookingNames()) {
-                            if(bookingName.getBookingNameId() == responsibleAdultId) {
+                    if (responsibleAdultId != null) {
+                        for (BookingName bookingName : booking.getBookingNames()) {
+                            if (bookingName.getBookingNameId() == responsibleAdultId) {
                                 responsibleAdult = bookingName;
                                 break;
                             }
@@ -215,9 +213,9 @@ public class DWMapper {
 
     private List<ServiceLine> getServiceLinesForChargeableItem(ChargeableItem chargeableItem) {
         BookingName bn = chargeableItem.getBookingName();
-        if(bn == null) return Collections.emptyList();
+        if (bn == null) return Collections.emptyList();
         Booking booking = bn.getBooking();
-        if(booking == null) return Collections.emptyList();
+        if (booking == null) return Collections.emptyList();
         Set<Long> ids = new HashSet<Long>();
         List<ServiceLine> serviceLines = new ArrayList<ServiceLine>();
 
@@ -249,9 +247,9 @@ public class DWMapper {
 
     private ServiceLine getServiceLinesForChargeableItemCoupon(ChargeableItemCoupon coupon) {
         ChargeableItem chargeableItem = coupon.getChargeableItem();
-        if(chargeableItem == null) return null;
+        if (chargeableItem == null) return null;
         BookingName bn = chargeableItem.getBookingName();
-        if(bn == null) return null;
+        if (bn == null) return null;
         Booking booking = bn.getBooking();
         for (BookingName bookingName : booking.getBookingNames()) {
             for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
@@ -1307,13 +1305,10 @@ public class DWMapper {
             if (comps.length > 0 && comps[0].length() > 6) {
                 String date = comps[0].substring(comps[0].length() - 7);
                 try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyy");
-                    Date parse = sdf.parse(date);
-                    GregorianCalendar cal = new GregorianCalendar();
-                    cal.setTime(parse);
+                    GregorianCalendar cal = AirlineDateFormat.stringToCalendar(date);
                     row.setOrigIssueDate(ensureLength(getDate(cal), 10));
                 } catch (Exception e) {
-                    log.warn("Could not parse ticketing date", e);
+                    log.error("Failed to parse date: " + date);
                 }
             }
             if (comps.length > 2 && comps[2].length() > 15) {
@@ -1430,8 +1425,11 @@ public class DWMapper {
         if (c == null) {
             return null;
         }
+        return AirlineDateFormat.calendarToString(c);
+/*
         AirlineDateFormat df = new AirlineDateFormat("ddMMMyy");
         return df.format(c.getTime());
+        */
     }
 
     String getDate(GregorianCalendar c) {
