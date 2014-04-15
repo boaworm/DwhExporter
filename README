@@ -1,7 +1,5 @@
 DwhExporter
 
-Author: Henrik Thorburn (sg0211570) : henrik.thorburn@sabre.com
-
 To build a standalone app:
 mvn install
 cd ix-dwhexporter-app
