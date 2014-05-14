@@ -237,8 +237,14 @@ public class DataWarehouseExporter {
                         System.out.println("getSegNoTech " + row.getSegNoTech());
                         System.out.println("getIssInConnWith " + row.getIssInConnWith());
                         System.out.println("getIssInConnWithCpn " + row.getIssInConnWithCpn());
+                        System.out.println("getFarebaseCode " + row.getFarebaseCode());
+                        System.out.println("getTixFlightDt " + row.getTixFlightDt());
+                        System.out.println("getEmdtreatedAs " + row.getEmdtreatedAs());
+                        System.out.println("getMcoreason " + row.getMcoreason());
+                        System.out.println("getMcoreasonSubCode " + row.getMcoreasonSubCode());
                         System.out.println("getTixInformationFreetext " + row.getTixInformationFreetext());
                         System.out.println("getMiscellaneousChargeOrderFreetext " + row.getMiscellaneousChargeOrderFreetext());
+                        System.out.println("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
                         System.out.println("");
 
                         lastExportedRows = rows;

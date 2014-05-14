@@ -337,44 +337,14 @@ public class DWMapper {
                     }
                     //we get the ticket fields by finding the FA line that has a reference to this service line:
                     //we assume the FA line can be at booking name or booking name item level.
-                    ArrayList<ServiceLine> searchLines = new ArrayList<ServiceLine>();
-                    if (chargeableItem.getBookingName() != null) {
-                        searchLines.addAll(chargeableItem.getBookingName().getServiceLines());
-                    }
-                    if (item != null) {
-                        searchLines.addAll(item.getServiceLines());
-                    }
                     ServiceLine ticketingLine = null;
-                    if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
-                        // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
-                        GregorianCalendar mostRecentCancellationDate = null;
-                        for (ServiceLine searchLine : searchLines) {
-                            if (searchLine.getFreeText().contains("TicketDocumentData")) {
-                                if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
-                                        "] [Number:" + sLine.getCrsId() + "]")) {
-                                    if (mostRecentCancellationDate == null) {
-                                        ticketingLine = searchLine;
-                                        mostRecentCancellationDate = ticketingLine.getCancellationDate();
-                                    } else {
-                                        if (searchLine.getCancellationDate().after(mostRecentCancellationDate)) {
-                                            ticketingLine = searchLine;
-                                            mostRecentCancellationDate = ticketingLine.getCancellationDate();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        for (ServiceLine searchLine : searchLines) {
-                            if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
-                                if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
-                                        "] [Number:" + sLine.getCrsId() + "]")) {
-                                    ticketingLine = searchLine;
-                                    break;
-                                }
-                            }
-                        }
+                    if (item != null) {
+                        ticketingLine = getRelevantTicketingLine(booking, sLine, item.getServiceLines());
                     }
+                    if (ticketingLine == null && chargeableItem.getBookingName() != null) {
+                        ticketingLine = getRelevantTicketingLine(booking, sLine, chargeableItem.getBookingName().getServiceLines());
+                    }
+
                     if (ticketingLine != null) {
                         SBRFreeTextParser parser = new SBRFreeTextParser(ticketingLine.getFreeText());
                         String freeText = parser.get("FreeText");
@@ -496,6 +466,53 @@ public class DWMapper {
         }
     }
 
+    private ServiceLine getRelevantTicketingLine(Booking booking, ServiceLine sLine, List<ServiceLine> searchLines) {
+        ServiceLine ticketingLine = null;
+        if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
+            // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
+            GregorianCalendar mostRecentCancellationDate = null;
+            for (ServiceLine searchLine : searchLines) {
+                if (searchLine.getFreeText().contains("TicketDocumentData")) {
+                    if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
+                            "] [Number:" + sLine.getCrsId() + "]")) {
+                        if (mostRecentCancellationDate == null) {
+                            ticketingLine = searchLine;
+                            mostRecentCancellationDate = ticketingLine.getCancellationDate();
+                        } else {
+                            if (searchLine.getCancellationDate().after(mostRecentCancellationDate)) {
+                                ticketingLine = searchLine;
+                                mostRecentCancellationDate = ticketingLine.getCancellationDate();
+                            }
+                        }
+                    }
+                }
+            }
+            if (ticketingLine != null) {
+                return ticketingLine;
+            }
+        }
+
+        for (ServiceLine searchLine : searchLines) {
+            if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
+                if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
+                        "] [Number:" + sLine.getCrsId() + "]")) {
+                    return searchLine;
+                }
+            }
+        }
+
+        //14.05.14 assign the first ticket line
+        if (ticketingLine == null) {
+            for (ServiceLine searchLine : searchLines) {
+                if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
+                    return searchLine;
+                }
+            }
+        }
+
+        return ticketingLine;
+    }
+
     private void handlePaperMCO(ChargeableItem chargeableItemEntity, Booking booking, BookingName name, BookingNameItem item, FileDataRaw tstRow, ChargeableItem chargeableItem, FileDataRaw row) {
 
         populateMCOFields(chargeableItemEntity, booking, name, item, null, tstRow, row, null);
@@ -565,30 +582,36 @@ public class DWMapper {
         for (ChargeableItemData data : chargeableItemData) {
             if (data.getName() != null) {
                 if (data.getName().equalsIgnoreCase("GeneralIndicator")) {
-                    if (data.getType() != null && data.getType().equalsIgnoreCase("EMD")) {
-                        String emdtreatedAs = ensureLength(data.getValue(), 1);
-                        row.setEmdtreatedAs(ensureLength(emdtreatedAs, 3));
+                    if (data.getType() != null) {
+                        if (data.getType().equalsIgnoreCase("EMD")) {
+                            String emdtreatedAs = ensureLength(data.getValue(), 1);
+                            row.setEmdtreatedAs(ensureLength(emdtreatedAs, 3));
 
-                        if ("A".equals(emdtreatedAs)) {
-                            // If we have a specific tstRow, use it
-                            if (tstRow != null) {
-                                row.setIssInConnWith(ensureLength(tstRow.getDocumentNo(), 10));
-                                row.setIssInConnWithCpn(ensureLength(tstRow.getSegNoTech().toString(), 1));
-                            } else {
-                                // Grab the ticket number from the first segment
-                                if (itemRows != null && !itemRows.isEmpty()) {
-                                    row.setIssInConnWith(ensureLength(itemRows.get(0).getDocumentNo(), 10));
-                                    // If we have exactly one segment, we know coupon# is 1, else leave as null
-                                    if (itemRows.size() == 1) {
-                                        row.setIssInConnWithCpn(ensureLength("1", 1));
-                                    } else {
-                                        row.setIssInConnWithCpn(null);
+                            if ("A".equals(emdtreatedAs)) {
+                                // If we have a specific tstRow, use it
+                                if (tstRow != null) {
+                                    row.setIssInConnWith(ensureLength(tstRow.getDocumentNo(), 10));
+                                    row.setIssInConnWithCpn(ensureLength(tstRow.getSegNoTech().toString(), 1));
+                                } else {
+                                    // Grab the ticket number from the first segment
+                                    if (itemRows != null && !itemRows.isEmpty()) {
+                                        row.setIssInConnWith(ensureLength(itemRows.get(0).getDocumentNo(), 10));
+                                        // If we have exactly one segment, we know coupon# is 1, else leave as null
+                                        if (itemRows.size() == 1) {
+                                            row.setIssInConnWithCpn(ensureLength("1", 1));
+                                        } else {
+                                            row.setIssInConnWithCpn(null);
+                                        }
                                     }
                                 }
+                            } else if (emdtreatedAs.equals("S")) {
+                                row.setIssInConnWith(null);
+                                row.setIssInConnWithCpn(null);
                             }
-                        } else if (emdtreatedAs.equals("S")) {
-                            row.setIssInConnWith(null);
-                            row.setIssInConnWithCpn(null);
+
+                        } else if (data.getType().equalsIgnoreCase("FCM")) {
+                            //fix 14.05.2014
+                            row.setFcmi(data.getValue());
                         }
                     }
                 } else if (data.getName().equalsIgnoreCase("Rfics")) {
@@ -598,14 +621,14 @@ public class DWMapper {
                 } else if (data.getName().equalsIgnoreCase("ICW")) {
                     row.setIssInConnWith(data.getValue());
                     row.setIssInConnWithCpn(data.getAdditionalData1());
-                } else if (data.getName().equalsIgnoreCase("FCM")) {
-                    row.setFcmi(data.getValue());
                 }
             }
 
         }
 
         // AVIX-11374 : We needed to add iterating over insurances as well
+        // Pending deletion if 6.2 CVT goes well and we dont lose all insurance
+        /*
         if (itemForCoupon != null && itemForCoupon.getType().equals("IU")) {
             for (ServiceLine sLine : itemForCoupon.getServiceLines()) {
                 if (sLine.getServiceLineTypeCode().equals("FA")) {
@@ -615,6 +638,7 @@ public class DWMapper {
                 }
             }
         }
+        */
 
         for (ServiceLine sLine : booking.getServiceLines()) {
             if (sLine.getServiceLineTypeCode().equals("FZ")) {
