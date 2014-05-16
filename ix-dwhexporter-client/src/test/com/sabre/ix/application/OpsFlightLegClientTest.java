@@ -1,7 +1,6 @@
 package com.sabre.ix.application;
 
-import com.sabre.ix.client.OpsFlightLeg;
-import com.sabre.ix.client.OpsFlightLegServices;
+import com.sabre.ix.client.*;
 import com.sabre.ix.client.context.Context;
 import com.sabre.ix.client.dao.MetaModel;
 import com.sabre.ix.client.datahandler.DataHandler;
@@ -20,9 +19,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -51,6 +52,13 @@ public class OpsFlightLegClientTest {
     public void verifyBasicOpsFlightLegProcessing() throws IOException {
         OpsFlightLeg flightLeg = new OpsFlightLeg(opsFlightLegServices, getFileAsString("example_Ops_message.xml"));
         assertThat(flightLeg.getDestination(), equalTo("TXL"));
+    }
+
+    @Test
+    public void pullOpsBookingLinkClasses() throws IOException {
+        OpsFlightLeg flightLeg = new OpsFlightLeg(opsFlightLegServices, getFileAsString("example_Ops_message.xml"));
+        List<OpsBookingLink> linkedDataObjects = flightLeg.getLinkedDataObjects(OpsBookingLink.class);
+        assertTrue(linkedDataObjects.isEmpty());
     }
 
     private String getFileAsString(String fileName) throws IOException {

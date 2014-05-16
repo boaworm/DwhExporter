@@ -2,6 +2,7 @@ package com.sabre.ix.application;
 
 import com.sabre.ix.client.DcsFlightLeg;
 import com.sabre.ix.client.DcsFlightLegServices;
+import com.sabre.ix.client.OpsDcsLink;
 import com.sabre.ix.client.context.Context;
 import com.sabre.ix.client.dao.MetaModel;
 import com.sabre.ix.client.datahandler.DataHandler;
@@ -20,9 +21,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -53,6 +56,13 @@ public class DcsFlightLegClientTest {
         assertThat(flightLeg.getOrigin(), equalTo("VIE"));
         assertThat(flightLeg.getDestination(), equalTo("DME"));
         assertThat(flightLeg.getDcsPaxs().size(), equalTo(59));
+    }
+
+    @Test
+    public void pullDcsOpsLinkClasses() throws IOException {
+        DcsFlightLeg flightLeg = new DcsFlightLeg(dcsFlightLegServices, getFileAsString("example_Dcs_message.xml"));
+        List<OpsDcsLink> linkedDataObjects = flightLeg.getLinkedDataObjects(OpsDcsLink.class);
+        assertTrue(linkedDataObjects.isEmpty());
     }
 
     private String getFileAsString(String fileName) throws IOException {
