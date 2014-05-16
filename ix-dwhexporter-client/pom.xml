@@ -231,11 +231,21 @@
             <classifier>sources</classifier>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.opsdomain</groupId>
+            <artifactId>ix-opsdomain-client</artifactId>
+            <version>6.2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>sabre.domains.customerdomain</groupId>
             <artifactId>ix-customerdomain-client</artifactId>
             <version>6.2.0-SNAPSHOT</version>
             <type>jar</type>
             <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.customerdomain</groupId>
+            <artifactId>ix-customerdomain-client</artifactId>
+            <version>6.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>sabre.domains.dcsdomain</groupId>
@@ -245,11 +255,21 @@
             <classifier>sources</classifier>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.dcsdomain</groupId>
+            <artifactId>ix-dcsdomain-client</artifactId>
+            <version>6.2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>sabre.domains.bookingdomain</groupId>
             <artifactId>ix-bookingdomain-client</artifactId>
             <version>6.2.0-SNAPSHOT</version>
             <type>jar</type>
             <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.bookingdomain</groupId>
+            <artifactId>ix-bookingdomain-client</artifactId>
+            <version>6.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
@@ -259,11 +279,21 @@
             <classifier>sources</classifier>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
+            <version>6.2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>sabre.domains.opsdcslinkdomain</groupId>
             <artifactId>ix-opsdcslinkdomain-client</artifactId>
             <version>6.2.0-SNAPSHOT</version>
             <type>jar</type>
             <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.opsdcslinkdomain</groupId>
+            <artifactId>ix-opsdcslinkdomain-client</artifactId>
+            <version>6.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>sabre.domains.opsbookinglinkdomain</groupId>
@@ -273,11 +303,21 @@
             <classifier>sources</classifier>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain-client</artifactId>
+            <version>6.2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>sabre.domains.namelinkdomain</groupId>
             <artifactId>ix-namelinkdomain-client</artifactId>
             <version>6.2.0-SNAPSHOT</version>
             <type>jar</type>
             <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.namelinkdomain</groupId>
+            <artifactId>ix-namelinkdomain-client</artifactId>
+            <version>6.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>microsoft</groupId>

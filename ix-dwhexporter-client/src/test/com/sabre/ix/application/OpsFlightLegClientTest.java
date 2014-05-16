@@ -54,7 +54,7 @@ public class OpsFlightLegClientTest {
     }
 
     private String getFileAsString(String fileName) throws IOException {
-        File testFile = new File("c:/testdata/" + fileName);
+        File testFile = new File("C:/dev/DwhExporter/testdata/" + fileName);
         return FileUtils.readFileToString(testFile);
     }
 
