@@ -1,6 +1,8 @@
 package com.sabre.ix.application;
 
+import com.sabre.ix.application.dao.FileDataRaw;
 import com.sabre.ix.application.logic.AirlineDateFormat;
+import com.sabre.ix.application.logic.DWMapper;
 import com.sabre.ix.client.Booking;
 import com.sabre.ix.client.BookingServices;
 import com.sabre.ix.client.context.Context;
@@ -24,6 +26,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -90,6 +93,10 @@ public class DWMapperTest {
     public void verify_FZ_for7MENHD() throws IOException {
         Booking booking = new Booking(bookingServices, getFileAsString("7MENHD.xml"));
         assertThat(booking.getRloc(), equalTo("7MENHD"));
+
+        DWMapper mapper = new DWMapper();
+        List<FileDataRaw> fileDataRaws = mapper.mapBooking(booking);
+        assertThat(fileDataRaws.size(), equalTo(16));
     }
 
     private String getFileAsString(String fileName) throws IOException {
