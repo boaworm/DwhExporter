@@ -183,6 +183,7 @@ public class DWMapper {
         return null;
     }
 
+    /*
     private List<ServiceLine> getServiceLinesAssociatedWithChargeableItem(ChargeableItem cie) {
         List<ServiceLine> associatedServiceLines = new ArrayList<ServiceLine>();
 
@@ -210,6 +211,7 @@ public class DWMapper {
 
         return associatedServiceLines;
     }
+    */
 
     private List<ServiceLine> getServiceLinesForChargeableItem(ChargeableItem chargeableItem) {
         BookingName bn = chargeableItem.getBookingName();
@@ -223,14 +225,14 @@ public class DWMapper {
             for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
                 for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
                     if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !ids.contains(chargeableItem.getChargeableItemId())) {
-                        ids.add(chargeableItem.getChargeableItemId());
+                        ids.add(serviceLine.getServiceLineId());
                         serviceLines.add(serviceLine);
                     }
                 }
             }
             for (ServiceLine serviceLine : bookingName.getServiceLines()) {
                 if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !ids.contains(chargeableItem.getChargeableItemId())) {
-                    ids.add(chargeableItem.getChargeableItemId());
+                    ids.add(serviceLine.getServiceLineId());
                     serviceLines.add(serviceLine);
                 }
             }
@@ -238,7 +240,7 @@ public class DWMapper {
         }
         for (ServiceLine serviceLine : booking.getServiceLines()) {
             if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !ids.contains(chargeableItem.getChargeableItemId())) {
-                ids.add(chargeableItem.getChargeableItemId());
+                ids.add(serviceLine.getServiceLineId());
                 serviceLines.add(serviceLine);
             }
         }
@@ -274,30 +276,6 @@ public class DWMapper {
         return null;
     }
 
-    private ServiceLine getServiceLineById(Booking booking, Long id) {
-        for (BookingName bookingName : booking.getBookingNames()) {
-            for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
-                for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
-                    if (serviceLine.getServiceLineId() == id) {
-                        return serviceLine;
-                    }
-                }
-            }
-            for (ServiceLine serviceLine : bookingName.getServiceLines()) {
-                if (serviceLine.getServiceLineId() == id) {
-                    return serviceLine;
-                }
-            }
-
-        }
-        for (ServiceLine serviceLine : booking.getServiceLines()) {
-            if (serviceLine.getServiceLineId() == id) {
-                return serviceLine;
-            }
-        }
-        return null;
-    }
-
     private void populateOtherStagingRecord(ChargeableItem chargeableItem, Booking booking, BookingName name, BookingNameItem item, List<FileDataRaw> rows, FileDataRaw tstRow, List<FileDataRaw> itemRows) {
         if (chargeableItem.getType() == null) {
             return;
@@ -316,7 +294,7 @@ public class DWMapper {
             // Workaround as CIE look different when loaded from DB
             List<ServiceLine> serviceLinesAssociatedWithChargeableItem;
             if (getServiceLinesForChargeableItem(chargeableItem).isEmpty()) {
-                serviceLinesAssociatedWithChargeableItem = getServiceLinesAssociatedWithChargeableItem(chargeableItem);
+                serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
             } else {
                 serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
             }
@@ -520,7 +498,7 @@ public class DWMapper {
 
         GregorianCalendar mostRecentCancellationDate = null;
         if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
-            for (ServiceLine searchLine : getServiceLinesAssociatedWithChargeableItem(chargeableItemEntity)) {
+            for (ServiceLine searchLine : getServiceLinesForChargeableItem(chargeableItemEntity)) {
                 if (searchLine.getFreeText().contains("TicketDocumentData")) {
                     if (mostRecentCancellationDate == null) {
                         ticketingLine = searchLine;
@@ -534,7 +512,7 @@ public class DWMapper {
                 }
             }
         } else {
-            for (ServiceLine searchLine : getServiceLinesAssociatedWithChargeableItem(chargeableItemEntity)) {
+            for (ServiceLine searchLine : getServiceLinesForChargeableItem(chargeableItemEntity)) {
                 if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
                     ticketingLine = searchLine;
                     break;
@@ -640,26 +618,13 @@ public class DWMapper {
         }
         */
 
-        for (ServiceLine sLine : booking.getServiceLines()) {
-            if (sLine.getServiceLineTypeCode().equals("FZ")) {
-                if ((getServiceLineById(booking, sLine.getChargeableItemId()) == null && row.getDocumentClass().equals("PAX")) ||
-                        getServiceLineById(booking, sLine.getChargeableItemId()) != null && row.getDocumentClass().equals("MCO")) {
+        if(row.getDocumentClass().equals("MCO")) {
+            Collection<ServiceLine> serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
+            for(ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
+                if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FZ")) {
                     SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
                     String freeText = parser.get("FreeText");
                     row.setMiscellaneousInformationFreetext(ensureLength(wrap(row.getMiscellaneousInformationFreetext()) + freeText, 990));
-                }
-            }
-        }
-
-        if (name != null) {
-            for (ServiceLine sLine : name.getServiceLines()) {
-                if (sLine.getServiceLineTypeCode().equals("FZ")) {
-                    if ((getServiceLineById(booking, sLine.getChargeableItemId()) == null && row.getDocumentClass().equals("PAX")) ||
-                            getServiceLineById(booking, sLine.getChargeableItemId()) != null && row.getDocumentClass().equals("MCO")) {
-                        SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
-                        String freeText = parser.get("FreeText");
-                        row.setMiscellaneousInformationFreetext(ensureLength(wrap(row.getMiscellaneousInformationFreetext()) + freeText, 990));
-                    }
                 }
             }
         }
