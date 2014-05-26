@@ -182,6 +182,18 @@ public class DWMapper {
         }
         return null;
     }
+        /*
+    private ChargeableItem getChargeableItemByBookingNameItemId(BookingNameItem item) {
+        for (BookingName bookingName : booking.getBookingNames()) {
+            for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
+                if (bookingNameItem.getBookingNameItemId() == id) {
+                    return bookingNameItem;
+                }
+            }
+        }
+        return null;
+    }
+          */
 
     /*
     private List<ServiceLine> getServiceLinesAssociatedWithChargeableItem(ChargeableItem cie) {
@@ -247,7 +259,7 @@ public class DWMapper {
         return serviceLines;
     }
 
-    private ServiceLine getServiceLinesForChargeableItemCoupon(ChargeableItemCoupon coupon) {
+    private ServiceLine getServiceLineForChargeableItemCoupon(ChargeableItemCoupon coupon) {
         ChargeableItem chargeableItem = coupon.getChargeableItem();
         if (chargeableItem == null) return null;
         BookingName bn = chargeableItem.getBookingName();
@@ -256,20 +268,26 @@ public class DWMapper {
         for (BookingName bookingName : booking.getBookingNames()) {
             for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
                 for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
-                    if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
+                    // #MH 22MAY14# compare sl ids (not item with coupon) TODO validate
+                    //if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
+                    if (serviceLine.getServiceLineId() == coupon.getServiceLineId()) {
                         return serviceLine;
                     }
                 }
             }
             for (ServiceLine serviceLine : bookingName.getServiceLines()) {
-                if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
+                // #MH 22MAY14# compare sl ids (not item with coupon) TODO validate
+                //if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
+                if (serviceLine.getServiceLineId() == coupon.getServiceLineId()) {
                     return serviceLine;
                 }
             }
 
         }
         for (ServiceLine serviceLine : booking.getServiceLines()) {
-            if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
+            // #MH 22MAY14# compare sl ids (not item with coupon) TODO validate
+            //if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
+            if (serviceLine.getServiceLineId() == coupon.getServiceLineId()) {
                 return serviceLine;
             }
         }
@@ -543,6 +561,7 @@ public class DWMapper {
         setCommonFields(booking, name, null, itemForCoupon, row);
         setStandardChargeableFields(row, itemForCoupon, chargeableItem);
 
+                      /*
         //need to add coupon data depending on whether we have item or service line
         ArrayList<ChargeableItemData> chargeableItemData = new ArrayList<ChargeableItemData>();
         chargeableItemData.addAll(chargeableItem.getChargeableItemDatas());
@@ -551,12 +570,32 @@ public class DWMapper {
                     itemForCoupon.getCrsSegmentLineNum() == getBookingNameItemById(booking, coupon.getBookingNameItemId()).getCrsSegmentLineNum()) {
                 chargeableItemData.addAll(coupon.getChargeableItemDatas());
             }
-            if (serviceLineForCoupon != null && getServiceLinesForChargeableItemCoupon(coupon) != null &&
-                    serviceLineForCoupon.getCrsId() == getServiceLinesForChargeableItemCoupon(coupon).getCrsId()) {
+            if (serviceLineForCoupon != null && getServiceLineForChargeableItemCoupon(coupon) != null &&
+                    serviceLineForCoupon.getCrsId() == getServiceLineForChargeableItemCoupon(coupon).getCrsId()) {
                 chargeableItemData.addAll(coupon.getChargeableItemDatas());
             }
 
         }
+                    */
+
+        ArrayList<ChargeableItemData> chargeableItemData = new ArrayList<ChargeableItemData>();
+        chargeableItemData.addAll(chargeableItem.getChargeableItemDatas());
+        //also need to add coupon data depending on whether we have item or service line
+        for (ChargeableItemCoupon couponEntity : chargeableItem.getChargeableItemCoupons()) {
+            BookingNameItem bookingNameItem = getBookingNameItemById(booking, couponEntity.getBookingNameItemId());
+            if (itemForCoupon != null && bookingNameItem != null && itemForCoupon.getBookingNameItemId() == bookingNameItem.getBookingNameItemId()) {
+                chargeableItemData.addAll(couponEntity.getChargeableItemDatas());
+                break;
+            }
+
+            ServiceLine serviceLine = getServiceLineForChargeableItemCoupon(couponEntity);
+            if (serviceLineForCoupon != null && serviceLine != null && serviceLineForCoupon.getServiceLineId() == serviceLine.getServiceLineId()) {
+                chargeableItemData.addAll(couponEntity.getChargeableItemDatas());
+                break;
+            }
+        }
+
+
         for (ChargeableItemData data : chargeableItemData) {
             if (data.getName() != null) {
                 if (data.getName().equalsIgnoreCase("GeneralIndicator")) {
@@ -588,7 +627,7 @@ public class DWMapper {
                             }
 
                         } else if (data.getType().equalsIgnoreCase("FCM")) {
-                            //fix 14.05.2014
+                            //#MH# fix 14.05.2014
                             row.setFcmi(data.getValue());
                         }
                     }
@@ -597,8 +636,19 @@ public class DWMapper {
                 } else if (data.getName().equalsIgnoreCase("Rfisc")) {
                     row.setMcoreasonSubCode(ensureLength(data.getSubType(), 100));
                 } else if (data.getName().equalsIgnoreCase("ICW")) {
+
                     row.setIssInConnWith(data.getValue());
                     row.setIssInConnWithCpn(data.getAdditionalData1());
+                    /*
+                    //#MH 26MAY14# assign to right coupon TODO validate
+                    if (serviceLineForCoupon != null) {
+                        ChargeableItemCoupon cic = data.getChargeableItemCoupon();
+                        if (cic != null && serviceLineForCoupon.getServiceLineId() == cic.getServiceLineId()) {
+                            row.setIssInConnWith(data.getValue());
+                            row.setIssInConnWithCpn(data.getAdditionalData1());
+                        }
+                    }
+                    */
                 }
             }
 
@@ -813,9 +863,10 @@ public class DWMapper {
             if (name != null) {
                 if (name.equalsIgnoreCase("IssueIdentifier")) {
                     // IssueIdentifier is populated by SBR >= 12.1
-                    if ("I".equalsIgnoreCase(data.getSubType())) {
+                    // #MH 26MAY14# check for sub type disabled TODO validate
+                    //if ("I".equalsIgnoreCase(data.getSubType())) {
                         return true;
-                    }
+                    //}
                 } else if (name.equalsIgnoreCase("TicketingIndicator")) {
                     // TicketingIndicator is populated by SBR < 12.1
                     if ("T".equalsIgnoreCase(data.getValue())) {

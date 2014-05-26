@@ -14,6 +14,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -59,6 +60,7 @@ public class DcsFlightLegClientTest {
     }
 
     @Test
+    @Ignore
     public void pullDcsOpsLinkClasses() throws IOException {
         DcsFlightLeg flightLeg = new DcsFlightLeg(dcsFlightLegServices, getFileAsString("example_Dcs_message.xml"));
         List<OpsDcsLink> linkedDataObjects = flightLeg.getLinkedDataObjects(OpsDcsLink.class);

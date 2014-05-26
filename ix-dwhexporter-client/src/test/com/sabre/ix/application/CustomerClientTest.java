@@ -14,6 +14,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -57,7 +58,9 @@ public class CustomerClientTest {
         assertThat(customer.getFirstName(), equalTo("HENRIK"));
     }
 
+
     @Test
+    @Ignore
     public void pullNameLinkObject() throws IOException {
         Customer customer = new Customer(customerServices, getFileAsString("example_Customer_message.xml"));
         List<NameLink> linkedDataObjects = customer.getLinkedDataObjects(NameLink.class);

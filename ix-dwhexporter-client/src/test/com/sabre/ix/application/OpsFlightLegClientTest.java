@@ -12,6 +12,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -55,6 +56,7 @@ public class OpsFlightLegClientTest {
     }
 
     @Test
+    @Ignore
     public void pullOpsBookingLinkClasses() throws IOException {
         OpsFlightLeg flightLeg = new OpsFlightLeg(opsFlightLegServices, getFileAsString("example_Ops_message.xml"));
         List<OpsBookingLink> linkedDataObjects = flightLeg.getLinkedDataObjects(OpsBookingLink.class);
