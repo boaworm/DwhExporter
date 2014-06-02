@@ -258,7 +258,7 @@ public class DWMapper {
         }
         return serviceLines;
     }
-
+    //#MH 22MAY14# renamed - was getServiceLinesForChargeableItemCoupon
     private ServiceLine getServiceLineForChargeableItemCoupon(ChargeableItemCoupon coupon) {
         ChargeableItem chargeableItem = coupon.getChargeableItem();
         if (chargeableItem == null) return null;
@@ -561,7 +561,7 @@ public class DWMapper {
         setCommonFields(booking, name, null, itemForCoupon, row);
         setStandardChargeableFields(row, itemForCoupon, chargeableItem);
 
-                      /*
+        /*
         //need to add coupon data depending on whether we have item or service line
         ArrayList<ChargeableItemData> chargeableItemData = new ArrayList<ChargeableItemData>();
         chargeableItemData.addAll(chargeableItem.getChargeableItemDatas());
@@ -576,22 +576,28 @@ public class DWMapper {
             }
 
         }
-                    */
+        */
+        // #MH 23MAY14# clear logic and break if found TODO validate
 
+        // get chargeable item data for chargeable item
         ArrayList<ChargeableItemData> chargeableItemData = new ArrayList<ChargeableItemData>();
         chargeableItemData.addAll(chargeableItem.getChargeableItemDatas());
+
         //also need to add coupon data depending on whether we have item or service line
         for (ChargeableItemCoupon couponEntity : chargeableItem.getChargeableItemCoupons()) {
-            BookingNameItem bookingNameItem = getBookingNameItemById(booking, couponEntity.getBookingNameItemId());
-            if (itemForCoupon != null && bookingNameItem != null && itemForCoupon.getBookingNameItemId() == bookingNameItem.getBookingNameItemId()) {
-                chargeableItemData.addAll(couponEntity.getChargeableItemDatas());
-                break;
+            if (itemForCoupon != null) {
+                BookingNameItem bookingNameItem = getBookingNameItemById(booking, couponEntity.getBookingNameItemId());
+                if (bookingNameItem != null && itemForCoupon.getBookingNameItemId() == bookingNameItem.getBookingNameItemId()) {
+                    chargeableItemData.addAll(couponEntity.getChargeableItemDatas());
+                    break;
+                }
             }
-
-            ServiceLine serviceLine = getServiceLineForChargeableItemCoupon(couponEntity);
-            if (serviceLineForCoupon != null && serviceLine != null && serviceLineForCoupon.getServiceLineId() == serviceLine.getServiceLineId()) {
-                chargeableItemData.addAll(couponEntity.getChargeableItemDatas());
-                break;
+            if (serviceLineForCoupon != null) {
+                ServiceLine serviceLine = getServiceLineForChargeableItemCoupon(couponEntity);
+                if (serviceLine != null && serviceLineForCoupon.getServiceLineId() == serviceLine.getServiceLineId()) {
+                    chargeableItemData.addAll(couponEntity.getChargeableItemDatas());
+                    break;
+                }
             }
         }
 
@@ -636,19 +642,8 @@ public class DWMapper {
                 } else if (data.getName().equalsIgnoreCase("Rfisc")) {
                     row.setMcoreasonSubCode(ensureLength(data.getSubType(), 100));
                 } else if (data.getName().equalsIgnoreCase("ICW")) {
-
                     row.setIssInConnWith(data.getValue());
                     row.setIssInConnWithCpn(data.getAdditionalData1());
-                    /*
-                    //#MH 26MAY14# assign to right coupon TODO validate
-                    if (serviceLineForCoupon != null) {
-                        ChargeableItemCoupon cic = data.getChargeableItemCoupon();
-                        if (cic != null && serviceLineForCoupon.getServiceLineId() == cic.getServiceLineId()) {
-                            row.setIssInConnWith(data.getValue());
-                            row.setIssInConnWithCpn(data.getAdditionalData1());
-                        }
-                    }
-                    */
                 }
             }
 
@@ -1315,7 +1310,7 @@ public class DWMapper {
     }
 
     void handleFP(FileDataRaw row, String freeText) {
-        row.setFopinformationFreetext(ensureLength(freeText, 30));
+        row.setFopinformationFreetext(ensureLength(freeText, 999));
         if (freeText != null) {
             if (freeText.startsWith("CC")) {
                 if (freeText.charAt(4) == 'X') {
