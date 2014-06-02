@@ -1904,6 +1904,80 @@ public class DWMapperTest {
         */
     }
 
+    @Test
+    public void verify_FO_for_PAX_and_EMD() throws IOException {
+
+        DWMapper mapper = new DWMapper();
+        Booking booking;
+        List<FileDataRaw> fileDataRaws;
+        FileDataRaw row;
+        List<Integer> multirow;
+
+        //5W3TII
+        booking = new Booking(bookingServices, getFileAsString("5W3TII.xml"));
+        assertThat(booking.getRloc(), equalTo("5W3TII"));
+
+        fileDataRaws = mapper.mapBooking(booking);
+        assertThat(fileDataRaws.size(), equalTo(7));
+
+        multirow = Arrays.asList(0, 1, 2, 3);
+        for (int rownum : multirow) {
+            row = fileDataRaws.get(rownum);
+            assertThat(row.getDocumentClass(), equalTo("MCO"));
+            assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-8206236418MIA29APR14/10980211/745-82062364183M1"));
+        }
+
+        multirow = Arrays.asList(4, 5, 6, 7);
+        for (int rownum : multirow) {
+            row = fileDataRaws.get(rownum);
+            assertThat(row.getDocumentClass(), equalTo("PAX"));
+            assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-2338946432MIA29APR14/10980211/745-23389464325E1"));
+        }
+
+        //ZT5H5E
+        booking = new Booking(bookingServices, getFileAsString("ZT5H5E.xml"));
+        assertThat(booking.getRloc(), equalTo("ZT5H5E"));
+
+        fileDataRaws = mapper.mapBooking(booking);
+        assertThat(fileDataRaws.size(), equalTo(6));
+
+        multirow = Arrays.asList(0, 1, 2, 3);
+        for (int rownum : multirow) {
+            row = fileDataRaws.get(rownum);
+            assertThat(row.getDocumentClass(), equalTo("MCO"));
+            assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-8205670647PAR05FEB14/20494935/745-82056706470M1"));
+        }
+
+        multirow = Arrays.asList(4, 5);
+        for (int rownum : multirow) {
+            row = fileDataRaws.get(rownum);
+            assertThat(row.getDocumentClass(), equalTo("PAX"));
+            assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-2336768887PAR05FEB14/20494935/745-23367688876E1"));
+        }
+
+        //38IS83
+        booking = new Booking(bookingServices, getFileAsString("38IS83.xml"));
+        assertThat(booking.getRloc(), equalTo("38IS83"));
+
+        fileDataRaws = mapper.mapBooking(booking);
+        assertThat(fileDataRaws.size(), equalTo(6));
+
+        multirow = Arrays.asList(0, 1, 2, 3);
+        for (int rownum : multirow) {
+            row = fileDataRaws.get(rownum);
+            assertThat(row.getDocumentClass(), equalTo("MCO"));
+            assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-8205325996BER29DEC13/23496605/745-82053259961M1"));
+        }
+
+        multirow = Arrays.asList(4, 5);
+        for (int rownum : multirow) {
+            row = fileDataRaws.get(rownum);
+            assertThat(row.getDocumentClass(), equalTo("PAX"));
+            assertThat(row.getOrigIssueInformationFreetext(), equalTo("PAX 745-2335302045BER29DEC13/23496605/745-23353020450E1"));
+        }
+
+    }
+
 
 
     private String getFileAsString(String fileName) throws IOException {
