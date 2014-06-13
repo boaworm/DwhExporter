@@ -247,6 +247,11 @@ public class DataWarehouseExporter {
                         System.out.println("getTixInformationFreetext " + row.getTixInformationFreetext());
                         System.out.println("getMiscellaneousChargeOrderFreetext " + row.getMiscellaneousChargeOrderFreetext());
                         System.out.println("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
+                        System.out.println("getOrigIssueInformationFreetext " + row.getOrigIssueInformationFreetext());
+                        System.out.println("getFopinformationFreetext " + row.getFopinformationFreetext());
+
+
+
                         System.out.println("");
 
                         lastExportedRows = rows;

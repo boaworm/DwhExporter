@@ -331,6 +331,13 @@ public class DWMapper {
                         SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
                         handleSEA(row, sLine, parser);
                     }
+
+                    //these two line replace  the code below
+                    ServiceLine ticketingLine = null;
+                    ticketingLine = getRelevantTicketingLineNew(booking, sLine, item, name);
+
+
+                    /*
                     //we get the ticket fields by finding the FA line that has a reference to this service line:
                     //we assume the FA line can be at booking name or booking name item level.
                     ServiceLine ticketingLine = null;
@@ -340,6 +347,7 @@ public class DWMapper {
                     if (ticketingLine == null && chargeableItem.getBookingName() != null) {
                         ticketingLine = getRelevantTicketingLine(booking, sLine, chargeableItem.getBookingName().getServiceLines());
                     }
+                    */
 
                     if (ticketingLine != null) {
                         SBRFreeTextParser parser = new SBRFreeTextParser(ticketingLine.getFreeText());
@@ -462,6 +470,72 @@ public class DWMapper {
         }
     }
 
+    private ServiceLine getRelevantTicketingLineNew(Booking booking, ServiceLine sLine, BookingNameItem item, BookingName name) {
+        ServiceLine ticketingLine = null;
+
+        if (name == null ) return null;
+
+        if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
+            // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
+            GregorianCalendar mostRecentCancellationDate = null;
+            for (ServiceLine searchLine : name.getServiceLines()) {
+                if (searchLine.getFreeText().contains("TicketDocumentData")) {
+                    if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
+                            "] [Number:" + sLine.getCrsId() + "]")) {
+                        if (mostRecentCancellationDate == null) {
+                            ticketingLine = searchLine;
+                            mostRecentCancellationDate = ticketingLine.getCancellationDate();
+                        } else {
+                            if (searchLine.getCancellationDate().after(mostRecentCancellationDate)) {
+                                ticketingLine = searchLine;
+                                mostRecentCancellationDate = ticketingLine.getCancellationDate();
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            for (ServiceLine searchLine : name.getServiceLines()) {
+                if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
+                    if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
+                            "] [Number:" + sLine.getCrsId() + "]")) {
+                        ticketingLine = searchLine;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (ticketingLine != null) {
+            return ticketingLine;
+        }
+
+        if (ticketingLine == null && item != null) {
+            //searchline may be a service line related to an MCO, but has no Reference: in free text (e.g. FP,FV,FZ)
+            //get service lines related to the same chargeable item
+            if (sLine.getBookingNameItemId() == 0) {
+                //need to check service lines at BookingName Level
+                List<ServiceLine> searchLines = item.getServiceLines();
+                for (ServiceLine searchLine : searchLines) {
+                    if (searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED)
+                        if (searchLine.getChargeableItemId() == sLine.getChargeableItemId()) {
+                            //and grab ticketing line from there
+                            ServiceLine sLineAlternative = searchLine;
+                            for (ServiceLine candidate : name.getServiceLines()) {
+                                if (candidate.getFreeText().contains("TicketDocumentData") && candidate.getServiceLineState() != ServiceLine.STATUS_DELETED) {
+                                    if (candidate.getFreeText().contains("Reference: [Qualifier:" + sLineAlternative.getServiceLineTypeCode() +
+                                            "] [Number:" + sLineAlternative.getCrsId() + "]")) {
+                                        ticketingLine = candidate;
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+        }
+        return ticketingLine;
+    }
+
     private ServiceLine getRelevantTicketingLine(Booking booking, ServiceLine sLine, List<ServiceLine> searchLines) {
         ServiceLine ticketingLine = null;
 
@@ -494,51 +568,12 @@ public class DWMapper {
             if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
                 if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
                         "] [Number:" + sLine.getCrsId() + "]")) {
-                    return searchLine;
+                    ticketingLine = searchLine;
                 }
             }
         }
+
         /*
-        //14.05.14 assign the first ticket line
-        if (ticketingLine == null) {
-            for (ServiceLine searchLine : searchLines) {
-                if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
-                    return searchLine;
-                }
-            }
-        }
-
-        if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
-            // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
-            GregorianCalendar mostRecentCancellationDate = null;
-            for (ServiceLine searchLine : searchLines) {
-                if (searchLine.getFreeText().contains("TicketDocumentData")) {
-                    if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
-                            "] [Number:" + sLine.getCrsId() + "]")) {
-                        if (mostRecentCancellationDate == null) {
-                            ticketingLine = searchLine;
-                            mostRecentCancellationDate = ticketingLine.getCancellationDate();
-                        } else {
-                            if (searchLine.getCancellationDate().after(mostRecentCancellationDate)) {
-                                ticketingLine = searchLine;
-                                mostRecentCancellationDate = ticketingLine.getCancellationDate();
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            for (ServiceLine searchLine : searchLines) {
-                if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
-                    if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
-                            "] [Number:" + sLine.getCrsId() + "]")) {
-                        ticketingLine = searchLine;
-                        break;
-                    }
-                }
-            }
-        }
-
         //14.05.14 assign the first ticket line
         if (ticketingLine == null) {
             for (ServiceLine searchLine : searchLines) {
