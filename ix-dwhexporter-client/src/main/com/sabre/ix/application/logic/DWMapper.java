@@ -464,6 +464,8 @@ public class DWMapper {
 
     private ServiceLine getRelevantTicketingLine(Booking booking, ServiceLine sLine, List<ServiceLine> searchLines) {
         ServiceLine ticketingLine = null;
+
+
         if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
             // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
             GregorianCalendar mostRecentCancellationDate = null;
@@ -496,6 +498,46 @@ public class DWMapper {
                 }
             }
         }
+        /*
+        //14.05.14 assign the first ticket line
+        if (ticketingLine == null) {
+            for (ServiceLine searchLine : searchLines) {
+                if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
+                    return searchLine;
+                }
+            }
+        }
+
+        if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
+            // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
+            GregorianCalendar mostRecentCancellationDate = null;
+            for (ServiceLine searchLine : searchLines) {
+                if (searchLine.getFreeText().contains("TicketDocumentData")) {
+                    if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
+                            "] [Number:" + sLine.getCrsId() + "]")) {
+                        if (mostRecentCancellationDate == null) {
+                            ticketingLine = searchLine;
+                            mostRecentCancellationDate = ticketingLine.getCancellationDate();
+                        } else {
+                            if (searchLine.getCancellationDate().after(mostRecentCancellationDate)) {
+                                ticketingLine = searchLine;
+                                mostRecentCancellationDate = ticketingLine.getCancellationDate();
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            for (ServiceLine searchLine : searchLines) {
+                if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
+                    if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
+                            "] [Number:" + sLine.getCrsId() + "]")) {
+                        ticketingLine = searchLine;
+                        break;
+                    }
+                }
+            }
+        }
 
         //14.05.14 assign the first ticket line
         if (ticketingLine == null) {
@@ -505,6 +547,7 @@ public class DWMapper {
                 }
             }
         }
+        */
 
         return ticketingLine;
     }
