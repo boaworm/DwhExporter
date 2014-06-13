@@ -62,6 +62,9 @@ public class DWMapperTest {
     MetaModelServices mockMetaModelServices;
     MetaModel mockMetaModel;
 
+    // private String testdataPath = "C:\\dev\\DwhExporter\\testdata\\";
+    private String testdataPath = "/home/henrik/src/DwhExporter/testdata/";
+
     @Before
     public void setup() throws IOException, DocumentException {
         mockMetaModel = prepareMetaModel(DocumentHelper.parseText(loadTestData("metamodel.xml")));
@@ -88,7 +91,6 @@ public class DWMapperTest {
 
 
     @Test
-    @Ignore
     public void verifyStringToCalendar() throws ParseException {
 
         Calendar calendar;
@@ -108,7 +110,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore
     public void verifyCalendarToString() {
         GregorianCalendar gregorianCalendar = new GregorianCalendar();
 
@@ -1978,7 +1979,7 @@ public class DWMapperTest {
 
 
     private String readFile(String fileName) throws IOException {
-        File testFile = new File("C:\\dev\\DwhExporter\\testdata\\" + fileName);
+        File testFile = new File(testdataPath + fileName);
         if (testFile.exists() && testFile.canRead()) {
             return FileUtils.readFileToString(testFile);
         } else {
@@ -1986,7 +1987,7 @@ public class DWMapperTest {
         }
     }
     private void writeFile(String rloc, String content) throws IOException {
-        File testFile = new File("C:\\dev\\DwhExporter\\testdata\\" + rloc + ".xml");
+        File testFile = new File(testdataPath + rloc + ".xml");
         FileUtils.writeStringToFile(testFile, content);
     }
 
