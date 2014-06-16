@@ -2002,6 +2002,148 @@ public class DWMapperTest {
             assertThat(row.getDocumentClass(), equalTo("PAX"));
             assertThat(row.getOrigIssueInformationFreetext(), equalTo("PAX 745-2335302045BER29DEC13/23496605/745-23353020450E1"));
         }
+    }
+
+        @Test
+        public void verify_TST_for_non_AB()throws IOException {
+
+            DWMapper mapper = new DWMapper();
+            Booking booking;
+            List<FileDataRaw> fileDataRaws;
+            FileDataRaw row;
+            List<Integer> multirow;
+
+            //5YEFK4
+            booking = new Booking(bookingServices, loadTestData("5YEFK4.xml"));
+            assertThat(booking.getRloc(), equalTo("5YEFK4"));
+
+            fileDataRaws = mapper.mapBooking(booking);
+            assertThat(fileDataRaws.size(), equalTo(2));
+
+            row = fileDataRaws.get(0);
+            assertThat(row.getDocumentNo(), equalTo("8504449104"));
+            assertThat(row.getFarebaseCode(), equalTo("PAFM03"));
+            assertThat(row.getFcmi(), equalTo("1"));
+            assertThat(row.getSectorTotalFare(), nullValue());
+            assertThat(row.getSectorTotalFareNotEur(), equalTo("0.00"));
+            assertThat(row.getTixCurrency(), equalTo("USD"));
+            assertThat(row.getTourCode(), nullValue());
+            assertThat(row.getFareCalc(), equalTo("MIA AB X/BER Q000.00AB HEL0000.00NUC0000.00END ROE1.000000"));
+            assertThat(row.getTaxCode1(), equalTo("XDE---EUR"));
+            assertThat(row.getTaxValue1(), equalTo("6.01"));
+
+
+            row = fileDataRaws.get(1);
+            assertThat(row.getDocumentNo(), equalTo("8504449104"));
+            assertThat(row.getFarebaseCode(), equalTo("PAFM03"));
+            assertThat(row.getFcmi(), equalTo("1"));
+            assertThat(row.getSectorTotalFare(), nullValue());
+            assertThat(row.getSectorTotalFareNotEur(), equalTo("0.00"));
+            assertThat(row.getTixCurrency(), equalTo("USD"));
+            assertThat(row.getTourCode(), nullValue());
+            assertThat(row.getFareCalc(), equalTo("MIA AB X/BER Q000.00AB HEL0000.00NUC0000.00END ROE1.000000"));
+            assertThat(row.getTaxCode1(), equalTo("XDE---EUR"));
+            assertThat(row.getTaxValue1(), equalTo("6.01"));
+
+        }
+
+    @Test
+    public void verify_TST_for_INF()throws IOException {
+
+        DWMapper mapper = new DWMapper();
+        Booking booking;
+        List<FileDataRaw> fileDataRaws;
+        FileDataRaw row;
+        List<Integer> multirow;
+
+        //X3ZBXG
+        booking = new Booking(bookingServices, loadTestData("X3ZBXG.xml"));
+        assertThat(booking.getRloc(), equalTo("X3ZBXG"));
+
+        fileDataRaws = mapper.mapBooking(booking);
+        assertThat(fileDataRaws.size(), equalTo(6));
+
+        row = fileDataRaws.get(0);
+        assertThat(row.getDocumentNo(), equalTo("2336165513"));
+        assertThat(row.getFarebaseCode(), equalTo("ONCRT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("7.00"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getTixCurrency(), nullValue());
+        assertThat(row.getTourCode(), nullValue());
+        assertThat(row.getFareCalc (), equalTo("MUC AB PMI5.53AB MUC4.16NUC9.69END ROE0.731857"));
+        assertThat(row.getTaxCode1(), equalTo("XJDAE-EUR"));
+        assertThat(row.getTaxValue1(), equalTo("7.17"));
+
+
+
+        row = fileDataRaws.get(1);
+        assertThat(row.getDocumentNo(), equalTo("2336165513"));
+        assertThat(row.getFarebaseCode(), equalTo("PNCRT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("7.00"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getTixCurrency(), nullValue());
+        assertThat(row.getTourCode(), nullValue());
+        assertThat(row.getFareCalc (), equalTo("MUC AB PMI5.53AB MUC4.16NUC9.69END ROE0.731857"));
+        assertThat(row.getTaxCode1(), equalTo("XJDAE-EUR"));
+        assertThat(row.getTaxValue1(), equalTo("7.17"));
+
+
+        row = fileDataRaws.get(2);
+        assertThat(row.getDocumentNo(), equalTo("2336165514"));
+        assertThat(row.getFarebaseCode(), equalTo("ONCRT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("71.00"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getTixCurrency(), nullValue());
+        assertThat(row.getTourCode(), nullValue());
+        assertThat(row.getFareCalc (), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
+        assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR"));
+        assertThat(row.getTaxValue1(), equalTo("84.00"));
+
+
+
+        row = fileDataRaws.get(3);
+        assertThat(row.getDocumentNo(), equalTo("2336165514"));
+        assertThat(row.getFarebaseCode(), equalTo("PNCRT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("71.00"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getTixCurrency(), nullValue());
+        assertThat(row.getTourCode(), nullValue());
+        assertThat(row.getFareCalc (), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
+        assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR "));
+        assertThat(row.getTaxValue1(), equalTo("84.00"));
+
+
+
+        row = fileDataRaws.get(4);
+        assertThat(row.getDocumentNo(), equalTo("2336165512"));
+        assertThat(row.getFarebaseCode(), equalTo("ONCRT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("71.00"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getTixCurrency(), nullValue());
+        assertThat(row.getTourCode(), nullValue());
+        assertThat(row.getFareCalc (), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
+        assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR"));
+        assertThat(row.getTaxValue1(), equalTo("84.00"));
+
+
+
+        row = fileDataRaws.get(5);
+        assertThat(row.getDocumentNo(), equalTo("2336165512"));
+        assertThat(row.getFarebaseCode(), equalTo("PNCRT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("71.00"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getTixCurrency(), nullValue());
+        assertThat(row.getTourCode(), nullValue());
+        assertThat(row.getFareCalc (), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
+        assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR "));
+        assertThat(row.getTaxValue1(), equalTo("84.00"));
+
 
     }
 
