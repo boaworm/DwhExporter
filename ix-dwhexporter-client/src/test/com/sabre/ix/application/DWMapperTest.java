@@ -2176,14 +2176,18 @@ public class DWMapperTest {
         } else {
             // Attempting to read file from IX system
             String rloc = fileName.substring(0, 6);
-            Context liveContext = ContextFactory.createContext();
-            BookingServices liveBookingServices = (BookingServices) liveContext.getDomainServices(Booking.class);
-            List<Booking> bookings = liveBookingServices.retrieveByCCL("Booking.Rloc=\"" + rloc + "\"");
-            assertThat("Expected exactly one booking when querying by CCL and RLOC=" + rloc, bookings.size(), equalTo(1));
-            Booking liveBooking = bookings.get(0);
-            String xmlString = liveBooking.toXml();
-            writeFile(rloc, xmlString);
-            return xmlString;
+            try {
+                Context liveContext = ContextFactory.createContext();
+                BookingServices liveBookingServices = (BookingServices) liveContext.getDomainServices(Booking.class);
+                List<Booking> bookings = liveBookingServices.retrieveByCCL("Booking.Rloc=\"" + rloc + "\"");
+                assertThat("Expected exactly one booking when querying by CCL and RLOC=" + rloc, bookings.size(), equalTo(1));
+                Booking liveBooking = bookings.get(0);
+                String xmlString = liveBooking.toXml();
+                writeFile(rloc, xmlString);
+                return xmlString;
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to load RLOC from live system: " + rloc, e);
+            }
         }
     }
 
