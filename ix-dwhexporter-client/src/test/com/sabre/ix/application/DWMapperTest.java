@@ -69,7 +69,9 @@ public class DWMapperTest {
     public void setup() throws IOException, DocumentException {
         if (InetAddress.getLocalHost().getHostName().contains("htlinux")) {
             testdataPath = "/home/henrik/src/DwhExporter/testdata/";
-        } else {
+        } else if (InetAddress.getLocalHost().getHostName().contains("montecito")) {
+            testdataPath = "/Volumes/2TB/src/DwhExporter/testdata/";
+        }else {
             testdataPath = "C:\\dev\\DwhExporter\\testdata\\";
         }
 
