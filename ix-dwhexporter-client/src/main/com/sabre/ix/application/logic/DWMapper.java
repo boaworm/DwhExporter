@@ -258,6 +258,7 @@ public class DWMapper {
         }
         return serviceLines;
     }
+
     //#MH 22MAY14# renamed - was getServiceLinesForChargeableItemCoupon
     private ServiceLine getServiceLineForChargeableItemCoupon(ChargeableItemCoupon coupon) {
         ChargeableItem chargeableItem = coupon.getChargeableItem();
@@ -334,7 +335,7 @@ public class DWMapper {
 
                     //these two line replace  the code below
                     ServiceLine ticketingLine = null;
-                    ticketingLine = getRelevantTicketingLineNew(booking, sLine, item, name);
+                    ticketingLine = getRelevantTicketingLine(booking, sLine, item, name);
 
 
                     /*
@@ -470,10 +471,10 @@ public class DWMapper {
         }
     }
 
-    private ServiceLine getRelevantTicketingLineNew(Booking booking, ServiceLine sLine, BookingNameItem item, BookingName name) {
-        ServiceLine ticketingLine = null;
+    private ServiceLine getRelevantTicketingLine(Booking booking, ServiceLine sLine, BookingNameItem item, BookingName name) {
+        if (name == null) return null;
 
-        if (name == null ) return null;
+        ServiceLine ticketingLine = null;
 
         if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
             // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
@@ -506,11 +507,13 @@ public class DWMapper {
             }
         }
 
+        // If we found a ticket line on BookingName level above, return it.
         if (ticketingLine != null) {
             return ticketingLine;
         }
 
-        if (ticketingLine == null && item != null) {
+        // Else, try on BookingNameItem level as wel.
+        if (item != null) {
             //searchline may be a service line related to an MCO, but has no Reference: in free text (e.g. FP,FV,FZ)
             //get service lines related to the same chargeable item
             if (sLine.getBookingNameItemId() == 0) {
@@ -520,11 +523,10 @@ public class DWMapper {
                     if (searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED)
                         if (searchLine.getChargeableItemId() == sLine.getChargeableItemId()) {
                             //and grab ticketing line from there
-                            ServiceLine sLineAlternative = searchLine;
                             for (ServiceLine candidate : name.getServiceLines()) {
                                 if (candidate.getFreeText().contains("TicketDocumentData") && candidate.getServiceLineState() != ServiceLine.STATUS_DELETED) {
-                                    if (candidate.getFreeText().contains("Reference: [Qualifier:" + sLineAlternative.getServiceLineTypeCode() +
-                                            "] [Number:" + sLineAlternative.getCrsId() + "]")) {
+                                    if (candidate.getFreeText().contains("Reference: [Qualifier:" + searchLine.getServiceLineTypeCode() +
+                                            "] [Number:" + searchLine.getCrsId() + "]")) {
                                         ticketingLine = candidate;
                                     }
                                 }
@@ -533,57 +535,6 @@ public class DWMapper {
                 }
             }
         }
-        return ticketingLine;
-    }
-
-    private ServiceLine getRelevantTicketingLine(Booking booking, ServiceLine sLine, List<ServiceLine> searchLines) {
-        ServiceLine ticketingLine = null;
-
-
-        if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
-            // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
-            GregorianCalendar mostRecentCancellationDate = null;
-            for (ServiceLine searchLine : searchLines) {
-                if (searchLine.getFreeText().contains("TicketDocumentData")) {
-                    if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
-                            "] [Number:" + sLine.getCrsId() + "]")) {
-                        if (mostRecentCancellationDate == null) {
-                            ticketingLine = searchLine;
-                            mostRecentCancellationDate = ticketingLine.getCancellationDate();
-                        } else {
-                            if (searchLine.getCancellationDate().after(mostRecentCancellationDate)) {
-                                ticketingLine = searchLine;
-                                mostRecentCancellationDate = ticketingLine.getCancellationDate();
-                            }
-                        }
-                    }
-                }
-            }
-            if (ticketingLine != null) {
-                return ticketingLine;
-            }
-        }
-
-        for (ServiceLine searchLine : searchLines) {
-            if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
-                if (searchLine.getFreeText().contains("Reference: [Qualifier:" + sLine.getServiceLineTypeCode() +
-                        "] [Number:" + sLine.getCrsId() + "]")) {
-                    ticketingLine = searchLine;
-                }
-            }
-        }
-
-        /*
-        //14.05.14 assign the first ticket line
-        if (ticketingLine == null) {
-            for (ServiceLine searchLine : searchLines) {
-                if (searchLine.getFreeText().contains("TicketDocumentData") && searchLine.getServiceLineState() != ServiceLine.STATUS_DELETED) {
-                    return searchLine;
-                }
-            }
-        }
-        */
-
         return ticketingLine;
     }
 
@@ -741,9 +692,9 @@ public class DWMapper {
         }
         */
 
-        if(row.getDocumentClass().equals("MCO")) {
+        if (row.getDocumentClass().equals("MCO")) {
             Collection<ServiceLine> serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
-            for(ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
+            for (ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
                 if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FZ")) {
                     SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
                     String freeText = parser.get("FreeText");
@@ -938,7 +889,7 @@ public class DWMapper {
                     // IssueIdentifier is populated by SBR >= 12.1
                     // #MH 26MAY14# check for sub type disabled TODO validate
                     //if ("I".equalsIgnoreCase(data.getSubType())) {
-                        return true;
+                    return true;
                     //}
                 } else if (name.equalsIgnoreCase("TicketingIndicator")) {
                     // TicketingIndicator is populated by SBR < 12.1

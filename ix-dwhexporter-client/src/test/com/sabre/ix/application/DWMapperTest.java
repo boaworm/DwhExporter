@@ -29,6 +29,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -62,15 +63,22 @@ public class DWMapperTest {
     MetaModelServices mockMetaModelServices;
     MetaModel mockMetaModel;
 
-     private String testdataPath = "C:\\dev\\DwhExporter\\testdata\\";
-    //private String testdataPath = "/home/henrik/src/DwhExporter/testdata/";
+    private String testdataPath = "will be autodiscovered during setup";
 
     @Before
     public void setup() throws IOException, DocumentException {
+        if (InetAddress.getLocalHost().getHostName().contains("htlinux")) {
+            testdataPath = "/home/henrik/src/DwhExporter/testdata/";
+        } else {
+            testdataPath = "C:\\dev\\DwhExporter\\testdata\\";
+        }
+
         mockMetaModel = prepareMetaModel(DocumentHelper.parseText(loadTestData("metamodel.xml")));
         when(mockContext.getMetaModelServices()).thenReturn(mockMetaModelServices);
         when(mockMetaModelServices.getMetaModel()).thenReturn(mockMetaModel);
         bookingServices = new BookingServices(mockContext, mockDataHandler, mockActionHandler);
+
+
     }
 
     @Rule
@@ -91,7 +99,6 @@ public class DWMapperTest {
 
 
     @Test
-    @Ignore
     public void verifyStringToCalendar() throws ParseException {
 
         Calendar calendar;
@@ -111,7 +118,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore
     public void verifyCalendarToString() {
         GregorianCalendar gregorianCalendar = new GregorianCalendar();
 
@@ -709,7 +715,7 @@ public class DWMapperTest {
         FileDataRaw row;
         List<Integer> multirow;
 
-        //8GKIZH, DocumentClass “MCO�? (EMD-S)
+        //8GKIZH, DocumentClass MCO (EMD-S)
         booking = new Booking(bookingServices, loadTestData("8GKIZH.xml"));
         assertThat(booking.getRloc(), equalTo("8GKIZH"));
 
@@ -741,7 +747,7 @@ public class DWMapperTest {
         assertThat(row.getMcoreason(), equalTo("UKWN"));
         */
 
-        //8HHO9E, DocumentClass “MCO�? (EMD-S)
+        //8HHO9E, DocumentClass MCO (EMD-S)
         booking = new Booking(bookingServices, loadTestData("8HHO9E.xml"));
         assertThat(booking.getRloc(), equalTo("8HHO9E"));
 
@@ -828,7 +834,7 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWithCpn(), nullValue());
 
 
-        //8D69PH, DocumentClass “MCO�? (EMD-A)
+        //8D69PH, DocumentClass MCO (EMD-A)
         booking = new Booking(bookingServices, loadTestData("8D69PH.xml"));
         assertThat(booking.getRloc(), equalTo("8D69PH"));
 
@@ -898,7 +904,7 @@ public class DWMapperTest {
         }
 
 
-        //8BZZ7W, DocumentClass “MCO�? (EMD-A)
+        //8BZZ7W, DocumentClass MCO (EMD-A)
         booking = new Booking(bookingServices, loadTestData("8BZZ7W.xml"));
         assertThat(booking.getRloc(), equalTo("8BZZ7W"));
 
@@ -981,7 +987,7 @@ public class DWMapperTest {
 
 
 
-        //8F6Y2M, DocumentClass “MCO�?, EmdtreatedAs “A�? (EMD-A)
+        //8F6Y2M, DocumentClass MCO, EmdtreatedAs “A�? (EMD-A)
         booking = new Booking(bookingServices, loadTestData("8F6Y2M.xml"));
         assertThat(booking.getRloc(), equalTo("8F6Y2M"));
 
@@ -1205,7 +1211,6 @@ public class DWMapperTest {
             assertThat(row.getEmdtreatedAs(), equalTo("A"));
             assertThat(row.getMcoreason(), equalTo("UKWN"));
         }
-
 
 
         //ZPR3KZ, DocumentClass “MCO" (EMD-A)
@@ -1812,7 +1817,7 @@ public class DWMapperTest {
 
         //TODO no FopinformationFreetext for MCO-A and MCO-S
 
-        //27OLJO, DocumentClass “MCO�? (EMD-A)
+        //27OLJO, DocumentClass MCO (EMD-A)
         booking = new Booking(bookingServices, loadTestData("27OLJO.xml"));
         assertThat(booking.getRloc(), equalTo("27OLJO"));
 
@@ -1845,7 +1850,7 @@ public class DWMapperTest {
         fileDataRaws = mapper.mapBooking(booking);
         assertThat(fileDataRaws.size(), equalTo(4));
 
-        multirow = Arrays.asList(0,1);
+        multirow = Arrays.asList(0, 1);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8206345104"));
@@ -1872,8 +1877,7 @@ public class DWMapperTest {
         assertThat(row.getFcmi(), equalTo("0"));
 
 
-
-        //2BAEI8, DocumentClass “MCO�? (EMD-S)
+        //2BAEI8, DocumentClass MCO (EMD-S)
         booking = new Booking(bookingServices, loadTestData("2BAEI8.xml"));
         assertThat(booking.getRloc(), equalTo("2BAEI8"));
 
@@ -1892,13 +1896,13 @@ public class DWMapperTest {
         assertThat(row.getDocumentNo(), equalTo("8205568855"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getMiscellaneousChargeOrderFreetext(),equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
+        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
 
         row = fileDataRaws.get(2);
         assertThat(row.getDocumentNo(), equalTo("8205568856"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getMiscellaneousChargeOrderFreetext(),equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
+        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
 
         row = fileDataRaws.get(3);
         assertThat(row.getDocumentNo(), equalTo("8205568856"));
@@ -1925,7 +1929,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentNo(), equalTo("2610646591"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getMiscellaneousChargeOrderFreetext(),equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
+        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
 
     }
 
@@ -2156,6 +2160,7 @@ public class DWMapperTest {
             return null;
         }
     }
+
     private void writeFile(String rloc, String content) throws IOException {
         File testFile = new File(testdataPath + rloc + ".xml");
         FileUtils.writeStringToFile(testFile, content);
