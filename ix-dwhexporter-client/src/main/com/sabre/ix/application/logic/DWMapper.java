@@ -309,14 +309,7 @@ public class DWMapper {
                 }
             }
 
-            // Workaround as CIE look different when loaded from DB
-            List<ServiceLine> serviceLinesAssociatedWithChargeableItem;
-            if (getServiceLinesForChargeableItem(chargeableItem).isEmpty()) {
-                serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
-            } else {
-                serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
-            }
-
+            List<ServiceLine> serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
             if (!serviceLinesAssociatedWithChargeableItem.isEmpty()) {
                 //if this is a service line associated TSM (e.g. seat request)
                 //we create on row for each such service line. Each TSM may have multiple coupons each of which is
