@@ -2076,6 +2076,9 @@ public class DWMapperTest {
         assertThat(fileDataRaws.size(), equalTo(2));
 
         row = fileDataRaws.get(0);
+        assertThat(row.getPaxfirstName(), equalTo("MATTI"));
+        assertThat(row.getTixDepApt(), equalTo("MIA"));
+        assertThat(row.getTixDestApt(), equalTo("TXL"));
         assertThat(row.getDocumentNo(), equalTo("8504449104"));
         assertThat(row.getFarebaseCode(), equalTo("PAFM03"));
         assertThat(row.getFcmi(), equalTo("1"));
@@ -2089,6 +2092,9 @@ public class DWMapperTest {
 
 
         row = fileDataRaws.get(1);
+        assertThat(row.getPaxfirstName(), equalTo("MATTI"));
+        assertThat(row.getTixDepApt(), equalTo("TXL"));
+        assertThat(row.getTixDestApt(), equalTo("HEL"));
         assertThat(row.getDocumentNo(), equalTo("8504449104"));
         assertThat(row.getFarebaseCode(), equalTo("PAFM03"));
         assertThat(row.getFcmi(), equalTo("1"));
