@@ -148,7 +148,7 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("7MENHD"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(26));   //diff: 16->26
+        assertThat(fileDataRaws.size(), equalTo(22));   //diff: 16->26
 
 
         row = fileDataRaws.get(0);
@@ -165,7 +165,7 @@ public class DWMapperTest {
         assertThat(row.getSegNoTech(), equalTo(2));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        multirow = Arrays.asList(2, 3, 4, 5, 6);
+        multirow = Arrays.asList(2, 3, 4, 5);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8204821561"));
@@ -175,7 +175,7 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9918223"));
         }
 
-        multirow = Arrays.asList(7, 8, 9, 10, 11);
+        multirow = Arrays.asList(6, 7, 8, 9);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8204821561"));
@@ -185,21 +185,21 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9918223"));
         }
 
-        row = fileDataRaws.get(12);
+        row = fileDataRaws.get(10);
         assertThat(row.getDocumentNo(), equalTo("2333513308"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("SIMON/WERNER"));
         assertThat(row.getSegNoTech(), equalTo(1));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        row = fileDataRaws.get(13);
+        row = fileDataRaws.get(11);
         assertThat(row.getDocumentNo(), equalTo("2333513308"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("SIMON/WERNER"));
         assertThat(row.getSegNoTech(), equalTo(2));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        multirow = Arrays.asList(14, 15, 16, 17, 18);
+        multirow = Arrays.asList(12, 13, 14, 15);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8204821562"));
@@ -208,7 +208,7 @@ public class DWMapperTest {
             assertThat(row.getSegNoTech(), equalTo(1));
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9918223"));
         }
-        multirow = Arrays.asList(19, 20, 21, 22, 23);
+        multirow = Arrays.asList(16, 17, 18, 19);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8204821562"));
@@ -218,14 +218,14 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9918223"));
         }
 
-        row = fileDataRaws.get(24);
+        row = fileDataRaws.get(20);
         assertThat(row.getDocumentNo(), equalTo("2333513309"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("SIMON/CHRISTINA"));
         assertThat(row.getSegNoTech(), equalTo(1));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        row = fileDataRaws.get(25);
+        row = fileDataRaws.get(21);
         assertThat(row.getDocumentNo(), equalTo("2333513309"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("SIMON/CHRISTINA"));
@@ -241,7 +241,7 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("3NWPAK"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(26));     //16->26
+        assertThat(fileDataRaws.size(), equalTo(22));     //16->26
 
         row = fileDataRaws.get(0);
         assertThat(row.getDocumentNo(), nullValue());
@@ -257,7 +257,7 @@ public class DWMapperTest {
         assertThat(row.getSegNoTech(), equalTo(2));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        multirow = Arrays.asList(2, 3, 4, 5, 6);
+        multirow = Arrays.asList(2, 3, 4, 5);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8205126717"));
@@ -266,7 +266,7 @@ public class DWMapperTest {
             assertThat(row.getSegNoTech(), equalTo(1));
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9947605"));
         }
-        multirow = Arrays.asList(7, 8, 9, 10, 11);
+        multirow = Arrays.asList(6, 7, 8, 9);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8205126717"));
@@ -276,21 +276,21 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9947605"));
         }
 
-        row = fileDataRaws.get(12);
+        row = fileDataRaws.get(10);
         assertThat(row.getDocumentNo(), equalTo("2334383699"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("BUBENZER/BRIGITTE"));
         assertThat(row.getSegNoTech(), equalTo(1));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        row = fileDataRaws.get(13);
+        row = fileDataRaws.get(11);
         assertThat(row.getDocumentNo(), equalTo("2334383699"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("BUBENZER/BRIGITTE"));
         assertThat(row.getSegNoTech(), equalTo(2));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        multirow = Arrays.asList(14, 15, 16, 17, 18);
+        multirow = Arrays.asList(12, 13, 14, 15);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8205126718"));
@@ -300,7 +300,7 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9947605"));
         }
 
-        multirow = Arrays.asList(19, 20, 21, 22, 23);
+        multirow = Arrays.asList(16, 17, 18, 19);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8205126718"));
@@ -310,14 +310,14 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9947605"));
         }
 
-        row = fileDataRaws.get(24);
+        row = fileDataRaws.get(20);
         assertThat(row.getDocumentNo(), equalTo("2334383700"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("BUBENZER/EDGAR"));
         assertThat(row.getSegNoTech(), equalTo(1));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        row = fileDataRaws.get(25);
+        row = fileDataRaws.get(21);
         assertThat(row.getDocumentNo(), equalTo("2334383700"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("BUBENZER/EDGAR"));
@@ -333,7 +333,7 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("5N3JUD"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(26));
+        assertThat(fileDataRaws.size(), equalTo(22));
 
         row = fileDataRaws.get(0);
         assertThat(row.getDocumentNo(), nullValue());
@@ -349,7 +349,7 @@ public class DWMapperTest {
         assertThat(row.getSegNoTech(), equalTo(4));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        multirow = Arrays.asList(2, 3, 4, 5, 6);
+        multirow = Arrays.asList(2, 3, 4, 5);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8204954536"));
@@ -359,7 +359,7 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9924434"));
         }
 
-        multirow = Arrays.asList(7, 8, 9, 10, 11);
+        multirow = Arrays.asList(6, 7, 8, 9);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8204954536"));
@@ -369,21 +369,21 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9924434"));
         }
 
-        row = fileDataRaws.get(12);
+        row = fileDataRaws.get(10);
         assertThat(row.getDocumentNo(), equalTo("2333535797"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("STRUCK/HELMUT"));
         assertThat(row.getSegNoTech(), equalTo(3));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        row = fileDataRaws.get(13);
+        row = fileDataRaws.get(11);
         assertThat(row.getDocumentNo(), equalTo("2333535797"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("STRUCK/HELMUT"));
         assertThat(row.getSegNoTech(), equalTo(4));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        multirow = Arrays.asList(14, 15, 16, 17, 18);
+        multirow = Arrays.asList(12, 13, 14, 15);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8204954537"));
@@ -393,7 +393,7 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9924434"));
         }
 
-        multirow = Arrays.asList(19, 20, 21, 22, 23);
+        multirow = Arrays.asList(16, 17, 18, 19);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("8204954537"));
@@ -403,14 +403,14 @@ public class DWMapperTest {
             assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA9924434"));
         }
 
-        row = fileDataRaws.get(24);
+        row = fileDataRaws.get(20);
         assertThat(row.getDocumentNo(), equalTo("2333535798"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("STRUCK/ELISABETH"));
         assertThat(row.getSegNoTech(), equalTo(3));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        row = fileDataRaws.get(25);
+        row = fileDataRaws.get(21);
         assertThat(row.getDocumentNo(), equalTo("2333535798"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("STRUCK/ELISABETH"));
@@ -1868,7 +1868,7 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("27OLJO"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(10));
+        assertThat(fileDataRaws.size(), equalTo(8));
 
         row = fileDataRaws.get(1);
         assertThat(row.getDocumentNo(), equalTo("8205915682"));
