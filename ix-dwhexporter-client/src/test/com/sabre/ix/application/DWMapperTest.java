@@ -18,7 +18,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestWatcher;
@@ -38,7 +37,6 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -916,7 +914,9 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("8BZZ7W"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(20));
+        // printRows(fileDataRaws);
+
+        assertThat(fileDataRaws.size(), equalTo(16));
 
         //Bei 8BZZ7W gibt es ein Problem: die FlugTickets sind nicht den Segmenten zugeordnet, sondern chargeable SSRs| | |
 
@@ -1226,30 +1226,7 @@ public class DWMapperTest {
 
         fileDataRaws = mapper.mapBooking(booking);
 
-        int i = 1;
-        for(FileDataRaw row : fileDataRaws) {
-            System.out.println("Row " + i++);
-            System.out.println("getPaxname " + row.getPaxname());
-            System.out.println("getTixDepApt " + row.getTixDepApt());
-            System.out.println("getTixDestApt " + row.getTixDestApt());
-            System.out.println("getFcmi " + row.getFcmi());
-            System.out.println("getDocumentNo " + row.getDocumentNo());
-            System.out.println("getDocumentClass " + row.getDocumentClass());
-            System.out.println("getSegNoTech " + row.getSegNoTech());
-            System.out.println("getIssInConnWith " + row.getIssInConnWith());
-            System.out.println("getIssInConnWithCpn " + row.getIssInConnWithCpn());
-            System.out.println("getFarebaseCode " + row.getFarebaseCode());
-            System.out.println("getTixFlightDt " + row.getTixFlightDt());
-            System.out.println("getEmdtreatedAs " + row.getEmdtreatedAs());
-            System.out.println("getMcoreason " + row.getMcoreason());
-            System.out.println("getMcoreasonSubCode " + row.getMcoreasonSubCode());
-            System.out.println("getTixInformationFreetext " + row.getTixInformationFreetext());
-            System.out.println("getMiscellaneousChargeOrderFreetext " + row.getMiscellaneousChargeOrderFreetext());
-            System.out.println("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
-            System.out.println("getOrigIssueInformationFreetext " + row.getOrigIssueInformationFreetext());
-            System.out.println("getFopinformationFreetext " + row.getFopinformationFreetext());
-            System.out.println("");
-        }
+        printRows(fileDataRaws);
 
         assertThat(fileDataRaws.size(), equalTo(18));
 
@@ -2247,6 +2224,33 @@ public class DWMapperTest {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load RLOC from live system: " + rloc, e);
             }
+        }
+    }
+
+    private void printRows(List<FileDataRaw> rows) {
+        int i = 1;
+        for(FileDataRaw row : rows) {
+            System.out.println("Row " + i++);
+            System.out.println("getPaxname " + row.getPaxname());
+            System.out.println("getTixDepApt " + row.getTixDepApt());
+            System.out.println("getTixDestApt " + row.getTixDestApt());
+            System.out.println("getFcmi " + row.getFcmi());
+            System.out.println("getDocumentNo " + row.getDocumentNo());
+            System.out.println("getDocumentClass " + row.getDocumentClass());
+            System.out.println("getSegNoTech " + row.getSegNoTech());
+            System.out.println("getIssInConnWith " + row.getIssInConnWith());
+            System.out.println("getIssInConnWithCpn " + row.getIssInConnWithCpn());
+            System.out.println("getFarebaseCode " + row.getFarebaseCode());
+            System.out.println("getTixFlightDt " + row.getTixFlightDt());
+            System.out.println("getEmdtreatedAs " + row.getEmdtreatedAs());
+            System.out.println("getMcoreason " + row.getMcoreason());
+            System.out.println("getMcoreasonSubCode " + row.getMcoreasonSubCode());
+            System.out.println("getTixInformationFreetext " + row.getTixInformationFreetext());
+            System.out.println("getMiscellaneousChargeOrderFreetext " + row.getMiscellaneousChargeOrderFreetext());
+            System.out.println("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
+            System.out.println("getOrigIssueInformationFreetext " + row.getOrigIssueInformationFreetext());
+            System.out.println("getFopinformationFreetext " + row.getFopinformationFreetext());
+            System.out.println("");
         }
     }
 
