@@ -1227,6 +1227,10 @@ public class DWMapperTest {
         fileDataRaws = mapper.mapBooking(booking);
         assertThat(fileDataRaws.size(), equalTo(24));
 
+        // Cpn 1. HAM -> DUS, seat 11A
+        // Cpn 2. DUS -> ALC, seat 26A
+        // Cpn 3. ALC -> HAM, seat 13F
+
         row = fileDataRaws.get(0);
         assertThat(row.getDocumentNo(), equalTo("8205951399"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));

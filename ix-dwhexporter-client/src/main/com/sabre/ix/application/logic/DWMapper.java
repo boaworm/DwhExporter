@@ -643,7 +643,7 @@ public class DWMapper {
                                 // If we have a specific tstRow, use it
                                 if (tstRow != null) {
                                     row.setIssInConnWith(ensureLength(tstRow.getDocumentNo(), 10));
-                                    row.setIssInConnWithCpn(ensureLength(tstRow.getSegNoTech().toString(), 1));
+                                    row.setIssInConnWithCpn(ensureLength(tstRow.getSegNoTech().toString(), 3));
                                 } else {
                                     // Grab the ticket number from the first segment
                                     if (itemRows != null && !itemRows.isEmpty()) {
