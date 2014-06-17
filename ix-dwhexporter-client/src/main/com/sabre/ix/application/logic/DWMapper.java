@@ -315,6 +315,16 @@ public class DWMapper {
                 //we create on row for each such service line. Each TSM may have multiple coupons each of which is
                 //associated with one service line.
                 for (ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
+
+                    // 2014-06-17 - SBR12.1 ZPR3KZ blowup fix.
+                    // Experiment to remove duplicates. We arrive here because we have ServiceLines that are all
+                    // associated with the CI as expected, but not all of them are related to the BNI we are
+                    // currently processing. Lets see if this can fix that.
+                    if(item != null && sLine.getBookingNameItem() != null && !item.equals(sLine.getBookingNameItem())) {
+                        // Ignore it, wrong BNI
+                        continue;
+                    }
+
                     FileDataRaw row = new FileDataRaw();
                     populateMCOFields(chargeableItem, booking, name, item, sLine, tstRow, row, itemRows);
 

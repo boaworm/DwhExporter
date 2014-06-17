@@ -1225,11 +1225,38 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("ZPR3KZ"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(24));
+
+        int i = 1;
+        for(FileDataRaw row : fileDataRaws) {
+            System.out.println("Row " + i++);
+            System.out.println("getPaxname " + row.getPaxname());
+            System.out.println("getTixDepApt " + row.getTixDepApt());
+            System.out.println("getTixDestApt " + row.getTixDestApt());
+            System.out.println("getFcmi " + row.getFcmi());
+            System.out.println("getDocumentNo " + row.getDocumentNo());
+            System.out.println("getDocumentClass " + row.getDocumentClass());
+            System.out.println("getSegNoTech " + row.getSegNoTech());
+            System.out.println("getIssInConnWith " + row.getIssInConnWith());
+            System.out.println("getIssInConnWithCpn " + row.getIssInConnWithCpn());
+            System.out.println("getFarebaseCode " + row.getFarebaseCode());
+            System.out.println("getTixFlightDt " + row.getTixFlightDt());
+            System.out.println("getEmdtreatedAs " + row.getEmdtreatedAs());
+            System.out.println("getMcoreason " + row.getMcoreason());
+            System.out.println("getMcoreasonSubCode " + row.getMcoreasonSubCode());
+            System.out.println("getTixInformationFreetext " + row.getTixInformationFreetext());
+            System.out.println("getMiscellaneousChargeOrderFreetext " + row.getMiscellaneousChargeOrderFreetext());
+            System.out.println("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
+            System.out.println("getOrigIssueInformationFreetext " + row.getOrigIssueInformationFreetext());
+            System.out.println("getFopinformationFreetext " + row.getFopinformationFreetext());
+            System.out.println("");
+        }
+
+        assertThat(fileDataRaws.size(), equalTo(18));
 
         // Cpn 1. HAM -> DUS, seat 11A
         // Cpn 2. DUS -> ALC, seat 26A
         // Cpn 3. ALC -> HAM, seat 13F
+
 
         row = fileDataRaws.get(0);
         assertThat(row.getDocumentNo(), equalTo("8205951399"));
