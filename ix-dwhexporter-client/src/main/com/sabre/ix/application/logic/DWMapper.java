@@ -148,11 +148,11 @@ public class DWMapper {
         // ItemRows will be populated when we're not processing on a particular item, but on the BN.
         if (item != null) {
             //need to find the TSM row that has this coupon:
-            for (ChargeableItem chargeableItemEntity : name.getChargeableItems()) {
-                for (ChargeableItemCoupon couponEntity : chargeableItemEntity.getChargeableItemCoupons()) {
-                    BookingNameItem bni = getBookingNameItemById(booking, couponEntity.getBookingNameItemId());
+            for (ChargeableItem chargeableItem : name.getChargeableItems()) {
+                for (ChargeableItemCoupon coupon : chargeableItem.getChargeableItemCoupons()) {
+                    BookingNameItem bni = getBookingNameItemById(booking, coupon.getBookingNameItemId());
                     if (bni != null && bni.getCrsSegmentLineNum() == item.getCrsSegmentLineNum()) {
-                        populateOtherStagingRecord(chargeableItemEntity, booking, name, item, rows, tstRow, itemRows);
+                        populateOtherStagingRecord(chargeableItem, booking, name, item, rows, tstRow, itemRows);
                         break;
                     }
                 }
@@ -230,29 +230,29 @@ public class DWMapper {
         if (bn == null) return Collections.emptyList();
         Booking booking = bn.getBooking();
         if (booking == null) return Collections.emptyList();
-        Set<Long> ids = new HashSet<Long>();
+        Set<Long> serviceLineIDs = new HashSet<Long>();
         List<ServiceLine> serviceLines = new ArrayList<ServiceLine>();
 
         for (BookingName bookingName : booking.getBookingNames()) {
             for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
                 for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
-                    if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !ids.contains(chargeableItem.getChargeableItemId())) {
-                        ids.add(serviceLine.getServiceLineId());
+                    if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
+                        serviceLineIDs.add(serviceLine.getServiceLineId());
                         serviceLines.add(serviceLine);
                     }
                 }
             }
             for (ServiceLine serviceLine : bookingName.getServiceLines()) {
-                if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !ids.contains(chargeableItem.getChargeableItemId())) {
-                    ids.add(serviceLine.getServiceLineId());
+                if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
+                    serviceLineIDs.add(serviceLine.getServiceLineId());
                     serviceLines.add(serviceLine);
                 }
             }
 
         }
         for (ServiceLine serviceLine : booking.getServiceLines()) {
-            if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !ids.contains(chargeableItem.getChargeableItemId())) {
-                ids.add(serviceLine.getServiceLineId());
+            if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
+                serviceLineIDs.add(serviceLine.getServiceLineId());
                 serviceLines.add(serviceLine);
             }
         }
