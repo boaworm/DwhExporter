@@ -63,6 +63,12 @@ public class DWMapperTest {
     MetaModelServices mockMetaModelServices;
     MetaModel mockMetaModel;
 
+    DWMapper mapper = new DWMapper();
+    Booking booking;
+    List<FileDataRaw> fileDataRaws;
+    FileDataRaw row;
+    List<Integer> multirow;
+
     private String testdataPath = "will be autodiscovered during setup";
 
     @Before
@@ -71,7 +77,7 @@ public class DWMapperTest {
             testdataPath = "/home/henrik/src/DwhExporter/testdata/";
         } else if (InetAddress.getLocalHost().getHostName().contains("montecito")) {
             testdataPath = "/Volumes/2TB/src/DwhExporter/testdata/";
-        }else {
+        } else {
             testdataPath = "C:\\dev\\DwhExporter\\testdata\\";
         }
 
@@ -80,7 +86,10 @@ public class DWMapperTest {
         when(mockMetaModelServices.getMetaModel()).thenReturn(mockMetaModel);
         bookingServices = new BookingServices(mockContext, mockDataHandler, mockActionHandler);
 
-
+        booking = null;
+        fileDataRaws = null;
+        row = null;
+        multirow = null;
     }
 
     @Rule
@@ -131,17 +140,8 @@ public class DWMapperTest {
     }
 
     @Test
-    public void verify_FZ() throws IOException {
+    public void verify_FZ_7MENHD() throws IOException {
 
-
-        DWMapper mapper = new DWMapper();
-        Booking booking;
-        List<FileDataRaw> fileDataRaws;
-        FileDataRaw row;
-        List<Integer> multirow;
-
-
-        // 7MENHD
         log.info("checking 7MENHD");
         booking = new Booking(bookingServices, loadTestData("7MENHD.xml"));
         assertThat(booking.getRloc(), equalTo("7MENHD"));
@@ -231,8 +231,10 @@ public class DWMapperTest {
         assertThat(row.getSegNoTech(), equalTo(2));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
+    }
 
-        // 3NWPAK
+    @Test
+    public void verify_FZ_3NWPAK() throws IOException {
 
         booking = new Booking(bookingServices, loadTestData("3NWPAK.xml"));
         assertThat(booking.getRloc(), equalTo("3NWPAK"));
@@ -321,7 +323,10 @@ public class DWMapperTest {
         assertThat(row.getSegNoTech(), equalTo(2));
         assertThat(row.getMiscellaneousInformationFreetext(), equalTo("RA2349405"));
 
-        // 5N3JUD
+    }
+
+    @Test
+    public void verify_FZ_5N3JUD() throws IOException {
 
         booking = new Booking(bookingServices, loadTestData("5N3JUD.xml"));
         assertThat(booking.getRloc(), equalTo("5N3JUD"));
@@ -415,15 +420,7 @@ public class DWMapperTest {
 
 
     @Test
-    public void verify_TST_12_1() throws IOException {
-
-        DWMapper mapper = new DWMapper();
-        Booking booking;
-        List<FileDataRaw> fileDataRaws;
-        FileDataRaw row;
-        List<Integer> multirow;
-
-        // 7A7OHS
+    public void verify_TST_12_1_7A7OHS() throws IOException {
 
         booking = new Booking(bookingServices, loadTestData("7A7OHS.xml"));
         assertThat(booking.getRloc(), equalTo("7A7OHS"));
@@ -548,8 +545,10 @@ public class DWMapperTest {
         assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR"));
         assertThat(row.getTaxValue1(), equalTo("80.00"));
 
+    }
 
-        // 5WTN6S
+    @Test
+    public void verify_TST_12_1_5WTN6S() throws IOException {
 
         booking = new Booking(bookingServices, loadTestData("5WTN6S.xml"));
         assertThat(booking.getRloc(), equalTo("5WTN6S"));
@@ -709,13 +708,7 @@ public class DWMapperTest {
     }
 
     @Test
-    public void verify_Ancillaries_10_1() throws IOException {
-
-        DWMapper mapper = new DWMapper();
-        Booking booking;
-        List<FileDataRaw> fileDataRaws;
-        FileDataRaw row;
-        List<Integer> multirow;
+    public void verify_Ancillaries_10_1_8GKIZH() throws IOException {
 
         //8GKIZH, DocumentClass MCO (EMD-S)
         booking = new Booking(bookingServices, loadTestData("8GKIZH.xml"));
@@ -780,7 +773,10 @@ public class DWMapperTest {
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
         assertThat(row.getMcoreason(), equalTo("UKWN"));
         */
+    }
 
+    @Test
+    public void verify_Ancillaries_10_1_79FDX2() throws IOException {
         //79FDX2 (EMD-S)
         booking = new Booking(bookingServices, loadTestData("79FDX2.xml"));
         assertThat(booking.getRloc(), equalTo("79FDX2"));
@@ -812,7 +808,10 @@ public class DWMapperTest {
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
         assertThat(row.getMcoreason(), equalTo("UKWN"));
         */
+    }
 
+    @Test
+    public void verify_Ancillaries_10_1_79LP74() throws IOException {
         //79LP74 (Paper EBT)
         booking = new Booking(bookingServices, loadTestData("79LP74.xml"));
         assertThat(booking.getRloc(), equalTo("79LP74"));
@@ -835,7 +834,10 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWith(), nullValue());
         assertThat(row.getIssInConnWithCpn(), nullValue());
 
+    }
 
+    @Test
+    public void verify_Ancillaries_10_1_8D69PH() throws IOException {
         //8D69PH, DocumentClass MCO (EMD-A)
         booking = new Booking(bookingServices, loadTestData("8D69PH.xml"));
         assertThat(booking.getRloc(), equalTo("8D69PH"));
@@ -905,7 +907,10 @@ public class DWMapperTest {
             assertThat(row.getDocumentClass(), equalTo("PAX"));
         }
 
+    }
 
+    @Test
+    public void verify_Ancillaries_10_1_8BZZ7W() throws IOException {
         //8BZZ7W, DocumentClass MCO (EMD-A)
         booking = new Booking(bookingServices, loadTestData("8BZZ7W.xml"));
         assertThat(booking.getRloc(), equalTo("8BZZ7W"));
@@ -1035,14 +1040,7 @@ public class DWMapperTest {
     }
 
     @Test
-    public void verify_Ancillaries_12_1() throws IOException {
-
-        DWMapper mapper = new DWMapper();
-        Booking booking;
-        List<FileDataRaw> fileDataRaws;
-        FileDataRaw row;
-        List<Integer> multirow;
-
+    public void verify_Ancillaries_12_1_3WKOGY() throws IOException {
 
         //3WKOGY, DocumentClass “MCO" (EMD-A)
         booking = new Booking(bookingServices, loadTestData("3WKOGY.xml"));
@@ -1123,6 +1121,10 @@ public class DWMapperTest {
             assertThat(row.getMcoreason(), equalTo("UKWN"));
         }
 
+    }
+
+    @Test
+    public void verify_Ancillaries_12_1_4UBC28() throws IOException {
         //4UBC28, DocumentClass “MCO" (EMD-A)
         booking = new Booking(bookingServices, loadTestData("4UBC28.xml"));
         assertThat(booking.getRloc(), equalTo("4UBC28"));
@@ -1213,7 +1215,10 @@ public class DWMapperTest {
             assertThat(row.getEmdtreatedAs(), equalTo("A"));
             assertThat(row.getMcoreason(), equalTo("UKWN"));
         }
+    }
 
+    @Test
+    public void verify_Ancillaries_12_1_ZPR3KZ() throws IOException {
 
         //ZPR3KZ, DocumentClass “MCO" (EMD-A)
         booking = new Booking(bookingServices, loadTestData("ZPR3KZ.xml"));
@@ -1267,6 +1272,11 @@ public class DWMapperTest {
             assertThat(row.getMcoreason(), equalTo("UKWN"));
         }
 
+    }
+
+    @Test
+    public void verify_Ancillaries_12_1_23K69M() throws IOException {
+
         //23K69M, DocumentClass „MCO“, EmdtreatedAs „S“ (EMD-S)
         booking = new Booking(bookingServices, loadTestData("23K69M.xml"));
         assertThat(booking.getRloc(), equalTo("23K69M"));
@@ -1295,6 +1305,12 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
         assertThat(row.getMcoreason(), equalTo("UKWN"));
+
+
+    }
+
+    @Test
+    public void verify_Ancillaries_12_1_28XYQ8() throws IOException {
 
         //28XYQ8, DocumentClass „MCO“ (EMD-S)
         booking = new Booking(bookingServices, loadTestData("28XYQ8.xml"));
@@ -1326,6 +1342,10 @@ public class DWMapperTest {
         assertThat(row.getMiscellaneousChargeOrderFreetext(),equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
         assertThat(row.getMcoreason(), equalTo("UKWN"));
         */
+    }
+
+    @Test
+    public void verify_Ancillaries_12_1_Y2NH4D() throws IOException {
 
         //Y2NH4D, DocumentClass „MCO“ (EMD-S)
         booking = new Booking(bookingServices, loadTestData("Y2NH4D.xml"));
@@ -1355,6 +1375,11 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
         assertThat(row.getMcoreason(), equalTo("UKWN"));
+
+    }
+
+    @Test
+    public void verify_Ancillaries_12_1_ZW869W() throws IOException {
 
         //ZW869W, DocumentClass „MCO“ (Virtual MCO)
         booking = new Booking(bookingServices, loadTestData("ZW869W.xml"));
@@ -1405,7 +1430,10 @@ public class DWMapperTest {
         assertThat(row.getMcoreason(), equalTo("UKWN"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
 
+    }
 
+    @Test
+    public void verify_Ancillaries_12_1_5YZCWQ() throws IOException {
         //5YZCWQ, DocumentClass „MCO“ (Paper MCO)
         booking = new Booking(bookingServices, loadTestData("5YZCWQ.xml"));
         assertThat(booking.getRloc(), equalTo("5YZCWQ"));
@@ -1441,7 +1469,10 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWith(), nullValue());
         assertThat(row.getIssInConnWithCpn(), nullValue());
 
+    }
 
+    @Test
+    public void verify_Ancillaries_12_1_YZQSP9() throws IOException {
         //YZQSP9, DocumentClass “EBT" (Paper EBT)
         booking = new Booking(bookingServices, loadTestData("YZQSP9.xml"));
         assertThat(booking.getRloc(), equalTo("YZQSP9"));
@@ -1467,13 +1498,7 @@ public class DWMapperTest {
     }
 
     @Test
-    public void verify_TST_10_1() throws IOException {
-
-        DWMapper mapper = new DWMapper();
-        Booking booking;
-        List<FileDataRaw> fileDataRaws;
-        FileDataRaw row;
-        List<Integer> multirow;
+    public void verify_TST_10_1_75WVC9() throws IOException {
 
         //75WVC9
         booking = new Booking(bookingServices, loadTestData("75WVC9.xml"));
@@ -1554,6 +1579,11 @@ public class DWMapperTest {
         assertThat(row.getTaxCode1(), equalTo("XYQAC-NZD"));
         assertThat(row.getTaxValue1(), equalTo("116.80"));
 
+    }
+
+    @Test
+    public void verify_TST_10_1_796K5N() throws IOException {
+
         //796K5N
         booking = new Booking(bookingServices, loadTestData("796K5N.xml"));
         assertThat(booking.getRloc(), equalTo("796K5N"));
@@ -1597,7 +1627,11 @@ public class DWMapperTest {
         assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR"));
         assertThat(row.getTaxValue1(), equalTo("84.00"));
 
-        //8A8Q8O
+    }
+
+    @Test
+    public void verify_TST_10_1_8A8Q8O() throws IOException {
+
         booking = new Booking(bookingServices, loadTestData("8A8Q8O.xml"));
         assertThat(booking.getRloc(), equalTo("8A8Q8O"));
 
@@ -1639,9 +1673,11 @@ public class DWMapperTest {
         assertThat(row.getFareCalc(), equalTo("BER AB MIL2.62NUC2.62END ROE0.760562"));
         assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR"));
         assertThat(row.getTaxValue1(), equalTo("30.00"));
+    }
 
+    @Test
+    public void verify_TST_10_1_8ISHFE() throws IOException {
 
-        //8ISHFE
         booking = new Booking(bookingServices, loadTestData("8ISHFE.xml"));
         assertThat(booking.getRloc(), equalTo("8ISHFE"));
 
@@ -1722,8 +1758,11 @@ public class DWMapperTest {
         assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR"));
         assertThat(row.getTaxValue1(), equalTo("45.00"));
 
+    }
 
-        //8IUM85
+    @Test
+    public void verify_TST_10_1_8IUM85() throws IOException {
+
         booking = new Booking(bookingServices, loadTestData("8IUM85.xml"));
         assertThat(booking.getRloc(), equalTo("8IUM85"));
 
@@ -1809,13 +1848,7 @@ public class DWMapperTest {
     }
 
     @Test
-    public void verify_FOP_and_FCMI_for_ancillaries() throws IOException {
-
-        DWMapper mapper = new DWMapper();
-        Booking booking;
-        List<FileDataRaw> fileDataRaws;
-        FileDataRaw row;
-        List<Integer> multirow;
+    public void verify_FOP_and_FCMI_for_ancillaries_27OLJO() throws IOException {
 
         //TODO no FopinformationFreetext for MCO-A and MCO-S
 
@@ -1844,7 +1877,10 @@ public class DWMapperTest {
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE88733692640001822462/JOHANN WOELFLE*A"));
         assertThat(row.getFcmi(), equalTo("0"));
 
+    }
 
+    @Test
+    public void verify_FOP_and_FCMI_for_ancillaries_5ZBOJ3() throws IOException {
         //5ZBOJ3, DocumentClass „MCO“ (EMD-A)
         booking = new Booking(bookingServices, loadTestData("5ZBOJ3.xml"));
         assertThat(booking.getRloc(), equalTo("5ZBOJ3"));
@@ -1878,6 +1914,10 @@ public class DWMapperTest {
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/NL41ABNA0005981133/G. JONKER-JANS*A"));
         assertThat(row.getFcmi(), equalTo("0"));
 
+    }
+
+    @Test
+    public void verify_FOP_and_FCMI_for_ancillaries_2BAEI8() throws IOException {
 
         //2BAEI8, DocumentClass MCO (EMD-S)
         booking = new Booking(bookingServices, loadTestData("2BAEI8.xml"));
@@ -1913,6 +1953,11 @@ public class DWMapperTest {
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DEXXXXXXXXXXXX17338328/JENNIFER TURBA*A"));
         assertThat(row.getFcmi(), equalTo("0"));
 
+    }
+
+    @Test
+    public void verify_FOP_and_FCMI_for_ancillaries_28YYQE() throws IOException {
+
         //28YYQE, DocumentClass „MCO“ (EMD-S)
         booking = new Booking(bookingServices, loadTestData("28YYQE.xml"));
         assertThat(booking.getRloc(), equalTo("28YYQE"));
@@ -1936,15 +1981,8 @@ public class DWMapperTest {
     }
 
     @Test
-    public void verify_FO_for_PAX_and_EMD() throws IOException {
+    public void verify_FO_for_PAX_and_EMD_5W3TII() throws IOException {
 
-        DWMapper mapper = new DWMapper();
-        Booking booking;
-        List<FileDataRaw> fileDataRaws;
-        FileDataRaw row;
-        List<Integer> multirow;
-
-        //5W3TII
         booking = new Booking(bookingServices, loadTestData("5W3TII.xml"));
         assertThat(booking.getRloc(), equalTo("5W3TII"));
 
@@ -1966,8 +2004,11 @@ public class DWMapperTest {
             assertThat(row.getDocumentClass(), equalTo("PAX"));
             assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-2338946432MIA29APR14/10980211/745-23389464325E1"));
         }
+    }
 
-        //ZT5H5E
+    @Test
+    public void verify_FO_for_PAX_and_EMD_ZT5H5E() throws IOException {
+
         booking = new Booking(bookingServices, loadTestData("ZT5H5E.xml"));
         assertThat(booking.getRloc(), equalTo("ZT5H5E"));
 
@@ -1988,7 +2029,11 @@ public class DWMapperTest {
             assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-2336768887PAR05FEB14/20494935/745-23367688876E1"));
         }
 
-        //38IS83
+    }
+
+    @Test
+    public void verify_FO_for_PAX_and_EMD_38IS83() throws IOException {
+
         booking = new Booking(bookingServices, loadTestData("38IS83.xml"));
         assertThat(booking.getRloc(), equalTo("38IS83"));
 
@@ -2010,57 +2055,44 @@ public class DWMapperTest {
         }
     }
 
-        @Test
-        public void verify_TST_for_non_AB()throws IOException {
+    @Test
+    public void verify_TST_for_non_AB_5YEFK4() throws IOException {
 
-            DWMapper mapper = new DWMapper();
-            Booking booking;
-            List<FileDataRaw> fileDataRaws;
-            FileDataRaw row;
-            List<Integer> multirow;
+        booking = new Booking(bookingServices, loadTestData("5YEFK4.xml"));
+        assertThat(booking.getRloc(), equalTo("5YEFK4"));
 
-            //5YEFK4
-            booking = new Booking(bookingServices, loadTestData("5YEFK4.xml"));
-            assertThat(booking.getRloc(), equalTo("5YEFK4"));
+        fileDataRaws = mapper.mapBooking(booking);
+        assertThat(fileDataRaws.size(), equalTo(2));
 
-            fileDataRaws = mapper.mapBooking(booking);
-            assertThat(fileDataRaws.size(), equalTo(2));
-
-            row = fileDataRaws.get(0);
-            assertThat(row.getDocumentNo(), equalTo("8504449104"));
-            assertThat(row.getFarebaseCode(), equalTo("PAFM03"));
-            assertThat(row.getFcmi(), equalTo("1"));
-            assertThat(row.getSectorTotalFare(), nullValue());
-            assertThat(row.getSectorTotalFareNotEur(), equalTo("0.00"));
-            assertThat(row.getTixCurrency(), equalTo("USD"));
-            assertThat(row.getTourCode(), nullValue());
-            assertThat(row.getFareCalc(), equalTo("MIA AB X/BER Q000.00AB HEL0000.00NUC0000.00END ROE1.000000"));
-            assertThat(row.getTaxCode1(), equalTo("XDE---EUR"));
-            assertThat(row.getTaxValue1(), equalTo("6.01"));
+        row = fileDataRaws.get(0);
+        assertThat(row.getDocumentNo(), equalTo("8504449104"));
+        assertThat(row.getFarebaseCode(), equalTo("PAFM03"));
+        assertThat(row.getFcmi(), equalTo("1"));
+        assertThat(row.getSectorTotalFare(), nullValue());
+        assertThat(row.getSectorTotalFareNotEur(), equalTo("0.00"));
+        assertThat(row.getTixCurrency(), equalTo("USD"));
+        assertThat(row.getTourCode(), nullValue());
+        assertThat(row.getFareCalc(), equalTo("MIA AB X/BER Q000.00AB HEL0000.00NUC0000.00END ROE1.000000"));
+        assertThat(row.getTaxCode1(), equalTo("XDE---EUR"));
+        assertThat(row.getTaxValue1(), equalTo("6.01"));
 
 
-            row = fileDataRaws.get(1);
-            assertThat(row.getDocumentNo(), equalTo("8504449104"));
-            assertThat(row.getFarebaseCode(), equalTo("PAFM03"));
-            assertThat(row.getFcmi(), equalTo("1"));
-            assertThat(row.getSectorTotalFare(), nullValue());
-            assertThat(row.getSectorTotalFareNotEur(), equalTo("0.00"));
-            assertThat(row.getTixCurrency(), equalTo("USD"));
-            assertThat(row.getTourCode(), nullValue());
-            assertThat(row.getFareCalc(), equalTo("MIA AB X/BER Q000.00AB HEL0000.00NUC0000.00END ROE1.000000"));
-            assertThat(row.getTaxCode1(), equalTo("XDE---EUR"));
-            assertThat(row.getTaxValue1(), equalTo("6.01"));
+        row = fileDataRaws.get(1);
+        assertThat(row.getDocumentNo(), equalTo("8504449104"));
+        assertThat(row.getFarebaseCode(), equalTo("PAFM03"));
+        assertThat(row.getFcmi(), equalTo("1"));
+        assertThat(row.getSectorTotalFare(), nullValue());
+        assertThat(row.getSectorTotalFareNotEur(), equalTo("0.00"));
+        assertThat(row.getTixCurrency(), equalTo("USD"));
+        assertThat(row.getTourCode(), nullValue());
+        assertThat(row.getFareCalc(), equalTo("MIA AB X/BER Q000.00AB HEL0000.00NUC0000.00END ROE1.000000"));
+        assertThat(row.getTaxCode1(), equalTo("XDE---EUR"));
+        assertThat(row.getTaxValue1(), equalTo("6.01"));
 
-        }
+    }
 
     @Test
-    public void verify_TST_for_INF()throws IOException {
-
-        DWMapper mapper = new DWMapper();
-        Booking booking;
-        List<FileDataRaw> fileDataRaws;
-        FileDataRaw row;
-        List<Integer> multirow;
+    public void verify_TST_for_INF() throws IOException {
 
         //X3ZBXG
         booking = new Booking(bookingServices, loadTestData("X3ZBXG.xml"));
@@ -2077,10 +2109,9 @@ public class DWMapperTest {
         assertThat(row.getSectorTotalFareNotEur(), nullValue());
         assertThat(row.getTixCurrency(), nullValue());
         assertThat(row.getTourCode(), nullValue());
-        assertThat(row.getFareCalc (), equalTo("MUC AB PMI5.53AB MUC4.16NUC9.69END ROE0.731857"));
+        assertThat(row.getFareCalc(), equalTo("MUC AB PMI5.53AB MUC4.16NUC9.69END ROE0.731857"));
         assertThat(row.getTaxCode1(), equalTo("XJDAE-EUR"));
         assertThat(row.getTaxValue1(), equalTo("7.17"));
-
 
 
         row = fileDataRaws.get(1);
@@ -2091,7 +2122,7 @@ public class DWMapperTest {
         assertThat(row.getSectorTotalFareNotEur(), nullValue());
         assertThat(row.getTixCurrency(), nullValue());
         assertThat(row.getTourCode(), nullValue());
-        assertThat(row.getFareCalc (), equalTo("MUC AB PMI5.53AB MUC4.16NUC9.69END ROE0.731857"));
+        assertThat(row.getFareCalc(), equalTo("MUC AB PMI5.53AB MUC4.16NUC9.69END ROE0.731857"));
         assertThat(row.getTaxCode1(), equalTo("XJDAE-EUR"));
         assertThat(row.getTaxValue1(), equalTo("7.17"));
 
@@ -2104,10 +2135,9 @@ public class DWMapperTest {
         assertThat(row.getSectorTotalFareNotEur(), nullValue());
         assertThat(row.getTixCurrency(), nullValue());
         assertThat(row.getTourCode(), nullValue());
-        assertThat(row.getFareCalc (), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
+        assertThat(row.getFareCalc(), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
         assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR"));
         assertThat(row.getTaxValue1(), equalTo("84.00"));
-
 
 
         row = fileDataRaws.get(3);
@@ -2118,10 +2148,9 @@ public class DWMapperTest {
         assertThat(row.getSectorTotalFareNotEur(), nullValue());
         assertThat(row.getTixCurrency(), nullValue());
         assertThat(row.getTourCode(), nullValue());
-        assertThat(row.getFareCalc (), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
+        assertThat(row.getFareCalc(), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
         assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR "));
         assertThat(row.getTaxValue1(), equalTo("84.00"));
-
 
 
         row = fileDataRaws.get(4);
@@ -2132,10 +2161,9 @@ public class DWMapperTest {
         assertThat(row.getSectorTotalFareNotEur(), nullValue());
         assertThat(row.getTixCurrency(), nullValue());
         assertThat(row.getTourCode(), nullValue());
-        assertThat(row.getFareCalc (), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
+        assertThat(row.getFareCalc(), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
         assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR"));
         assertThat(row.getTaxValue1(), equalTo("84.00"));
-
 
 
         row = fileDataRaws.get(5);
@@ -2146,7 +2174,7 @@ public class DWMapperTest {
         assertThat(row.getSectorTotalFareNotEur(), nullValue());
         assertThat(row.getTixCurrency(), nullValue());
         assertThat(row.getTourCode(), nullValue());
-        assertThat(row.getFareCalc (), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
+        assertThat(row.getFareCalc(), equalTo("MUC AB PMI55.33AB MUC41.67NUC97.00END ROE0.731857"));
         assertThat(row.getTaxCode1(), equalTo("XYQAC-EUR "));
         assertThat(row.getTaxValue1(), equalTo("84.00"));
 
