@@ -1897,7 +1897,7 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("5ZBOJ3"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(4));
+        assertThat(fileDataRaws.size(), equalTo(8));
 
         multirow = Arrays.asList(0, 1);
         for (int rownum : multirow) {
@@ -1998,7 +1998,7 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("5W3TII"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(12));
+        assertThat(fileDataRaws.size(), equalTo(10));
 
         // TODO no OrigIssueInformationFreetext for MCO and wrong one for PAX
         multirow = Arrays.asList(0, 1, 2, 3);
