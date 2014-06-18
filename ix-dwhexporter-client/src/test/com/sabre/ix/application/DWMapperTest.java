@@ -2015,6 +2015,7 @@ public class DWMapperTest {
         assertThat(fileDataRaws.size(), equalTo(10));
 
         // TODO no OrigIssueInformationFreetext for MCO and wrong one for PAX
+        // TODO#2 : Wrong one for pax fixed. Possibly we want OrigIssue for MCO though?
         multirow = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
