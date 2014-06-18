@@ -1997,22 +1997,40 @@ public class DWMapperTest {
         booking = new Booking(bookingServices, loadTestData("5W3TII.xml"));
         assertThat(booking.getRloc(), equalTo("5W3TII"));
 
+        // 1 pax: J. M. ISRA..
+        // 2 segments: MIA -> TXL
+        //           : TXL -> ARN
+        // ChargeableItem
+        //  67071667 138.75eur, TSM
+        //      2x coupons
+        //
+        //  67071676 463 eur, TST
+        //      2x coupons
+        //
+        // 1 x FO line 745-820...
+        //      this one is associated to 67071667
+        //      this is a TSM / PET IN CABIN
+
         fileDataRaws = mapper.mapBooking(booking);
         assertThat(fileDataRaws.size(), equalTo(10));
+        printRows(fileDataRaws);
 
         // TODO no OrigIssueInformationFreetext for MCO and wrong one for PAX
-        multirow = Arrays.asList(0, 1, 2, 3);
+        multirow = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentClass(), equalTo("MCO"));
-            assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-8206236418MIA29APR14/10980211/745-82062364183M1"));
+            assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-8206236864/DTAB/USD0.00/09MAY14/MIAAB0501/10980211"));
+            // assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-8206236418MIA29APR14/10980211/745-82062364183M1"));
         }
 
 
-        multirow = Arrays.asList(4, 5, 6, 7);
+        multirow = Arrays.asList(8, 9);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentClass(), equalTo("PAX"));
+            assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2338946673/ETAB/USD0.00/09MAY14/MIAAB0501/10980211"));
+            // Dont want both: 745-8206236418MIA29APR14/10980211/745-82062364183M1##745-2338946432MIA29APR14/10980211/745-23389464325E1
             assertThat(row.getOrigIssueInformationFreetext(), equalTo("745-2338946432MIA29APR14/10980211/745-23389464325E1"));
         }
     }

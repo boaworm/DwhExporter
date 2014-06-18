@@ -258,6 +258,7 @@ public class DWMapper {
         }
         return serviceLines;
     }
+
     //#MH 22MAY14# renamed - was getServiceLinesForChargeableItemCoupon
     private ServiceLine getServiceLineForChargeableItemCoupon(ChargeableItemCoupon coupon) {
         ChargeableItem chargeableItem = coupon.getChargeableItem();
@@ -320,7 +321,7 @@ public class DWMapper {
                     // Experiment to remove duplicates. We arrive here because we have ServiceLines that are all
                     // associated with the CI as expected, but not all of them are related to the BNI we are
                     // currently processing. Lets see if this can fix that.
-                    if(item != null && sLine.getBookingNameItem() != null && !item.equals(sLine.getBookingNameItem())) {
+                    if (item != null && sLine.getBookingNameItem() != null && !item.equals(sLine.getBookingNameItem())) {
                         // Ignore it, wrong BNI
                         continue;
                     }
@@ -476,7 +477,7 @@ public class DWMapper {
     private ServiceLine getRelevantTicketingLineNew(Booking booking, ServiceLine sLine, BookingNameItem item, BookingName name) {
         ServiceLine ticketingLine = null;
 
-        if (name == null ) return null;
+        if (name == null) return null;
 
         if (booking.getBookingStatus() == Booking.CANCELLED_BOOKING) {
             // In case of cancelled bookings, we want to find the most recently cancelled TicketDocumentData service line (if any)
@@ -744,9 +745,9 @@ public class DWMapper {
         }
         */
 
-        if(row.getDocumentClass().equals("MCO")) {
+        if (row.getDocumentClass().equals("MCO")) {
             Collection<ServiceLine> serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
-            for(ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
+            for (ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
                 if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FZ")) {
                     SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
                     String freeText = parser.get("FreeText");
@@ -941,7 +942,7 @@ public class DWMapper {
                     // IssueIdentifier is populated by SBR >= 12.1
                     // #MH 26MAY14# check for sub type disabled TODO validate
                     //if ("I".equalsIgnoreCase(data.getSubType())) {
-                        return true;
+                    return true;
                     //}
                 } else if (name.equalsIgnoreCase("TicketingIndicator")) {
                     // TicketingIndicator is populated by SBR < 12.1
@@ -1181,7 +1182,10 @@ public class DWMapper {
                 row.setElectronicFhFreetext(ensureLength(wrap(row.getElectronicFhFreetext()) + freeText, 999));
             }
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FO")) {
-            handleFO(row, freeText);
+            if ((sLine.getChargeableItemId() == 0 && row.getDocumentClass().equals("PAX")) ||
+                    (sLine.getChargeableItemId() != 0 && row.getDocumentClass().equals("MCO"))) {
+                handleFO(row, freeText);
+            }
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FV")) {
             handleFV(row, parser, freeText);
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FE")) {
