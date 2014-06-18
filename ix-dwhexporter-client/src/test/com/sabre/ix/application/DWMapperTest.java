@@ -2013,7 +2013,6 @@ public class DWMapperTest {
 
         fileDataRaws = mapper.mapBooking(booking);
         assertThat(fileDataRaws.size(), equalTo(10));
-        printRows(fileDataRaws);
 
         // TODO no OrigIssueInformationFreetext for MCO and wrong one for PAX
         multirow = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7);
