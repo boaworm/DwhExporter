@@ -744,14 +744,18 @@ public class DWMapper {
         }
         */
 
+
         if(row.getDocumentClass().equals("MCO")) {
             Collection<ServiceLine> serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
-            for(ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
+            for (ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
+                /* TODO validate general use of handleServiceLinerow
                 if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FZ")) {
                     SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
                     String freeText = parser.get("FreeText");
                     row.setMiscellaneousInformationFreetext(ensureLength(wrap(row.getMiscellaneousInformationFreetext()) + freeText, 990));
                 }
+                */
+                handleServiceLine(row, sLine);
             }
         }
     }
@@ -1181,7 +1185,10 @@ public class DWMapper {
                 row.setElectronicFhFreetext(ensureLength(wrap(row.getElectronicFhFreetext()) + freeText, 999));
             }
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FO")) {
-            handleFO(row, freeText);
+            if ((sLine.getChargeableItemId() == 0 && row.getDocumentClass().equals("PAX")) ||
+                    sLine.getChargeableItemId() != 0 && row.getDocumentClass().equals("MCO")) {
+                handleFO(row, freeText);
+            }
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FV")) {
             handleFV(row, parser, freeText);
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FE")) {
