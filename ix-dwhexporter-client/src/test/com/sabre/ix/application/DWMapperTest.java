@@ -1969,6 +1969,17 @@ public class DWMapperTest {
     @Test
     public void verify_FOP_and_FCMI_for_ancillaries_28YYQE() throws IOException {
 
+        // One PAX: ERICH BEAU...
+        // 3 x BNI
+        //  AIR    TXL - MUC
+        //  AIR    MUC - TXL
+        //  IU / PENF
+        //      LFT: [SubjectQualifier:3] [Type:P07] [FreeText:PAX 3000443529 TTM/RT OK EMD]
+        //      TicketDocumentData: [FreeText:PAX 745-2610646591/DTAB/EUR60.00/30APR14/FDHLT2204/23203585]
+        //          [Type:T] [DataIndicator:D] [RequestNotification:S] [Status:T] [CouponNumber:1] [PaxDetails:A]REF:
+        //          Reference: [Qualifier:PT] [Number:1]: Reference: [Qualifier:ST] [Number:11]:
+
+
         //28YYQE, DocumentClass „MCO“ (EMD-S)
         booking = new Booking(bookingServices, loadTestData("28YYQE.xml"));
         assertThat(booking.getRloc(), equalTo("28YYQE"));
@@ -1977,18 +1988,27 @@ public class DWMapperTest {
         assertThat(fileDataRaws.size(), equalTo(4));
 
         row = fileDataRaws.get(0);
-        assertThat(row.getDocumentNo(), equalTo("2610646591"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
+        assertThat(row.getDocumentNo(), equalTo("2610646591"));
         assertThat(row.getFopinformationFreetext(), equalTo("CCTPXXXXXXXXXXX0016/0917/A669A"));
         assertThat(row.getFcmi(), equalTo("0"));
 
         row = fileDataRaws.get(1);
-        assertThat(row.getDocumentNo(), equalTo("2610646591"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
+        assertThat(row.getDocumentNo(), equalTo("2610646591"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
 
+        row = fileDataRaws.get(2);
+        assertThat(row.getDocumentNo(), equalTo("4843782710"));
+        assertThat(row.getDocumentClass(), equalTo("PAX"));
+        assertThat(row.getPaxfirstName(), equalTo("ERICH"));
+
+        row = fileDataRaws.get(3);
+        assertThat(row.getDocumentNo(), equalTo("4843782710"));
+        assertThat(row.getDocumentClass(), equalTo("PAX"));
+        assertThat(row.getPaxfirstName(), equalTo("ERICH"));
     }
 
     @Test
