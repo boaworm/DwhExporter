@@ -699,6 +699,7 @@ public class DWMapper {
                                     row.setIssInConnWithCpn(ensureLength(tstRow.getSegNoTech().toString(), 3));
                                 } else {
                                     // Grab the ticket number from the first segment
+                                    //todo: This code should go, should it not?
                                     if (itemRows != null && !itemRows.isEmpty()) {
                                         row.setIssInConnWith(ensureLength(itemRows.get(0).getDocumentNo(), 10));
                                         // If we have exactly one segment, we know coupon# is 1, else leave as null
@@ -712,6 +713,21 @@ public class DWMapper {
                             } else if (emdtreatedAs.equals("S")) {
                                 row.setIssInConnWith(null);
                                 row.setIssInConnWithCpn(null);
+
+                                // See if we have a Ticketing service line on the item
+                                if(itemForCoupon != null) {
+                                    for(ServiceLine serviceLine : itemForCoupon.getServiceLines()) {
+                                        if(serviceLine.getServiceLineState() == ServiceLine.STATUS_ACTIVE &&
+                                                serviceLine.getFreeText().contains("TicketDocumentData")) {
+                                            // This is an active ticketing line:
+                                            SBRFreeTextParser parser = new SBRFreeTextParser(serviceLine.getFreeText());
+                                            String freeText = parser.get("FreeText");
+                                            handleTicketing(row, parser, freeText, false);
+                                            break;
+                                        }
+
+                                    }
+                                }
                             }
 
                         } else if (data.getType().equalsIgnoreCase("FCM")) {
@@ -746,7 +762,7 @@ public class DWMapper {
         */
 
 
-        if(row.getDocumentClass().equals("MCO")) {
+        if (row.getDocumentClass().equals("MCO")) {
             Collection<ServiceLine> serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
             for (ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
                 /* TODO validate general use of handleServiceLinerow
