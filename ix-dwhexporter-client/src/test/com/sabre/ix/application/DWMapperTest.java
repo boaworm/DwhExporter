@@ -563,7 +563,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("BROCKT/JULIAN"));
         assertThat(row.getSegNoTech(), equalTo(1));
-        /* diff TODO check (INF)
+        // diff TODO check (INF)
         assertThat(row.getFarebaseCode(), equalTo("YID00R7"));
         assertThat(row.getFcmi(), equalTo("1"));
         assertThat(row.getSectorTotalFare(), equalTo("0.00"));
@@ -575,14 +575,14 @@ public class DWMapperTest {
         assertThat(row.getFareCalc(), equalTo("BER AB MIA AB BER 000.00NUC 000.00 END ROE1.000000"));
         assertThat(row.getTaxCode1(), nullValue());
         assertThat(row.getTaxValue1(),nullValue());
-        */
+
 
         row = fileDataRaws.get(1);
         assertThat(row.getDocumentNo(), equalTo("2339573739"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
         assertThat(row.getPaxname(), equalTo("BROCKT/JULIAN"));
         assertThat(row.getSegNoTech(), equalTo(2));
-        /* diff TODO check (INF)
+        // diff TODO check (INF)
         assertThat(row.getFarebaseCode(), equalTo("YID00R7"));
         assertThat(row.getFcmi(), equalTo("1"));
         assertThat(row.getSectorTotalFare(), equalTo("0.00"));
@@ -594,7 +594,7 @@ public class DWMapperTest {
         assertThat(row.getFareCalc(), equalTo("BER AB MIA AB BER 000.00NUC 000.00 END ROE1.000000"));
         assertThat(row.getTaxCode1(), nullValue());
         assertThat(row.getTaxValue1(),nullValue());
-        */
+
 
         row = fileDataRaws.get(2);
         assertThat(row.getDocumentNo(), equalTo("2339573737"));
@@ -747,8 +747,8 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-8204641252/DTAB/EUR12.90/09SEP13/BERAB08IB/23496605"));
-        //assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:ELV/DE32100500001060185810/WOLFGANG SCHUBERT*A]"));   //diff: equalTo("SVC AB HK1 VRDS TXL 21JUN14")
-        //assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE32100500001060185810/WOLFGANG SCHUBERT*A"));   //diff:null TODO FopinformationFreetext
+        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:ELV/DE32100500001060185810/WOLFGANG SCHUBERT*A]"));   //diff: equalTo("SVC AB HK1 VRDS TXL 21JUN14")
+        assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE32100500001060185810/WOLFGANG SCHUBERT*A"));   //diff:null TODO FopinformationFreetext
         assertThat(row.getMcoreason(), equalTo("VRDS"));
         assertThat(row.getMcoreasonSubCode(), equalTo("RDS"));
         assertThat(row.getIssInConnWith(), nullValue());
@@ -775,8 +775,8 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-8204635433/DTAB/EUR24.90/09SEP13/BUHAB0105/69491590"));
-        //assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:CCVI410403XXXXXX9032/1213*CV/A866131]"));   //diff: equalTo("SVC AB HK1 VRSG HAM 14SEP13")
-        //assertThat(row.getFopinformationFreetext(), equalTo("CCVIXXXXXXXXXXXX9032/1213/866131"));      //diff:null TODO FopinformationFreetext
+        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:CCVI410403XXXXXX9032/1213*CV/A866131]"));   //diff: equalTo("SVC AB HK1 VRSG HAM 14SEP13")
+        assertThat(row.getFopinformationFreetext(), equalTo("CCVIXXXXXXXXXXXX9032/1213/866131"));      //diff:null TODO FopinformationFreetext
         assertThat(row.getMcoreason(), equalTo("VRSG"));
         assertThat(row.getMcoreasonSubCode(), equalTo("RSG"));
         assertThat(row.getIssInConnWith(), nullValue());
@@ -1397,7 +1397,7 @@ public class DWMapperTest {
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getMcoreasonSubCode(), equalTo("0B5"));
         assertThat(row.getIssInConnWith(), nullValue());
-        //assertThat(row.getIssInConnWithCpn(), nullValue());  //diff: 2        //TODO IssInConnWithCpn
+        assertThat(row.getIssInConnWithCpn(), nullValue());  //diff: 2        //TODO IssInConnWithCpn
 
         row = fileDataRaws.get(1);
         assertThat(row.getDocumentClass(), equalTo("MCO"));
@@ -1428,7 +1428,7 @@ public class DWMapperTest {
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getMcoreasonSubCode(), equalTo("0B5"));
         assertThat(row.getIssInConnWith(), nullValue());
-        //assertThat(row.getIssInConnWithCpn(), nullValue());   //diff: 3             //TODO IssInConnWithCpn
+        assertThat(row.getIssInConnWithCpn(), nullValue());   //diff: 3             //TODO IssInConnWithCpn
 
         row = fileDataRaws.get(4);
         assertThat(row.getDocumentClass(), equalTo("MCO"));
@@ -1874,7 +1874,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE88733692640001822462/JOHANN WOELFLE*A"));
-        //assertThat(row.getFcmi(), equalTo("0")); //diff: null       TODO no FCMI for TSM in database
+        assertThat(row.getFcmi(), equalTo("0")); //diff: null       TODO no FCMI for TSM in database
 
         row = fileDataRaws.get(3);
         assertThat(row.getDocumentNo(), equalTo("8205915682"));
@@ -1885,7 +1885,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE88733692640001822462/JOHANN WOELFLE*A"));
-        //assertThat(row.getFcmi(), equalTo("0")); //diff: null      TODO no FCMI for TSM in database
+        assertThat(row.getFcmi(), equalTo("0")); //diff: null      TODO no FCMI for TSM in database
 
 
     }
@@ -1908,7 +1908,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/NL41ABNA0005981133/G. JONKER-JANS*A"));
-        //assertThat(row.getFcmi(), equalTo("0")); //diff: null    TODO FCMI
+        assertThat(row.getFcmi(), equalTo("0")); //diff: null    TODO FCMI
 
 
         row = fileDataRaws.get(3);
@@ -1920,7 +1920,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/NL41ABNA0005981133/G. JONKER-JANS*A"));
-        //assertThat(row.getFcmi(), equalTo("0")); //diff: null    TODO FCMI
+        assertThat(row.getFcmi(), equalTo("0")); //diff: null    TODO FCMI
 
     }
 
@@ -1942,7 +1942,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
-        //assertThat(row.getFcmi(), equalTo("0"));      //diff: null    TODO FCMI
+        assertThat(row.getFcmi(), equalTo("0"));      //diff: null    TODO FCMI
 
 
         row = fileDataRaws.get(3);
@@ -1962,7 +1962,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
-        //assertThat(row.getFcmi(), equalTo("0"));      //diff: null    TODO FCMI
+        assertThat(row.getFcmi(), equalTo("0"));      //diff: null    TODO FCMI
 
         row = fileDataRaws.get(7);
         assertThat(row.getDocumentNo(), equalTo("8205568855"));
@@ -2001,7 +2001,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getDocumentNo(), equalTo("2610646591"));
         assertThat(row.getFopinformationFreetext(), equalTo("CCTP122088XXXXX0016/0917/A669A/ADB"));
-        //assertThat(row.getFcmi(), equalTo("0"));       //diff: null    TODO FCMI
+        assertThat(row.getFcmi(), equalTo("0"));       //diff: null    TODO FCMI
 
         row = fileDataRaws.get(1);
         assertThat(row.getDocumentClass(), equalTo("MCO"));
