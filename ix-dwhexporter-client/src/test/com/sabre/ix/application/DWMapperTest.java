@@ -1875,6 +1875,8 @@ public class DWMapperTest {
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE88733692640001822462/JOHANN WOELFLE*A"));
         assertThat(row.getFcmi(), equalTo("0")); //diff: null       TODO no FCMI for TSM in database
+                                                // HT 2014-06-25 : The only "FCM" CID we have is on the TST
+                                                // so there's no "0" to pick up here.
 
         row = fileDataRaws.get(3);
         assertThat(row.getDocumentNo(), equalTo("8205915682"));
@@ -1934,24 +1936,46 @@ public class DWMapperTest {
         fileDataRaws = mapper.mapBooking(booking);
         assertThat(fileDataRaws.size(), equalTo(10));
 
+        row = fileDataRaws.get(0);
+        assertThat(row.getTixDepApt(), equalTo("FRA"));
+        assertThat(row.getTixDestApt(), equalTo("ALC"));
+        assertThat(row.getDocumentClass(), equalTo("PAX"));
+        assertThat(row.getDocumentNo(), equalTo("2336304018"));
+        assertThat(row.getSegNoTech(), equalTo(1));
+        assertThat(row.getPaxfirstName(), equalTo("CLARABELLA"));
+
+        row = fileDataRaws.get(1);
+        assertThat(row.getTixDepApt(), equalTo("ALC"));
+        assertThat(row.getTixDestApt(), equalTo("FRA"));
+        assertThat(row.getDocumentClass(), equalTo("PAX"));
+        assertThat(row.getDocumentNo(), equalTo("2336304018"));
+        assertThat(row.getSegNoTech(), equalTo(2));
+        assertThat(row.getPaxfirstName(), equalTo("CLARABELLA"));
+
         row = fileDataRaws.get(2);
-        assertThat(row.getDocumentNo(), equalTo("8205568856"));
+        assertThat(row.getPaxfirstName(), equalTo("HENDRIK"));
         assertThat(row.getTixDepApt(), equalTo("FRA"));
         assertThat(row.getTixDestApt(), nullValue());
-        assertThat(row.getSegNoTech(), equalTo(4));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
+        //todo: HT 2014-06-25 This fails because the TicketDocumentData line has status=2
+        assertThat(row.getDocumentNo(), equalTo("8205568856"));
+        assertThat(row.getSegNoTech(), equalTo(4));
+
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
-        assertThat(row.getFcmi(), equalTo("0"));      //diff: null    TODO FCMI
+        //diff: null    TODO FCMI
+        // HT 2014-06-25 This is due to all the FCM CIDs being on TST, none on TSM.
+        assertThat(row.getFcmi(), equalTo("0"));
 
 
         row = fileDataRaws.get(3);
-        assertThat(row.getDocumentNo(), equalTo("8205568856"));
-        assertThat(row.getTixDepApt(), equalTo("FRA"));
-        assertThat(row.getTixDestApt(), nullValue());
-        assertThat(row.getSegNoTech(), equalTo(4));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
+        assertThat(row.getTixDepApt(), equalTo("FRA"));
+        assertThat(row.getTixDestApt(), nullValue());
+        assertThat(row.getDocumentNo(), equalTo("8205568856"));
+        assertThat(row.getSegNoTech(), equalTo(4));
+
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
 
         row = fileDataRaws.get(6);
