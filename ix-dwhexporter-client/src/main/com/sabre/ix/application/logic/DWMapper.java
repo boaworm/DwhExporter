@@ -233,6 +233,21 @@ public class DWMapper {
         Set<Long> serviceLineIDs = new HashSet<Long>();
         List<ServiceLine> serviceLines = new ArrayList<ServiceLine>();
 
+        for (BookingNameItem bookingNameItem : bn.getBookingNameItems()) {
+            for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
+                if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
+                    serviceLineIDs.add(serviceLine.getServiceLineId());
+                    serviceLines.add(serviceLine);
+                }
+            }
+        }
+        for (ServiceLine serviceLine : bn.getServiceLines()) {
+            if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
+                serviceLineIDs.add(serviceLine.getServiceLineId());
+                serviceLines.add(serviceLine);
+            }
+        }
+        /*
         for (BookingName bookingName : booking.getBookingNames()) {
             for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
                 for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
@@ -250,6 +265,7 @@ public class DWMapper {
             }
 
         }
+        */
         for (ServiceLine serviceLine : booking.getServiceLines()) {
             if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
                 serviceLineIDs.add(serviceLine.getServiceLineId());
@@ -715,9 +731,10 @@ public class DWMapper {
                                 row.setIssInConnWithCpn(null);
 
                                 // See if we have a Ticketing service line on the item
-                                if(itemForCoupon != null) {
-                                    for(ServiceLine serviceLine : itemForCoupon.getServiceLines()) {
-                                        if(serviceLine.getServiceLineState() == ServiceLine.STATUS_ACTIVE &&
+                                if (itemForCoupon != null) {
+                                    for (ServiceLine serviceLine : itemForCoupon.getServiceLines()) {
+                                        //if(serviceLine.getServiceLineState() == ServiceLine.STATUS_ACTIVE &&
+                                        if (serviceLine.getServiceLineState() != ServiceLine.STATUS_DELETED &&
                                                 serviceLine.getFreeText().contains("TicketDocumentData")) {
                                             // This is an active ticketing line:
                                             SBRFreeTextParser parser = new SBRFreeTextParser(serviceLine.getFreeText());
@@ -730,10 +747,12 @@ public class DWMapper {
                                 }
                             }
 
-                        } else if (data.getType().equalsIgnoreCase("FCM")) {
+                        }
+                        // TODO obsulete:
+                        /*  else if (data.getType().equalsIgnoreCase("FCM")) {
                             //#MH# fix 14.05.2014
                             row.setFcmi(data.getValue());
-                        }
+                        }    */
                     }
                 } else if (data.getName().equalsIgnoreCase("Rfics")) {
                     row.setMcoreason(ensureLength(data.getValue(), 100));
@@ -762,9 +781,9 @@ public class DWMapper {
         */
 
 
-        if (row.getDocumentClass().equals("MCO")) {
-            Collection<ServiceLine> serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
-            for (ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
+        Collection<ServiceLine> serviceLinesAssociatedWithChargeableItem = getServiceLinesForChargeableItem(chargeableItem);
+
+        for (ServiceLine sLine : serviceLinesAssociatedWithChargeableItem) {
                 /* TODO validate general use of handleServiceLinerow
                 if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FZ")) {
                     SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
@@ -772,9 +791,20 @@ public class DWMapper {
                     row.setMiscellaneousInformationFreetext(ensureLength(wrap(row.getMiscellaneousInformationFreetext()) + freeText, 990));
                 }
                 */
-                handleServiceLine(row, sLine);
+            handleServiceLine(row, sLine);
+        }
+
+        //special SBR batch 10.1 insurance handling (no link from chargeableItem to service line FP, so use service lines on name level
+        if (serviceLinesAssociatedWithChargeableItem.size() == 0 && itemForCoupon.getType().equals("IU")) {
+            for (ServiceLine sLine : chargeableItem.getBookingName().getServiceLines()) {
+                if (sLine.getServiceLineTypeCode() != null && sLine.getServiceLineTypeCode().equalsIgnoreCase("FP")) {
+                    SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
+                    String freeText = parser.get("FreeText");
+                    handleFP(row, freeText);
+                }
             }
         }
+
     }
 
     private void setCommonFields(Booking booking, BookingName name, BookingName infant, BookingNameItem item, FileDataRaw row) {
@@ -880,8 +910,8 @@ public class DWMapper {
         } else {
             row.setBookingPosagentType(ensureLength(booking.getPosType(), 1));
         }
-        if (booking.hasDynamicAttribute("SPLITPARENTRLOC")) {
-            String s = booking.getDynamicAttribute("SPLITPARENTRLOC");
+        if (booking.hasDynamicAttribute("SplitParentRLOC")) {
+            String s = booking.getDynamicAttribute("SplitParentRLOC");
             row.setParentPnr(s);
         }
     }
@@ -976,6 +1006,19 @@ public class DWMapper {
         return false;
     }
 
+    boolean isForInfant(ChargeableItem cie) {
+        for (ChargeableItemData data : cie.getChargeableItemDatas()) {
+            String type = data.getType();
+            String name = data.getName();
+            if (type != null && name != null) {
+                if (type.equalsIgnoreCase("INF") && name.equalsIgnoreCase("DiscountCode")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     void handleChargeableItems(BookingNameItem item, FileDataRaw row) {
 
@@ -984,7 +1027,7 @@ public class DWMapper {
 
         ChargeableItem chargeableItem = null;
 
-
+        /* old code
         Booking booking = item.getBookingName().getBooking();
         for (ChargeableItem chargeableItemEntity : item.getBookingName().getChargeableItems()) {
             for (ChargeableItemCoupon couponEntity : chargeableItemEntity.getChargeableItemCoupons()) {
@@ -995,6 +1038,55 @@ public class DWMapper {
                 }
             }
         }
+        */
+
+
+        //#MH 07/01/14 - if no chargeableItem found, we item my belong to an INF - logic to retrieve ChargeableItem for Infants
+
+        Booking booking = item.getBookingName().getBooking();
+        for (ChargeableItem chargeableItemEntity : item.getBookingName().getChargeableItems()) {
+            if(!isForInfant(chargeableItemEntity)) {          //assigning INF TST's like below causes duplicates
+                for (ChargeableItemCoupon couponEntity : chargeableItemEntity.getChargeableItemCoupons()) {
+                    BookingNameItem bookingNameItem = getBookingNameItemById(booking, couponEntity.getBookingNameItemId());
+                    if (bookingNameItem != null && bookingNameItem.getCrsSegmentLineNum() == item.getCrsSegmentLineNum()) {
+                        chargeableItem = chargeableItemEntity;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (chargeableItem == null) {
+
+            BookingName name = item.getBookingName();
+
+            if (name.getPassengerType() == BookingName.PASS_TYPE_INFANT) {
+                //need to find the chargeable item for the INF by looking at the responsible adult's cid  for type INF
+                BookingName responsibleAdult = null;
+                Long responsibleAdultId = name.getDynamicAttribute("ResponsibleAdult");
+                if (responsibleAdultId != null) {
+                    for (BookingName bookingName : booking.getBookingNames()) {
+                        if (bookingName.getBookingNameId() == responsibleAdultId) {
+                            responsibleAdult = bookingName;
+                            break;
+                        }
+                    }
+                }
+                if (responsibleAdult != null) {
+                    for (ChargeableItem chargeableItemEntity : responsibleAdult.getChargeableItems()) {
+                        for (ChargeableItemData chargeableItemDataEntity : chargeableItemEntity.getChargeableItemDatas()) {
+                            if (chargeableItemDataEntity.getType().equalsIgnoreCase("INF") && chargeableItemDataEntity.getName().equalsIgnoreCase("DiscountCode")) {
+                                chargeableItem = chargeableItemDataEntity.getChargeableItem();
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        //MH 07/01/14 - end
+
 
 
         if (chargeableItem != null) {
@@ -1203,7 +1295,7 @@ public class DWMapper {
             }
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FO")) {
             if ((sLine.getChargeableItemId() == 0 && row.getDocumentClass().equals("PAX")) ||
-                    sLine.getChargeableItemId() != 0 && row.getDocumentClass().equals("MCO")) {
+                    (sLine.getChargeableItemId() != 0 && row.getDocumentClass().equals("MCO"))) {
                 handleFO(row, freeText);
             }
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FV")) {
@@ -1230,7 +1322,11 @@ public class DWMapper {
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FI")) {
             row.setTixInvoiceNoInfoFreetext(ensureLength(wrap(row.getTixInvoiceNoInfoFreetext()) + freeText, 999));
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FP")) {
-            handleFP(row, freeText);
+            if ((sLine.getChargeableItemId() == 0 && row.getDocumentClass().equals("PAX")) ||
+                    (sLine.getChargeableItemId() != 0 && row.getDocumentClass().equals("MCO"))) {
+                handleFP(row, freeText);
+            }
+            //handleFP(row, freeText);
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("FT")) {
             handleFT(row, freeText);
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("OS")) {
@@ -1415,6 +1511,7 @@ public class DWMapper {
     }
 
     void handleFP(FileDataRaw row, String freeText) {
+        if (freeText.startsWith("PAX ")) freeText = freeText.substring(4);
         row.setFopinformationFreetext(ensureLength(freeText, 999));
         if (freeText != null) {
             if (freeText.startsWith("CC")) {
