@@ -285,16 +285,12 @@ public class DWMapper {
         for (BookingName bookingName : booking.getBookingNames()) {
             for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
                 for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
-                    // #MH 22MAY14# compare sl ids (not item with coupon) TODO validate
-                    //if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
                     if (serviceLine.getServiceLineId() == coupon.getServiceLineId()) {
                         return serviceLine;
                     }
                 }
             }
             for (ServiceLine serviceLine : bookingName.getServiceLines()) {
-                // #MH 22MAY14# compare sl ids (not item with coupon) TODO validate
-                //if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
                 if (serviceLine.getServiceLineId() == coupon.getServiceLineId()) {
                     return serviceLine;
                 }
@@ -302,8 +298,6 @@ public class DWMapper {
 
         }
         for (ServiceLine serviceLine : booking.getServiceLines()) {
-            // #MH 22MAY14# compare sl ids (not item with coupon) TODO validate
-            //if (serviceLine.getChargeableItemId() == coupon.getChargeableItemCouponId()) {
             if (serviceLine.getServiceLineId() == coupon.getServiceLineId()) {
                 return serviceLine;
             }
