@@ -742,11 +742,11 @@ public class DWMapper {
                             }
 
                         }
-                        // TODO obsulete:
-                        /*  else if (data.getType().equalsIgnoreCase("FCM")) {
-                            //#MH# fix 14.05.2014
+                        // TODO validate
+                        else if (data.getType().equalsIgnoreCase("FCP")) {
+                            //#MH# 04.07.2014 FCMI for MCO is being read from FCP (Fare Calculation Pricing indicator)
                             row.setFcmi(data.getValue());
-                        }    */
+                        }
                     }
                 } else if (data.getName().equalsIgnoreCase("Rfics")) {
                     row.setMcoreason(ensureLength(data.getValue(), 100));
