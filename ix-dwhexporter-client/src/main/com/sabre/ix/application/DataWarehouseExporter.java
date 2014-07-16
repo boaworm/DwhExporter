@@ -225,6 +225,7 @@ public class DataWarehouseExporter {
                             log.debug("Successfully wrote booking " + bookingId + ", row " + rowIndex + " to DWH");
                         } catch (org.hibernate.exception.DataException e) {
                             log.error("Failed to save row " + rowIndex + " of " + rows.size() + " : " + row);
+                            log.error(row.toInsertSQL());
                             throw e;
                         }
 
@@ -249,10 +250,13 @@ public class DataWarehouseExporter {
                         System.out.println("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
                         System.out.println("getOrigIssueInformationFreetext " + row.getOrigIssueInformationFreetext());
                         System.out.println("getFopinformationFreetext " + row.getFopinformationFreetext());
-
-
+                        System.out.println("getSectorFare " + row.getSectorFare());
+                        System.out.println("getSectorFareNotEur " + row.getSectorFareNotEur());
+                        System.out.println("getFareCalc " + row.getFareCalc());
 
                         System.out.println("");
+
+                        System.out.println(row.toInsertSQL());
 
                         lastExportedRows = rows;
                     }

@@ -1868,7 +1868,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE88733692640001822462/JOHANN WOELFLE*A"));
-        //assertThat(row.getFcmi(), equalTo("0")); //diff: null       TODO no FCMI for TSM in database
+        assertThat(row.getFcmi(), equalTo("0"));
 
         row = fileDataRaws.get(3);
         assertThat(row.getDocumentNo(), equalTo("8205915682"));
@@ -1879,8 +1879,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE88733692640001822462/JOHANN WOELFLE*A"));
-        //assertThat(row.getFcmi(), equalTo("0")); //diff: null      TODO no FCMI for TSM in database
-
+        assertThat(row.getFcmi(), equalTo("0"));
 
     }
 
@@ -1902,7 +1901,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/NL41ABNA0005981133/G. JONKER-JANS*A"));
-        //assertThat(row.getFcmi(), equalTo("0")); //diff: null    TODO no FCMI for TSM in database
+        assertThat(row.getFcmi(), equalTo("0"));
 
 
         row = fileDataRaws.get(3);
@@ -1914,7 +1913,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getMcoreason(), equalTo("RQST"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/NL41ABNA0005981133/G. JONKER-JANS*A"));
-        //assertThat(row.getFcmi(), equalTo("0")); //diff: null    TODO no FCMI for TSM in database
+        assertThat(row.getFcmi(), equalTo("0"));
 
     }
 
@@ -1936,7 +1935,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
-        //assertThat(row.getFcmi(), equalTo("0"));      //diff: null    TODO no FCMI for TSM in database
+        assertThat(row.getFcmi(), equalTo("0"));
 
 
         row = fileDataRaws.get(3);
@@ -1956,8 +1955,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
-        //assertThat(row.getFcmi(), equalTo("0"));      //diff: null    TODO no FCMI for TSM in database
-
+        assertThat(row.getFcmi(), equalTo("0"));
         row = fileDataRaws.get(7);
         assertThat(row.getDocumentNo(), equalTo("8205568855"));
         assertThat(row.getTixDepApt(), equalTo("FRA"));
@@ -1995,7 +1993,7 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getDocumentNo(), equalTo("2610646591"));
         assertThat(row.getFopinformationFreetext(), equalTo("CCTP122088XXXXX0016/0917/A669A/ADB"));
-        //assertThat(row.getFcmi(), equalTo("0"));       //diff: null    TODO no FCMI for TSM in database
+        assertThat(row.getFcmi(), equalTo("0"));
 
         row = fileDataRaws.get(1);
         assertThat(row.getDocumentClass(), equalTo("MCO"));

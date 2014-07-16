@@ -50,6 +50,7 @@ public class OpsFlightLegClientTest {
     }
 
     @Test
+    @Ignore
     public void verifyBasicOpsFlightLegProcessing() throws IOException {
         OpsFlightLeg flightLeg = new OpsFlightLeg(opsFlightLegServices, getFileAsString("example_Ops_message.xml"));
         assertThat(flightLeg.getDestination(), equalTo("TXL"));

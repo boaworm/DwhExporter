@@ -31,6 +31,7 @@ public class DWMapper {
                     adults.add(name);
                 }
             }
+            log.debug("Processing " + adults.size() + " adults and " + infants.size() + " infants");
             //start with infants as they may need to be processed with their responsible adult
             for (BookingName infant : infants) {
                 //if infant has active SSR INFT line then it is processed on its own.
@@ -46,6 +47,7 @@ public class DWMapper {
                         for (BookingName bookingName : booking.getBookingNames()) {
                             if (bookingName.getBookingNameId() == responsibleAdultId) {
                                 responsibleAdult = bookingName;
+                                log.debug("Found responsible adult: "+ responsibleAdult);
                                 break;
                             }
                         }
@@ -60,7 +62,7 @@ public class DWMapper {
                         }
                     }
                     for (ServiceLine sLine : activeServiceLines) {
-                        if (sLine.getServiceLineTypeCode().equalsIgnoreCase("SSR") &&
+                        if (sLine.getServiceLineTypeCode() != null &&  sLine.getServiceLineTypeCode().equalsIgnoreCase("SSR") &&
                                 sLine.getSecondaryType() != null && sLine.getSecondaryType().equalsIgnoreCase("INFT")) {
                             processIndependently = true;
                             break L;
@@ -74,6 +76,7 @@ public class DWMapper {
                     boolean found = false;
                     for (Iterator<BookingName> adultIt = adults.iterator(); adultIt.hasNext(); ) {
                         BookingName adult = adultIt.next();
+                        log.debug("Comparing adult and infant crs: " + adult.getCrsNameLineNum() + "/" + infant.getCrsNameLineNum());
                         if (adult.getCrsNameLineNum() == infant.getCrsNameLineNum()) {
                             found = true;
                             processName(booking, adult, infant, result);
@@ -789,7 +792,7 @@ public class DWMapper {
         }
 
         //special SBR batch 10.1 insurance handling (no link from chargeableItem to service line FP, so use service lines on name level
-        if (serviceLinesAssociatedWithChargeableItem.size() == 0 && itemForCoupon.getType().equals("IU")) {
+        if (serviceLinesAssociatedWithChargeableItem.size() == 0 && itemForCoupon != null && itemForCoupon.getType().equals("IU")) {
             for (ServiceLine sLine : chargeableItem.getBookingName().getServiceLines()) {
                 if (sLine.getServiceLineTypeCode() != null && sLine.getServiceLineTypeCode().equalsIgnoreCase("FP")) {
                     SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
@@ -939,7 +942,7 @@ public class DWMapper {
     private void setBookingFields(Booking booking, FileDataRaw row) {
         row.setPnr(ensureLength(booking.getRloc(), 13));
         row.setOrigBookingDate(ensureLength(getDate(booking.getBookingDate()), 10));
-        row.setOrigBookingAgnt(ensureLength(booking.getCreatingIataCode(), 7));
+        row.setOrigBookingAgnt(ensureLength(booking.getCreatingIataCode(), 8));
         row.setOrigBookingTime(ensureLength(getTime(booking.getBookingDate()), 8));
         row.setOrigBookingPurgeDate(ensureLength(getDate(booking.getPurgeDate()), 10));
         row.setBookingCancelledInd(booking.getBookingStatus() == Booking.CANCELLED_BOOKING);
@@ -949,7 +952,7 @@ public class DWMapper {
         row.setGds(ensureLength(booking.getGdsCode(), 10));
         row.setHostGds(ensureLength(booking.getGdsRloc(), 13));//they wanted it like this
         row.setGroupBooking(ensureLength(booking.getBookingType() == Booking.GROUP_BOOKING_TYPE ? "G" : null, 1));
-        row.setOrigAgnt(ensureLength(booking.getCreatingIataCode(), 7));
+        row.setOrigAgnt(ensureLength(booking.getCreatingIataCode(), 8));
         row.setBookingPosagent(ensureLength(booking.getResponsibleOfficeIdentifier(), 10));
         row.setQueueingOfficeIdFreetext(ensureLength(booking.getQueueingOfficeIdentifier(), 24));
         row.setBookingPosamaagent(ensureLength(booking.getCreatingOfficeIdentifier(), 24));

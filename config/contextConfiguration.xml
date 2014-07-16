@@ -8,9 +8,9 @@
 <contextConfiguration> 
   <webServiceDataLoader username="Admin">
 
-      <jsonPlatformServices defaultURL="http://asxstg.airberlin.net:8080/asx/ws/unprotected_json/"/>
-      <soapPlatformServices defaultURL="http://asxstg.airberlin.net:8080/"/>
-      <domainServices defaultURL="http://asxstg.airberlin.net:8080"/>
+      <jsonPlatformServices defaultURL="http://asxws.airberlin.net:8080/asx/ws/unprotected_json/"/>
+      <soapPlatformServices defaultURL="http://asxws.airberlin.net:8080/"/>
+      <domainServices defaultURL="http://asxws.airberlin.net:8080"/>
 
       <!--
     <jsonPlatformServices defaultURL="http://192.168.1.65:8111/asx/ws/unprotected_json/"/>

@@ -52,6 +52,7 @@ public class DcsFlightLegClientTest {
     }
 
     @Test
+    @Ignore
     public void verifyBasicTransformationOfDcsFlightLeg() throws IOException {
         DcsFlightLeg flightLeg = new DcsFlightLeg(dcsFlightLegServices, getFileAsString("example_Dcs_message.xml"));
         assertThat(flightLeg.getOrigin(), equalTo("VIE"));

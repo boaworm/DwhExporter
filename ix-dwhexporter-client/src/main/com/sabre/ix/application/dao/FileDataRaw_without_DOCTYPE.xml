@@ -1,7 +1,4 @@
 <?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 10.11.2011 16:28:21 by Hibernate Tools 3.2.0.b9 -->
 <hibernate-mapping>
     <class name="com.sabre.ix.application.dao.FileDataRaw" table="FileDataRaw" dynamic-insert="true">
         <id name="rowNumber" type="java.lang.Long" unsaved-value="0">

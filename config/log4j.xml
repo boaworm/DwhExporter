@@ -28,7 +28,7 @@
   <!-- ================================= -->
   <!-- A size limit rolling appender -->
   <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="/home/henrik/logs/ideaOutput.log"/>
+    <param name="File" value="C:/dev/DwhExporter/DwhExporter/export.log"/>
     <param name="Append" value="true"/>
     <!-- Max File Size and Backup Count. Max space on disk-> multiply these together -->
     <param name="MaxFileSize" value="10000KB"/>
@@ -104,9 +104,9 @@
   <root>
     <priority value="INFO"/>
     <appender-ref ref="CONSOLE"/>
-    <!--
+    
         <appender-ref ref="FILE"/>
-		-->
+		
     <!--appender-ref ref="CHAINSAW"/-->
   </root>
 </log4j:configuration>

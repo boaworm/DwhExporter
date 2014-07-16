@@ -53,6 +53,7 @@ public class CustomerClientTest {
     }
 
     @Test
+    @Ignore
     public void verifyBasicCustomerInteraction() throws IOException {
         Customer customer = new Customer(customerServices, getFileAsString("example_Customer_message.xml"));
         assertThat(customer.getFirstName(), equalTo("HENRIK"));
