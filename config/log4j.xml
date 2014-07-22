@@ -81,6 +81,11 @@
   <category name="com.sabre.ix.application">
     <priority value="TRACE"/>
   </category>
+
+    <!-- Suppressing MM warnings due to BookingId, BookingNameId etc -->
+    <category name="com.calidris.integrityserver.framework.DataElement">
+        <priority value="ERROR"/>
+    </category>
   <!--
     <category name="com.sabre.asx.integration.airberlin">
         <priority value="DEBUG"/>
