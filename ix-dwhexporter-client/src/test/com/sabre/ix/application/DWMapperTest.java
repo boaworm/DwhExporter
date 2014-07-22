@@ -2096,6 +2096,9 @@ public class DWMapperTest {
         }
     }
 
+    // todo: This is correctly failing in staging. We need to fix the CIC.BOOKING_NAME_ITEM_ID
+    // bug, then we can reprocess this booking in staging, and this test should become green again
+    // IE: Not an exporter but a platform bug!
     @Test
     public void verify_TST_for_non_AB_5YEFK4() throws IOException {
 
