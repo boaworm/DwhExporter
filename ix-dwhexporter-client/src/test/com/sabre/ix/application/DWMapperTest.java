@@ -508,8 +508,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore // unignore me
-
     public void verify_TST_12_1_Z8MC3Z() throws IOException {
 
         booking = new Booking(bookingServices, loadTestData("Z8MC3Z.xml"));
@@ -1516,8 +1514,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore // unignore me
-
     public void verify_TST_10_1_75WVC9() throws IOException {
 
         //75WVC9
@@ -2101,7 +2097,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore
     public void verify_TST_for_non_AB_5YEFK4() throws IOException {
 
         booking = new Booking(bookingServices, loadTestData("5YEFK4.xml"));
@@ -2138,7 +2133,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore
     public void verify_TST_for_INF() throws IOException {
 
         //X3ZBXG
@@ -2230,7 +2224,6 @@ public class DWMapperTest {
 
 
     @Test
-    @Ignore // unignore me
     public void verify_TST_with_INF_2GJIXE() throws IOException {
 
         //2GJIXE
@@ -2272,8 +2265,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore // unignore me
-
     public void verify_TST_with_INF_2WKW66() throws IOException {
 
         //2GJIXE
@@ -2334,8 +2325,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore // unignore me
-
     public void verify_differnt_Payment_for_TST_and_TSM_37PLZO() throws IOException {
         //37PLZO
         booking = new Booking(bookingServices, loadTestData("37PLZO.xml"));
@@ -2388,8 +2377,6 @@ public class DWMapperTest {
 
 
     @Test
-    @Ignore // unignore me
-
     public void verifyOpenJawsWithTicketNullValues_399ZTG() throws IOException {
         booking = new Booking(bookingServices, loadTestData("399ZTG.xml"));
         assertThat(booking.getRloc(), equalTo("399ZTG"));
