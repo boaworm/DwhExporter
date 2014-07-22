@@ -8,6 +8,7 @@ import com.sabre.ix.client.Booking;
 import com.sabre.ix.client.BookingServices;
 import com.sabre.ix.client.context.Context;
 import com.sabre.ix.client.services.DomainServices;
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
@@ -199,22 +200,32 @@ public class DataWarehouseExporter {
 
         void processBooking(Long bookingId, Session stagingSession) {
             Booking booking;
+            StopWatch sw = new StopWatch();
             try {
+
+                sw.start();
                 log.debug("About to load booking " + bookingId + " from ODS");
-                booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DwhExporterBooking");
+                booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DwhExporterBooking2");
+                //booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DwhExporterBooking2");
+
+                log.debug("booking " + bookingId + " with " + booking.getBookingNames().size() + " name loaded in " + sw.getTime() + " ms");
                 // booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DefaultBooking");
             } catch (Exception e) {
                 log.warn("Could not load booking " + bookingId + " because of exception: " + e.getMessage());
                 return;
             }
-            if(booking != null) {
+            if (booking != null) {
 
-                log.info("Handling booking " + booking.getRloc() + "/"+booking.getBookingId());
+                log.info("Handling booking " + booking.getRloc() + "/" + booking.getBookingId());
                 try {
+                    sw.reset();
+                    sw.start();
                     log.debug("Starting transformation of booking " + bookingId);
                     List<FileDataRaw> rows = dwMapper.mapBooking(booking);
-                    log.debug("Transformation of booking " + bookingId + " done, it has " + rows.size() + " rows");
+                    log.debug("Transformation of booking " + bookingId + " done in " + sw.getTime() + " ms, it has " + rows.size() + " rows");
                     int rowIndex = 0;
+                    sw.reset();
+                    sw.start();
                     for (FileDataRaw row : rows) {
 
                         row.setTms(new Date());
@@ -225,41 +236,44 @@ public class DataWarehouseExporter {
                             log.debug("Successfully wrote booking " + bookingId + ", row " + rowIndex + " to DWH");
                         } catch (org.hibernate.exception.DataException e) {
                             log.error("Failed to save row " + rowIndex + " of " + rows.size() + " : " + row);
-                            log.error(row.toInsertSQL());
+                            //log.error(row.toInsertSQL());
                             throw e;
                         }
 
 
-                        System.out.println("Row " + rowIndex);
-                        System.out.println("getPaxname " + row.getPaxname());
-                        System.out.println("getTixDepApt " + row.getTixDepApt());
-                        System.out.println("getTixDestApt " + row.getTixDestApt());
-                        System.out.println("getFcmi " + row.getFcmi());
-                        System.out.println("getDocumentNo " + row.getDocumentNo());
-                        System.out.println("getDocumentClass " + row.getDocumentClass());
-                        System.out.println("getSegNoTech " + row.getSegNoTech());
-                        System.out.println("getIssInConnWith " + row.getIssInConnWith());
-                        System.out.println("getIssInConnWithCpn " + row.getIssInConnWithCpn());
-                        System.out.println("getFarebaseCode " + row.getFarebaseCode());
-                        System.out.println("getTixFlightDt " + row.getTixFlightDt());
-                        System.out.println("getEmdtreatedAs " + row.getEmdtreatedAs());
-                        System.out.println("getMcoreason " + row.getMcoreason());
-                        System.out.println("getMcoreasonSubCode " + row.getMcoreasonSubCode());
-                        System.out.println("getTixInformationFreetext " + row.getTixInformationFreetext());
-                        System.out.println("getMiscellaneousChargeOrderFreetext " + row.getMiscellaneousChargeOrderFreetext());
-                        System.out.println("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
-                        System.out.println("getOrigIssueInformationFreetext " + row.getOrigIssueInformationFreetext());
-                        System.out.println("getFopinformationFreetext " + row.getFopinformationFreetext());
-                        System.out.println("getSectorFare " + row.getSectorFare());
-                        System.out.println("getSectorFareNotEur " + row.getSectorFareNotEur());
-                        System.out.println("getFareCalc " + row.getFareCalc());
+                        log.debug(("Row " + rowIndex));
+                        log.debug("getPaxname " + row.getPaxname());
+                        log.debug("getTixDepApt " + row.getTixDepApt());
+                        log.debug("getTixDestApt " + row.getTixDestApt());
+                        log.debug("getFcmi " + row.getFcmi());
+                        log.debug("getDocumentNo " + row.getDocumentNo());
+                        log.debug("getDocumentClass " + row.getDocumentClass());
+                        log.debug("getSegNoTech " + row.getSegNoTech());
+                        log.debug("getIssInConnWith " + row.getIssInConnWith());
+                        log.debug("getIssInConnWithCpn " + row.getIssInConnWithCpn());
+                        log.debug("getFarebaseCode " + row.getFarebaseCode());
+                        log.debug("getTixFlightDt " + row.getTixFlightDt());
+                        log.debug("getEmdtreatedAs " + row.getEmdtreatedAs());
+                        log.debug("getMcoreason " + row.getMcoreason());
+                        log.debug("getMcoreasonSubCode " + row.getMcoreasonSubCode());
+                        log.debug("getTixInformationFreetext " + row.getTixInformationFreetext());
+                        log.debug("getMiscellaneousChargeOrderFreetext " + row.getMiscellaneousChargeOrderFreetext());
+                        log.debug("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
+                        log.debug("getOrigIssueInformationFreetext " + row.getOrigIssueInformationFreetext());
+                        log.debug("getFopinformationFreetext " + row.getFopinformationFreetext());
+                        log.debug("getSectorFare " + row.getSectorFare());
+                        log.debug("getSectorFareNotEur " + row.getSectorFareNotEur());
+                        log.debug("getFareCalc " + row.getFareCalc());
 
-                        System.out.println("");
+                        log.debug("");
 
-                        System.out.println(row.toInsertSQL());
+
+                        //log.debug(row.toInsertSQL());
 
                         lastExportedRows = rows;
                     }
+                    log.debug("Successfully wrote " + bookingId + ", with " + rows.size() + " rows in " + sw.getTime() + " ms to DWH");
+                    sw.stop();
                 } catch (NullPointerException e) {
                     log.error("DataWarehouseExporter.processBooking : NullPointerException while processing booking " + bookingId, e);
                     throw e;
