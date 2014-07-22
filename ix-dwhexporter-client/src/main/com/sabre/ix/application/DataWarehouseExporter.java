@@ -256,7 +256,7 @@ public class DataWarehouseExporter {
 
                         System.out.println("");
 
-                        System.out.println(row.toInsertSQL());
+                        // System.out.println(row.toInsertSQL());
 
                         lastExportedRows = rows;
                     }
