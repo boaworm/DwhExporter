@@ -5,43 +5,45 @@
 // Domain/Version: DwhExporter/1.0.0
 // Meta Model Manager version: 1.1.0.SNAPSHOT
 -->
-<contextConfiguration> 
-  <webServiceDataLoader username="Admin">
+<contextConfiguration>
+    <webServiceDataLoader username="Admin">
 
-      <jsonPlatformServices defaultURL="http://asxws.airberlin.net:8080/asx/ws/unprotected_json/"/>
-      <soapPlatformServices defaultURL="http://asxws.airberlin.net:8080/"/>
-      <domainServices defaultURL="http://asxws.airberlin.net:8080"/>
+        <jsonPlatformServices defaultURL="http://asxstg.airberlin.net:8080/asx/ws/unprotected_json/"/>
+        <soapPlatformServices defaultURL="http://asxstg.airberlin.net:8080/"/>
+        <domainServices defaultURL="http://asxstg.airberlin.net:8080"/>
 
-      <!--
-    <jsonPlatformServices defaultURL="http://192.168.1.65:8111/asx/ws/unprotected_json/"/>
-    <soapPlatformServices defaultURL="http://192.168.1.65:8111/"/>
-    <domainServices defaultURL="http://192.168.1.65:8111"/>
-    -->
+        <!--
+      <jsonPlatformServices defaultURL="http://192.168.1.65:8111/asx/ws/unprotected_json/"/>
+      <soapPlatformServices defaultURL="http://192.168.1.65:8111/"/>
+      <domainServices defaultURL="http://192.168.1.65:8111"/>
+      -->
 
-      <!--
-      <jsonPlatformServices defaultURL="http://ltxl0486.dev.sabre.com:7000/asx/ws/unprotected_json/"/>
-      <soapPlatformServices defaultURL="http://ltxl0486.dev.sabre.com:7000/"/>
-      <domainServices defaultURL="http://ltxl0486.dev.sabre.com:7000"/>
-    -->
+        <!--
+        <jsonPlatformServices defaultURL="http://ltxl0486.dev.sabre.com:7000/asx/ws/unprotected_json/"/>
+        <soapPlatformServices defaultURL="http://ltxl0486.dev.sabre.com:7000/"/>
+        <domainServices defaultURL="http://ltxl0486.dev.sabre.com:7000"/>
+      -->
 
-  </webServiceDataLoader>  
-  <distributedCacheDataLoader> 
-    <jcsProperties> 
-      <jcsProperty key="jcs.default" value=""/>  
-      <jcsProperty key="jcs.default.cacheattributes" value="org.apache.jcs.engine.CompositeCacheAttributes"/>  
-      <jcsProperty key="jcs.default.cacheattributes.MaxObjects" value="1000"/>  
-      <jcsProperty key="jcs.default.cacheattributes.MemoryCacheName" value="org.apache.jcs.engine.memory.lru.LRUMemoryCache"/>  
-      <jcsProperty key="jcs.default.cacheattributes.UseMemoryShrinker" value="false"/>  
-      <jcsProperty key="jcs.default.cacheattributes.MaxMemoryIdleTimeSeconds" value="3600"/>  
-      <jcsProperty key="jcs.default.cacheattributes.ShrinkerIntervalSeconds" value="60"/>  
-      <jcsProperty key="jcs.default.elementattributes" value="org.apache.jcs.engine.ElementAttributes"/>  
-      <jcsProperty key="jcs.default.elementattributes.IsEternal" value="false"/>  
-      <jcsProperty key="jcs.default.elementattributes.MaxLifeSeconds" value="21600"/>  
-      <jcsProperty key="jcs.default.elementattributes.IdleTime" value="1800"/>  
-      <jcsProperty key="jcs.default.elementattributes.IsSpool" value="true"/>  
-      <jcsProperty key="jcs.default.elementattributes.IsRemote" value="true"/>  
-      <jcsProperty key="jcs.default.elementattributes.IsLateral" value="true"/> 
-    </jcsProperties> 
-  </distributedCacheDataLoader>  
-  <rootDataHandler className="com.sabre.ix.client.datahandler.IXClientDataHandlerImpl"/> 
+    </webServiceDataLoader>
+    <distributedCacheDataLoader>
+        <jcsProperties>
+            <jcsProperty key="jcs.default" value=""/>
+            <jcsProperty key="jcs.default.cacheattributes" value="org.apache.jcs.engine.CompositeCacheAttributes"/>
+            <jcsProperty key="jcs.default.cacheattributes.MaxObjects" value="1000"/>
+            <jcsProperty key="jcs.default.cacheattributes.MemoryCacheName"
+                         value="org.apache.jcs.engine.memory.lru.LRUMemoryCache"/>
+            <jcsProperty key="jcs.default.cacheattributes.UseMemoryShrinker" value="false"/>
+            <jcsProperty key="jcs.default.cacheattributes.MaxMemoryIdleTimeSeconds" value="3600"/>
+            <jcsProperty key="jcs.default.cacheattributes.ShrinkerIntervalSeconds" value="60"/>
+            <jcsProperty key="jcs.default.elementattributes" value="org.apache.jcs.engine.ElementAttributes"/>
+            <jcsProperty key="jcs.default.elementattributes.IsEternal" value="false"/>
+            <jcsProperty key="jcs.default.elementattributes.MaxLifeSeconds" value="21600"/>
+            <jcsProperty key="jcs.default.elementattributes.IdleTime" value="1800"/>
+            <jcsProperty key="jcs.default.elementattributes.IsSpool" value="true"/>
+            <jcsProperty key="jcs.default.elementattributes.IsRemote" value="true"/>
+            <jcsProperty key="jcs.default.elementattributes.IsLateral" value="true"/>
+        </jcsProperties>
+    </distributedCacheDataLoader>
+    <databaseDataLoader databaseXmlPath="C:\src\DwhExporter\config\database.xml"/>
+    <rootDataHandler className='com.sabre.ix.client.datahandler.IXDatabaseAwareClientDataHandlerImpl'/>
 </contextConfiguration>
