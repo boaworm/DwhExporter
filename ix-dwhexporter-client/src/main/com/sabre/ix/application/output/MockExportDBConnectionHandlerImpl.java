@@ -2,6 +2,7 @@ package com.sabre.ix.application.output;
 
 import com.sabre.ix.application.output.ExportDBConnectionHandler;
 import org.hibernate.*;
+import org.hibernate.jdbc.Work;
 import org.hibernate.stat.SessionStatistics;
 
 import java.io.Serializable;
@@ -103,6 +104,16 @@ public class MockExportDBConnectionHandlerImpl implements ExportDBConnectionHand
             }
 
             @Override
+            public boolean isDefaultReadOnly() {
+                return false;
+            }
+
+            @Override
+            public void setDefaultReadOnly(boolean b) {
+
+            }
+
+            @Override
             public Serializable getIdentifier(Object object) throws HibernateException {
                 return null;
             }
@@ -123,7 +134,17 @@ public class MockExportDBConnectionHandlerImpl implements ExportDBConnectionHand
             }
 
             @Override
+            public Object load(Class aClass, Serializable serializable, LockOptions lockOptions) throws HibernateException {
+                return null;
+            }
+
+            @Override
             public Object load(String entityName, Serializable id, LockMode lockMode) throws HibernateException {
+                return null;
+            }
+
+            @Override
+            public Object load(String s, Serializable serializable, LockOptions lockOptions) throws HibernateException {
                 return null;
             }
 
@@ -224,12 +245,22 @@ public class MockExportDBConnectionHandlerImpl implements ExportDBConnectionHand
             }
 
             @Override
+            public LockRequest buildLockRequest(LockOptions lockOptions) {
+                return null;
+            }
+
+            @Override
             public void refresh(Object object) throws HibernateException {
 
             }
 
             @Override
             public void refresh(Object object, LockMode lockMode) throws HibernateException {
+
+            }
+
+            @Override
+            public void refresh(Object o, LockOptions lockOptions) throws HibernateException {
 
             }
 
@@ -304,12 +335,22 @@ public class MockExportDBConnectionHandlerImpl implements ExportDBConnectionHand
             }
 
             @Override
+            public Object get(Class aClass, Serializable serializable, LockOptions lockOptions) throws HibernateException {
+                return null;
+            }
+
+            @Override
             public Object get(String entityName, Serializable id) throws HibernateException {
                 return null;
             }
 
             @Override
             public Object get(String entityName, Serializable id, LockMode lockMode) throws HibernateException {
+                return null;
+            }
+
+            @Override
+            public Object get(String s, Serializable serializable, LockOptions lockOptions) throws HibernateException {
                 return null;
             }
 
@@ -339,7 +380,17 @@ public class MockExportDBConnectionHandlerImpl implements ExportDBConnectionHand
             }
 
             @Override
+            public boolean isReadOnly(Object o) {
+                return false;
+            }
+
+            @Override
             public void setReadOnly(Object entity, boolean readOnly) {
+
+            }
+
+            @Override
+            public void doWork(Work work) throws HibernateException {
 
             }
 
@@ -356,6 +407,31 @@ public class MockExportDBConnectionHandlerImpl implements ExportDBConnectionHand
             @Override
             public void reconnect(Connection connection) throws HibernateException {
 
+            }
+
+            @Override
+            public boolean isFetchProfileEnabled(String s) throws UnknownProfileException {
+                return false;
+            }
+
+            @Override
+            public void enableFetchProfile(String s) throws UnknownProfileException {
+
+            }
+
+            @Override
+            public void disableFetchProfile(String s) throws UnknownProfileException {
+
+            }
+
+            @Override
+            public TypeHelper getTypeHelper() {
+                return null;
+            }
+
+            @Override
+            public LobHelper getLobHelper() {
+                return null;
             }
         };
     }

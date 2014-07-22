@@ -81,11 +81,13 @@
             <artifactId>com.springsource.slf4j.log4j</artifactId>
             <version>1.6.1</version>
         </dependency>
+        <!-- Removed 2014-07-22
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>com.springsource.org.hibernate.annotations</artifactId>
             <version>3.4.0.GA</version>
         </dependency>
+        -->
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>com.springsource.javax.persistence</artifactId>
@@ -223,6 +225,28 @@
             <type>jar</type>
             <classifier>sources</classifier>
         </dependency>
+        <!-- OPS DOMAIN -->
+
+        <dependency>
+            <groupId>sabre.domains.opsdomain</groupId>
+            <artifactId>ix-opsdomain</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>sabre.domains.opsdomain</groupId>
+            <artifactId>ix-opsdomain</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>sabre.domains.opsdomain</groupId>
+            <artifactId>ix-opsdomain-client</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <!--
         <dependency>
             <groupId>sabre.domains.opsdomain</groupId>
             <artifactId>ix-opsdomain-client</artifactId>
@@ -230,11 +254,38 @@
             <type>jar</type>
             <classifier>sources</classifier>
         </dependency>
+        -->
         <dependency>
-            <groupId>sabre.domains.opsdomain</groupId>
-            <artifactId>ix-opsdomain-client</artifactId>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain</artifactId>
             <version>6.2.0</version>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain-client</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain-client</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        -->
+
+
+        <!-- CUSTOMER -->
         <dependency>
             <groupId>sabre.domains.customerdomain</groupId>
             <artifactId>ix-customerdomain-client</artifactId>
@@ -247,9 +298,17 @@
             <artifactId>ix-customerdomain-client</artifactId>
             <version>6.2.0</version>
         </dependency>
+
+        <!-- DCS DOMAIN -->
+        <!--
         <dependency>
             <groupId>sabre.domains.dcsdomain</groupId>
-            <artifactId>ix-dcsdomain-client</artifactId>
+            <artifactId>ix-dcsdomain</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsdomain</groupId>
+            <artifactId>ix-dcsdomain</artifactId>
             <version>6.2.0</version>
             <type>jar</type>
             <classifier>sources</classifier>
@@ -259,6 +318,69 @@
             <artifactId>ix-dcsdomain-client</artifactId>
             <version>6.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsdomain</groupId>
+            <artifactId>ix-dcsdomain-client</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        -->
+        <!-- -->
+
+        <!-- OPS DCS LINK -->
+        <!--
+        <dependency>
+            <groupId>sabre.domains.opsdcslinkdomain</groupId>
+            <artifactId>ix-opsdcslinkdomain</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.opsdcslinkdomain</groupId>
+            <artifactId>ix-opsdcslinkdomain</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.opsdcslinkdomain</groupId>
+            <artifactId>ix-opsdcslinkdomain-client</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.opsdcslinkdomain</groupId>
+            <artifactId>ix-opsdcslinkdomain-client</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        -->
+        <!-- -->
+
         <dependency>
             <groupId>sabre.domains.bookingdomain</groupId>
             <artifactId>ix-bookingdomain-client</artifactId>
@@ -271,42 +393,9 @@
             <artifactId>ix-bookingdomain-client</artifactId>
             <version>6.2.0</version>
         </dependency>
-        <dependency>
-            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
-            <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
-            <version>6.2.0</version>
-            <type>jar</type>
-            <classifier>sources</classifier>
-        </dependency>
-        <dependency>
-            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
-            <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
-            <version>6.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>sabre.domains.opsdcslinkdomain</groupId>
-            <artifactId>ix-opsdcslinkdomain-client</artifactId>
-            <version>6.2.0</version>
-            <type>jar</type>
-            <classifier>sources</classifier>
-        </dependency>
-        <dependency>
-            <groupId>sabre.domains.opsdcslinkdomain</groupId>
-            <artifactId>ix-opsdcslinkdomain-client</artifactId>
-            <version>6.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
-            <artifactId>ix-opsbookinglinkdomain-client</artifactId>
-            <version>6.2.0</version>
-            <type>jar</type>
-            <classifier>sources</classifier>
-        </dependency>
-        <dependency>
-            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
-            <artifactId>ix-opsbookinglinkdomain-client</artifactId>
-            <version>6.2.0</version>
-        </dependency>
+
+
+        <!-- -->
         <dependency>
             <groupId>sabre.domains.namelinkdomain</groupId>
             <artifactId>ix-namelinkdomain-client</artifactId>
@@ -339,6 +428,36 @@
             <artifactId>ix-maven-plugin</artifactId>
             <version>1.0</version>
         </dependency>
+        <!-- manually added for 6.2.1 -->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.18.0-GA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>3.6.10.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>calidris.database</groupId>
+            <artifactId>ci-legacydao</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>calidris.database</groupId>
+            <artifactId>ci-booking</artifactId>
+            <version>6.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>calidris.database</groupId>
+            <artifactId>ci-booking</artifactId>
+            <version>6.2.0</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
+        <!-- end manually added for 6.2.1 -->
+
     </dependencies>
     <build>
         <sourceDirectory>${project.basedir}/src/main/</sourceDirectory>

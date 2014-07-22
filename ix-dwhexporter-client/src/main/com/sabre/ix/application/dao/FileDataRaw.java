@@ -5943,7 +5943,7 @@ public class FileDataRaw implements java.io.Serializable {
         return emdInd;
     }
 
-    public void setEmdInd(String emdInd){
+    public void setEmdInd(String emdInd) {
         this.emdInd = emdInd;
     }
 
@@ -6458,7 +6458,7 @@ public class FileDataRaw implements java.io.Serializable {
                 ", sourceFileName='" + sourceFileName + '\'' +
                 ", sourceFileDateInt='" + sourceFileDateInt + '\'' +
                 ", insertAuditDate='" + insertAuditDate + '\'' +
-                ", insertAuditJobSid='" + insertAuditJobSid + '\''+
+                ", insertAuditJobSid='" + insertAuditJobSid + '\'' +
                 ", insertAuditPackageSid='" + insertAuditPackageSid + '\'' +
                 ", sourceFileDateTime='" + sourceFileDateTime + '\'' +
                 ", tixConfidentialOffice='" + tixConfidentialOffice + '\'' +
@@ -6582,9 +6582,9 @@ public class FileDataRaw implements java.io.Serializable {
                 ", infIdentCdFreetext='" + infIdentCdFreetext + '\'' +
                 ", tixVoidRefundSalesInd='" + tixVoidRefundSalesInd + '\'' +
                 ", refundCategory='" + refundCategory + '\'' +
-                ", tixFlightDtTime='" + tixFlightDtTime + '\''+
-                ", tixFlightDtUtc='" + tixFlightDtUtc + '\''+
-                ", affectedCoupon='" + affectedCoupon + '\''+
+                ", tixFlightDtTime='" + tixFlightDtTime + '\'' +
+                ", tixFlightDtUtc='" + tixFlightDtUtc + '\'' +
+                ", affectedCoupon='" + affectedCoupon + '\'' +
                 ", purgeDate='" + purgeDate + '\'' +
                 ", noOfInf='" + noOfInf + '\'' +
                 ", flownCarr='" + flownCarr + '\'' +
@@ -6653,67 +6653,63 @@ public class FileDataRaw implements java.io.Serializable {
                 ", negoSpacePnr='" + negoSpacePnr + '\'' +
                 '}';
     }
-    public String toInsertSQL()
-    {
 
+    public String toInsertSQL() {
 
         List<String> columns = new ArrayList<String>();
         List<String> values = new ArrayList<String>();
 
         String s = this.toString();
-        String s2 = s.substring(12, s.length()-1);
+        String s2 = s.substring(12, s.length() - 1);
 
         String[] arr1 = s2.split("', ");
-        for(String singleEntry : arr1) {
+        for (String singleEntry : arr1) {
             try {
                 String[] pair = singleEntry.split("='");
                 // exclude rownumber
-                if(pair[0].equalsIgnoreCase("rowNumber")) {
+                if (pair[0].equalsIgnoreCase("rowNumber")) {
                     continue;
                 }
                 columns.add(pair[0]);
-                if(pair.length > 1) {
+                if (pair.length > 1) {
                     values.add("'" + pair[1] + (pair[1].endsWith("'") ? "" : "'"));
-                    if(pair[1].length() >= 30) {
+                    if (pair[1].length() >= 30) {
                         System.out.println("Column " + pair[0] + " with value " + pair[1] + " : length " + pair[1].length());
                     }
-                }
-                else {
+                } else {
                     values.add("''");
                 }
-            }catch(Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println("foo");
 
             }
         }
 
-        Map<String,String> nameTableMap = new HashMap<String, String>();
+        Map<String, String> nameTableMap = new HashMap<String, String>();
 
-            try {
-                URL resource = this.getClass().getResource("FileDataRaw_without_DOCTYPE.xml");
-                String fileDataRawXml = Resources.toString(resource, Charset.defaultCharset());
+        try {
+            URL resource = this.getClass().getResource("FileDataRaw_without_DOCTYPE.xml");
+            String fileDataRawXml = Resources.toString(resource, Charset.defaultCharset());
 
-                Document document = DocumentHelper.parseText(fileDataRawXml);
-                List<Element> list = (List<Element>) document.selectNodes("/hibernate-mapping/class/property");
-                for(Element e : list) {
-                    System.out.print("");
-                    String name = e.attribute("name").getText();
-                    String column = e.element("column").attribute("name").getText();
-                    nameTableMap.put(name, column);
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (DocumentException e) {
-                e.printStackTrace();
+            Document document = DocumentHelper.parseText(fileDataRawXml);
+            List<Element> list = (List<Element>) document.selectNodes("/hibernate-mapping/class/property");
+            for (Element e : list) {
+                System.out.print("");
+                String name = e.attribute("name").getText();
+                String column = e.element("column").attribute("name").getText();
+                nameTableMap.put(name, column);
             }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
 
 
         List<String> columnNames = new ArrayList<String>();
-        for(String column : columns) {
-            if(nameTableMap.containsKey(column)) {
+        for (String column : columns) {
+            if (nameTableMap.containsKey(column)) {
                 columnNames.add(nameTableMap.get(column));
             } else {
                 System.out.println("Error in column name mapping: " + column);
@@ -6723,13 +6719,13 @@ public class FileDataRaw implements java.io.Serializable {
         StringBuilder sb = new StringBuilder();
 
         sb.append("INSERT INTO SBRFeed.FileDataRaw (");
-        sb.append(StringUtils.join(columnNames,","));
+        sb.append(StringUtils.join(columnNames, ","));
         sb.append(") VALUES (");
 
         sb.append(StringUtils.join(values, ","));
         sb.append(");");
 
-        System.out.println("We have " + columns.size() + " columns and "+ values.size() + " values");
+        System.out.println("We have " + columns.size() + " columns and " + values.size() + " values");
         return sb.toString();
     }
 }

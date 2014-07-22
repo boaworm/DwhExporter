@@ -2,7 +2,7 @@ package com.sabre.ix.application;
 
 import com.sabre.ix.client.DcsFlightLeg;
 import com.sabre.ix.client.DcsFlightLegServices;
-import com.sabre.ix.client.OpsDcsLink;
+// import com.sabre.ix.client.OpsDcsLink;
 import com.sabre.ix.client.context.Context;
 import com.sabre.ix.client.dao.MetaModel;
 import com.sabre.ix.client.datahandler.DataHandler;
@@ -64,8 +64,8 @@ public class DcsFlightLegClientTest {
     @Ignore
     public void pullDcsOpsLinkClasses() throws IOException {
         DcsFlightLeg flightLeg = new DcsFlightLeg(dcsFlightLegServices, getFileAsString("example_Dcs_message.xml"));
-        List<OpsDcsLink> linkedDataObjects = flightLeg.getLinkedDataObjects(OpsDcsLink.class);
-        assertTrue(linkedDataObjects.isEmpty());
+        //List<OpsDcsLink> linkedDataObjects = flightLeg.getLinkedDataObjects(OpsDcsLink.class);
+        //assertTrue(linkedDataObjects.isEmpty());
     }
 
     private String getFileAsString(String fileName) throws IOException {

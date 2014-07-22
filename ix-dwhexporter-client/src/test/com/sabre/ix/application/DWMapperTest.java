@@ -39,6 +39,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 /**
@@ -504,6 +505,12 @@ public class DWMapperTest {
         assertThat(row.getTaxValue1(), equalTo("39.00"));
 
         // Z8MC3Z
+    }
+
+    @Test
+    @Ignore // unignore me
+
+    public void verify_TST_12_1_Z8MC3Z() throws IOException {
 
         booking = new Booking(bookingServices, loadTestData("Z8MC3Z.xml"));
         assertThat(booking.getRloc(), equalTo("Z8MC3Z"));
@@ -573,7 +580,7 @@ public class DWMapperTest {
         assertThat(row.getTourCode(), nullValue());
         assertThat(row.getFareCalc(), equalTo("BER AB MIA AB BER 000.00NUC 000.00 END ROE1.000000"));
         assertThat(row.getTaxCode1(), nullValue());
-        assertThat(row.getTaxValue1(),nullValue());
+        assertThat(row.getTaxValue1(), nullValue());
 
 
         row = fileDataRaws.get(1);
@@ -591,7 +598,7 @@ public class DWMapperTest {
         assertThat(row.getTourCode(), nullValue());
         assertThat(row.getFareCalc(), equalTo("BER AB MIA AB BER 000.00NUC 000.00 END ROE1.000000"));
         assertThat(row.getTaxCode1(), nullValue());
-        assertThat(row.getTaxValue1(),nullValue());
+        assertThat(row.getTaxValue1(), nullValue());
 
 
         row = fileDataRaws.get(2);
@@ -724,6 +731,7 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWith(), nullValue());
         assertThat(row.getIssInConnWithCpn(), nullValue());
     }
+
     @Test
     public void verify_Ancillaries_10_1_8HHO9E() throws IOException {
 
@@ -991,7 +999,7 @@ public class DWMapperTest {
         assertThat(row.getPaxname(), equalTo("SCHROEDER/HENRY"));
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-8204640770/DTAB/EUR150.00/09SEP13/BERAB08IB/23496605"));
-        assertThat(row.getMiscellaneousChargeOrderFreetext(),equalTo("SSR: [Type:AVIH] [Status:HK] [Quantity:1] [CompanyId:AB] [FreeText:TTL10KG1PCDIM50X20X30CMDOG/ONLY DOMESTIC PETS ARE ALLOWED FOR AVIH/ MAX CRATE 125X75X85CM]"));
+        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("SSR: [Type:AVIH] [Status:HK] [Quantity:1] [CompanyId:AB] [FreeText:TTL10KG1PCDIM50X20X30CMDOG/ONLY DOMESTIC PETS ARE ALLOWED FOR AVIH/ MAX CRATE 125X75X85CM]"));
         assertThat(row.getMcoreason(), equalTo("AVIH"));
         assertThat(row.getMcoreasonSubCode(), equalTo("0BS"));
         assertThat(row.getIssInConnWith(), equalTo("2331143469"));
@@ -1004,7 +1012,7 @@ public class DWMapperTest {
         assertThat(row.getPaxname(), equalTo("SCHROEDER/HENRY"));
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-8204640770/DTAB/EUR150.00/09SEP13/BERAB08IB/23496605"));
-        assertThat(row.getMiscellaneousChargeOrderFreetext(),equalTo("SSR: [Type:AVIH] [Status:HK] [Quantity:1] [CompanyId:AB] [FreeText:TTL10KG1PCDIM50X20X30CMDOG/ONLY DOMESTIC PETS ARE ALLOWED FOR AVIH/ MAX CRATE 125X75X85CM]"));
+        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("SSR: [Type:AVIH] [Status:HK] [Quantity:1] [CompanyId:AB] [FreeText:TTL10KG1PCDIM50X20X30CMDOG/ONLY DOMESTIC PETS ARE ALLOWED FOR AVIH/ MAX CRATE 125X75X85CM]"));
         assertThat(row.getMcoreason(), equalTo("AVIH"));
         assertThat(row.getMcoreasonSubCode(), equalTo("0BS"));
         assertThat(row.getIssInConnWith(), equalTo("2331143469"));
@@ -1508,6 +1516,8 @@ public class DWMapperTest {
     }
 
     @Test
+    @Ignore // unignore me
+
     public void verify_TST_10_1_75WVC9() throws IOException {
 
         //75WVC9
@@ -2220,6 +2230,7 @@ public class DWMapperTest {
 
 
     @Test
+    @Ignore // unignore me
     public void verify_TST_with_INF_2GJIXE() throws IOException {
 
         //2GJIXE
@@ -2234,33 +2245,35 @@ public class DWMapperTest {
         assertThat(row.getFarebaseCode(), equalTo("ORCRTIL"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("2.00"));
-        assertThat(row.getFareCalc (), equalTo("TLV AB BER9.25AB TLV7.00NUC16.25END ROE1.000000"));
+        assertThat(row.getFareCalc(), equalTo("TLV AB BER9.25AB TLV7.00NUC16.25END ROE1.000000"));
 
         row = fileDataRaws.get(1);
         assertThat(row.getDocumentNo(), equalTo("2339733264"));
         assertThat(row.getFarebaseCode(), equalTo("PNCRTIL"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("2.00"));
-        assertThat(row.getFareCalc (), equalTo("TLV AB BER9.25AB TLV7.00NUC16.25END ROE1.000000"));
+        assertThat(row.getFareCalc(), equalTo("TLV AB BER9.25AB TLV7.00NUC16.25END ROE1.000000"));
 
         row = fileDataRaws.get(4);
         assertThat(row.getDocumentNo(), equalTo("2339733263"));
         assertThat(row.getFarebaseCode(), equalTo("ORCRTIL"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("15.71"));
-        assertThat(row.getFareCalc (), equalTo("TLV AB BER92.50AB TLV70.00NUC162.50END ROE1.000000"));
+        assertThat(row.getFareCalc(), equalTo("TLV AB BER92.50AB TLV70.00NUC162.50END ROE1.000000"));
 
         row = fileDataRaws.get(5);
         assertThat(row.getDocumentNo(), equalTo("2339733263"));
         assertThat(row.getFarebaseCode(), equalTo("PNCRTIL"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("15.71"));
-        assertThat(row.getFareCalc (), equalTo("TLV AB BER92.50AB TLV70.00NUC162.50END ROE1.000000"));
+        assertThat(row.getFareCalc(), equalTo("TLV AB BER92.50AB TLV70.00NUC162.50END ROE1.000000"));
 
 
     }
 
     @Test
+    @Ignore // unignore me
+
     public void verify_TST_with_INF_2WKW66() throws IOException {
 
         //2GJIXE
@@ -2275,28 +2288,28 @@ public class DWMapperTest {
         assertThat(row.getFarebaseCode(), equalTo("SNCRT"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("0.00"));
-        assertThat(row.getFareCalc (), equalTo("DUS AB BER0.00AB DUS0.00EUR0.00END"));
+        assertThat(row.getFareCalc(), equalTo("DUS AB BER0.00AB DUS0.00EUR0.00END"));
 
         row = fileDataRaws.get(1);
         assertThat(row.getDocumentNo(), equalTo("2340280451"));
         assertThat(row.getFarebaseCode(), equalTo("LNCRT"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("0.00"));
-        assertThat(row.getFareCalc (), equalTo("DUS AB BER0.00AB DUS0.00EUR0.00END"));
+        assertThat(row.getFareCalc(), equalTo("DUS AB BER0.00AB DUS0.00EUR0.00END"));
 
         row = fileDataRaws.get(2);
         assertThat(row.getDocumentNo(), equalTo("4639515248"));
         assertThat(row.getFarebaseCode(), equalTo("SNCRT"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("268.32"));
-        assertThat(row.getFareCalc (), equalTo("DUS AB BER46.50AB DUS76.50EUR123.00END"));
+        assertThat(row.getFareCalc(), equalTo("DUS AB BER46.50AB DUS76.50EUR123.00END"));
 
         row = fileDataRaws.get(3);
         assertThat(row.getDocumentNo(), equalTo("4639515248"));
         assertThat(row.getFarebaseCode(), equalTo("LNCRT"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("268.32"));
-        assertThat(row.getFareCalc (), equalTo("DUS AB BER46.50AB DUS76.50EUR123.00END"));
+        assertThat(row.getFareCalc(), equalTo("DUS AB BER46.50AB DUS76.50EUR123.00END"));
 
 
     }
@@ -2321,6 +2334,8 @@ public class DWMapperTest {
     }
 
     @Test
+    @Ignore // unignore me
+
     public void verify_differnt_Payment_for_TST_and_TSM_37PLZO() throws IOException {
         //37PLZO
         booking = new Booking(bookingServices, loadTestData("37PLZO.xml"));
@@ -2352,7 +2367,8 @@ public class DWMapperTest {
         assertThat(row.getSegNoTech(), equalTo(1));
         assertThat(row.getFarebaseCode(), equalTo("YIDZL3R1"));
         assertThat(row.getTixFlightDt(), equalTo("40514"));
-        assertThat(row.getDocumentClass(), equalTo("PAX"));;
+        assertThat(row.getDocumentClass(), equalTo("PAX"));
+        ;
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2339188938/ETAB/EUR95.78/10APR14/BERAB0111/23498915"));
         assertThat(row.getFopinformationFreetext(), equalTo("CVI426354XXXXXX8970/0118*CV/A162598"));
 
@@ -2363,12 +2379,37 @@ public class DWMapperTest {
         assertThat(row.getSegNoTech(), equalTo(2));
         assertThat(row.getFarebaseCode(), equalTo("YIDZL1R1"));
         assertThat(row.getTixFlightDt(), equalTo("40514"));
-        assertThat(row.getDocumentClass(), equalTo("PAX"));;
+        assertThat(row.getDocumentClass(), equalTo("PAX"));
+        ;
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2339188938/ETAB/EUR95.78/10APR14/BERAB0111/23498915"));
         assertThat(row.getFopinformationFreetext(), equalTo("CVI426354XXXXXX8970/0118*CV/A162598"));
 
     }
 
+
+    @Test
+    @Ignore // unignore me
+
+    public void verifyOpenJawsWithTicketNullValues_399ZTG() throws IOException {
+        booking = new Booking(bookingServices, loadTestData("399ZTG.xml"));
+        assertThat(booking.getRloc(), equalTo("399ZTG"));
+
+        fileDataRaws = mapper.mapBooking(booking);
+        assertThat(fileDataRaws.size(), equalTo(20));
+
+        for (FileDataRaw row : fileDataRaws) {
+            String tixdepApt = row.getTixDepApt();
+            String tixdestApt = row.getTixDestApt();
+
+            if (tixdepApt == null && tixdestApt != null) {
+                fail("Found a problem");
+            } else if (tixdepApt != null && tixdestApt == null) {
+                assertThat(row.getPaxfirstName(), equalTo("GRADY"));
+                fail("Found another problem");
+            }
+        }
+
+    }
 
     private String readFile(String fileName) throws IOException {
         File testFile = new File(testdataPath + fileName);
@@ -2409,7 +2450,7 @@ public class DWMapperTest {
 
     private void printRows(List<FileDataRaw> rows) {
         int i = 1;
-        for(FileDataRaw row : rows) {
+        for (FileDataRaw row : rows) {
             System.out.println("Row " + i++);
             System.out.println("getPaxname " + row.getPaxname());
             System.out.println("getTixDepApt " + row.getTixDepApt());
