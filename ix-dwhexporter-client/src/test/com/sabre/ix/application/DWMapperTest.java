@@ -800,7 +800,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("EBT"));
         assertThat(row.getPaxname(), equalTo("RAPA/ANETA"));
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
-        assertThat(row.getTixDepApt(), equalTo("TXL"));
+        assertThat(row.getTixDepApt(), nullValue());  // equalTo("TXL") changed by request from DWH
         assertThat(row.getTixDestApt(), nullValue());
         assertThat(row.getTixFlightDt(), equalTo("90913"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2600638344/PTAB/EUR150.00/09SEP13/TXLAB0005/23496303"));
@@ -1464,7 +1464,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getPaxname(), equalTo("DAVIS/DOUGLAS"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getTixDepApt(), equalTo("MIA"));
+        assertThat(row.getTixDepApt(), nullValue());  // equalTo("MIA") changed by request from DWH
         assertThat(row.getTixDestApt(), nullValue());
         assertThat(row.getTixFlightDt(), equalTo("120514"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2700725907/PTAB/USD79.24/15JAN14/NYCAB08IB/33994122"));
@@ -1478,7 +1478,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getPaxname(), equalTo("DAVIS/PATRICIA"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getTixDepApt(), equalTo("MIA"));
+        assertThat(row.getTixDepApt(), nullValue());  // equalTo("MIA") changed by request from DWH
         assertThat(row.getTixDestApt(), nullValue());
         assertThat(row.getTixFlightDt(), equalTo("120514"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2700725908/PTAB/USD79.24/15JAN14/NYCAB08IB/33994122"));
@@ -1503,7 +1503,7 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("EBT"));
         assertThat(row.getPaxname(), equalTo("VULPIUS/ANDREAS"));
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
-        assertThat(row.getTixDepApt(), equalTo("FRA"));
+        assertThat(row.getTixDepApt(), nullValue());  // equalTo("FRA") changed by request from DWH
         assertThat(row.getTixDestApt(), nullValue());
         assertThat(row.getTixFlightDt(), equalTo("20514"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2600645020/PTAB/EUR70.00/02MAY14/FRAAB0005/23496782"));
@@ -2384,6 +2384,53 @@ public class DWMapperTest {
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2339188938/ETAB/EUR95.78/10APR14/BERAB0111/23498915"));
         assertThat(row.getFopinformationFreetext(), equalTo("CVI426354XXXXXX8970/0118*CV/A162598"));
 
+    }
+
+    @Test
+    @Ignore
+    public void verify_TST_63HXK7() throws IOException {
+        //63HXK7
+        booking = new Booking(bookingServices, loadTestData("63HXK7.xml"));
+        assertThat(booking.getRloc(), equalTo("63HXK7"));
+
+        fileDataRaws = mapper.mapBooking(booking);
+        assertThat(fileDataRaws.size(), equalTo(4));
+
+        row = fileDataRaws.get(0);
+        assertThat(row.getPaxname(), equalTo("ABDULMAJID/ADEL"));
+        assertThat(row.getFarebaseCode(), equalTo("WNC20RT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("98.27"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getSectorTotalFareFa(), equalTo("98.27"));
+        assertThat(row.getSectorTotalFareFanotEur(), nullValue());
+
+        row = fileDataRaws.get(0);
+        assertThat(row.getPaxname(), equalTo("ABDULMAJID/ALICE"));
+        assertThat(row.getFarebaseCode(), equalTo("WNC20RT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("98.27"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getSectorTotalFareFa(), equalTo("98.27"));
+        assertThat(row.getSectorTotalFareFanotEur(), nullValue());
+
+        row = fileDataRaws.get(0);
+        assertThat(row.getPaxname(), equalTo("ABDULMAJID/DJAMIL"));
+        assertThat(row.getFarebaseCode(), equalTo("WNC20RT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("98.27"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getSectorTotalFareFa(), equalTo("98.27"));
+        assertThat(row.getSectorTotalFareFanotEur(), nullValue());
+
+        row = fileDataRaws.get(0);
+        assertThat(row.getPaxname(), equalTo("ABDULMAJID/ADEL"));
+        assertThat(row.getFarebaseCode(), equalTo("WNC20RT"));
+        assertThat(row.getFcmi(), equalTo("0"));
+        assertThat(row.getSectorTotalFare(), equalTo("98.27"));
+        assertThat(row.getSectorTotalFareNotEur(), nullValue());
+        assertThat(row.getSectorTotalFareFa(), equalTo("98.27"));
+        assertThat(row.getSectorTotalFareFanotEur(), nullValue());
     }
 
 

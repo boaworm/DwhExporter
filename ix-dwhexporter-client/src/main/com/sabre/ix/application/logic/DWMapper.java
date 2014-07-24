@@ -47,7 +47,7 @@ public class DWMapper {
                         for (BookingName bookingName : booking.getBookingNames()) {
                             if (bookingName.getBookingNameId() == responsibleAdultId) {
                                 responsibleAdult = bookingName;
-                                log.debug("Found responsible adult: "+ responsibleAdult);
+                                log.debug("Found responsible adult: " + responsibleAdult);
                                 break;
                             }
                         }
@@ -62,7 +62,7 @@ public class DWMapper {
                         }
                     }
                     for (ServiceLine sLine : activeServiceLines) {
-                        if (sLine.getServiceLineTypeCode() != null &&  sLine.getServiceLineTypeCode().equalsIgnoreCase("SSR") &&
+                        if (sLine.getServiceLineTypeCode() != null && sLine.getServiceLineTypeCode().equalsIgnoreCase("SSR") &&
                                 sLine.getSecondaryType() != null && sLine.getSecondaryType().equalsIgnoreCase("INFT")) {
                             processIndependently = true;
                             break L;
@@ -1042,7 +1042,7 @@ public class DWMapper {
 
         Booking booking = item.getBookingName().getBooking();
         for (ChargeableItem chargeableItemEntity : item.getBookingName().getChargeableItems()) {
-            if(!isForInfant(chargeableItemEntity)) {          //assigning INF TST's like below causes duplicates
+            if (!isForInfant(chargeableItemEntity)) {          //assigning INF TST's like below causes duplicates
                 for (ChargeableItemCoupon couponEntity : chargeableItemEntity.getChargeableItemCoupons()) {
                     BookingNameItem bookingNameItem = getBookingNameItemById(booking, couponEntity.getBookingNameItemId());
                     if (bookingNameItem != null && bookingNameItem.getCrsSegmentLineNum() == item.getCrsSegmentLineNum()) {
@@ -1083,7 +1083,6 @@ public class DWMapper {
             }
         }
         //MH 07/01/14 - end
-
 
 
         if (chargeableItem != null) {
@@ -1130,9 +1129,12 @@ public class DWMapper {
 
     private void setStandardChargeableFields(FileDataRaw row, BookingNameItem item, ChargeableItem chargeableItem) {
         int taxIndex = 1;
+        //removed 20140717 by request from DWH to avoid having null in tixDestApt and not null in tixDepApt
+        /*
         if (row.getTixDepApt() == null && chargeableItem.getIssuanceDestination() != null) {
             row.setTixDepApt(chargeableItem.getIssuanceDestination());
-        }
+        }*/
+
         if (row.getTixFlightDt() == null && chargeableItem.getDateAdded() != null) {
             row.setTixFlightDt(getDate(chargeableItem.getDateAdded()));
         }

@@ -9,7 +9,7 @@
         <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
         <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
         <property name="hibernate.default_schema">SBRFeed</property>
-        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.show_sql">false</property>
         <property name="hibernate.jdbc.batch_size ">20</property>
         <mapping resource="com/sabre/ix/application/dao/FileDataRaw.hbm.xml"/>
         <mapping resource="com/sabre/ix/application/dao/ProcessStatus.hbm.xml"/>
