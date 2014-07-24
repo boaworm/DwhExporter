@@ -10,6 +10,8 @@
         <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
         <property name="hibernate.default_schema">SBRFeed</property>
         <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.generate_statistics">false</property>
+        <property name="hibernate.use_sql_comments">false</property>
         <property name="hibernate.jdbc.batch_size ">20</property>
         <mapping resource="com/sabre/ix/application/dao/FileDataRaw.hbm.xml"/>
         <mapping resource="com/sabre/ix/application/dao/ProcessStatus.hbm.xml"/>

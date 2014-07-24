@@ -267,12 +267,11 @@ public class DataWarehouseExporter {
 
                         log.debug("");
 
-
                         //log.debug(row.toInsertSQL());
 
                         lastExportedRows = rows;
                     }
-                    log.debug("Successfully wrote " + bookingId + ", with " + rows.size() + " rows in " + sw.getTime() + " ms to DWH");
+                    log.info("Successfully wrote " + bookingId + ", with " + rows.size() + " rows in " + sw.getTime() + " ms to DWH");
                     sw.stop();
                 } catch (NullPointerException e) {
                     log.error("DataWarehouseExporter.processBooking : NullPointerException while processing booking " + bookingId, e);

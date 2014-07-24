@@ -42,6 +42,7 @@
       <jcsProperty key="jcs.default.elementattributes.IsRemote" value="true"/>  
       <jcsProperty key="jcs.default.elementattributes.IsLateral" value="true"/> 
     </jcsProperties> 
-  </distributedCacheDataLoader>  
-  <rootDataHandler className="com.sabre.ix.client.datahandler.IXClientDataHandlerImpl"/> 
+  </distributedCacheDataLoader>
+    <databaseDataLoader databaseXmlPath="c:/src/DwhExporter/config/database.xml"/>
+    <rootDataHandler className='com.sabre.ix.client.datahandler.IXDatabaseAwareClientDataHandlerImpl'/>
 </contextConfiguration>

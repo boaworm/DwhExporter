@@ -508,8 +508,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore // unignore me
-
     public void verify_TST_12_1_Z8MC3Z() throws IOException {
 
         booking = new Booking(bookingServices, loadTestData("Z8MC3Z.xml"));
@@ -1516,8 +1514,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore // unignore me
-
     public void verify_TST_10_1_75WVC9() throws IOException {
 
         //75WVC9
@@ -2100,6 +2096,9 @@ public class DWMapperTest {
         }
     }
 
+    // todo: This is correctly failing in staging. We need to fix the CIC.BOOKING_NAME_ITEM_ID
+    // bug, then we can reprocess this booking in staging, and this test should become green again
+    // IE: Not an exporter but a platform bug!
     @Test
     @Ignore
     public void verify_TST_for_non_AB_5YEFK4() throws IOException {
@@ -2137,6 +2136,7 @@ public class DWMapperTest {
 
     }
 
+    // todo: This may be the order of the PNRs. Need to figure this one out
     @Test
     @Ignore
     public void verify_TST_for_INF() throws IOException {
@@ -2230,7 +2230,6 @@ public class DWMapperTest {
 
 
     @Test
-    @Ignore // unignore me
     public void verify_TST_with_INF_2GJIXE() throws IOException {
 
         //2GJIXE
@@ -2272,8 +2271,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore // unignore me
-
     public void verify_TST_with_INF_2WKW66() throws IOException {
 
         //2GJIXE
@@ -2334,8 +2331,6 @@ public class DWMapperTest {
     }
 
     @Test
-    @Ignore // unignore me
-
     public void verify_differnt_Payment_for_TST_and_TSM_37PLZO() throws IOException {
         //37PLZO
         booking = new Booking(bookingServices, loadTestData("37PLZO.xml"));
@@ -2435,8 +2430,7 @@ public class DWMapperTest {
 
 
     @Test
-    @Ignore // unignore me
-
+    @Ignore
     public void verifyOpenJawsWithTicketNullValues_399ZTG() throws IOException {
         booking = new Booking(bookingServices, loadTestData("399ZTG.xml"));
         assertThat(booking.getRloc(), equalTo("399ZTG"));

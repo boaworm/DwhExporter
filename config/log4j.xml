@@ -82,7 +82,7 @@
     <priority value="TRACE"/>
   </category>
 
-    <!-- Suppressing MM warnings due to BookingId, BookingNameId etc -->
+    <!-- Suppressing MM warnings due to BookingId on some entities. This is OK -->
     <category name="com.calidris.integrityserver.framework.DataElement">
         <priority value="ERROR"/>
     </category>
@@ -108,8 +108,8 @@
   <!-- ======================= -->
   <root>
     <priority value="INFO"/>
-    <appender-ref ref="CONSOLE"/>
-    
+        <appender-ref ref="CONSOLE"/>
+
         <appender-ref ref="FILE"/>
 		
     <!--appender-ref ref="CHAINSAW"/-->
