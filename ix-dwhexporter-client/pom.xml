@@ -10,7 +10,7 @@
     <parent>
         <groupId>com.sabre.asxapps</groupId>
         <artifactId>dwhexporter</artifactId>
-        <version>6.2.1-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ix-dwhexporter-client</artifactId>
@@ -19,6 +19,30 @@
     <!--
     <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public-jdk7.runtime</url>
     -->
+
+    <repositories>
+        <repository>
+            <id>ix-public-repositories</id>
+            <!-- This one is used for releases -->
+            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>ix-public-snapshot-repository</id>
+            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/repositories/ix-snapshot-jdk7.runtime/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 
     <dependencies>
