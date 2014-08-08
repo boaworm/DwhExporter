@@ -1,7 +1,7 @@
 package com.sabre.ix.application;
 
-import com.sabre.ix.client.DcsFlightLeg;
-import com.sabre.ix.client.DcsFlightLegServices;
+//import com.sabre.ix.client.DcsFlightLeg;
+//import com.sabre.ix.client.DcsFlightLegServices;
 // import com.sabre.ix.client.OpsDcsLink;
 import com.sabre.ix.client.context.Context;
 import com.sabre.ix.client.dao.MetaModel;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DcsFlightLegClientTest {
 
-    DcsFlightLegServices dcsFlightLegServices;
+    //DcsFlightLegServices dcsFlightLegServices;
     @Mock
     Context context;
     @Mock
@@ -43,6 +43,7 @@ public class DcsFlightLegClientTest {
     MetaModelServices metaModelServices;
     MetaModel metaModel;
 
+    /*
     @Before
     public void setup() throws IOException, DocumentException {
         metaModel = prepareMetaModel(DocumentHelper.parseText(getFileAsString("metamodel.xml")));
@@ -72,6 +73,8 @@ public class DcsFlightLegClientTest {
         File testFile = new File("C:/dev/DwhExporter/testdata/" + fileName);
         return FileUtils.readFileToString(testFile);
     }
+
+    */
 
     // Test setup
     @SuppressWarnings("unchecked")
