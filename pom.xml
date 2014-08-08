@@ -11,18 +11,17 @@
     <groupId>com.sabre.asxapps</groupId>
     <artifactId>dwhexporter</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <name>DwhExporter</name>
+    <!--
     <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public</url>
+    -->
     <!-- For internal Sabre Developers. External developers need to redirect to appropriate repo -->
-
     <repositories>
         <repository>
             <id>ix-public-repositories</id>
-			<!--
+            <!-- This one is used for releases -->
             <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public</url>
--->
-			<url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public-jdk7.runtime</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -30,10 +29,9 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <!--
         <repository>
-            <id>ix-public-jenkins-repositories</id>
-            <url>http://ci-ix.sgdcelab.sabre.com:8080/jenkins</url>
+            <id>ix-public-snapshot-repository</id>
+            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/repositories/ix-snapshot-jdk7.runtime/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -41,13 +39,34 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        -->
     </repositories>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <source.language.level>1.7</source.language.level>
+        <target.language.level>1.7</target.language.level>
+        <platform.version>6.2.1-SNAPSHOT</platform.version>
+        <failsafe.skipITs>true</failsafe.skipITs>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.sabre.calidris</groupId>
+                <artifactId>bom</artifactId>
+                <version>6.2.1.001</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <!-- For internal Sabre Developers. External developers need to redirect to appropriate repo -->
     <pluginRepositories>
         <pluginRepository>
             <id>ix-plugin-public-repositories</id>
-            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public-jdk7.runtime/</url>
+            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
