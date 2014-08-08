@@ -41,12 +41,42 @@
             <version>${platform.version}</version>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.dcsdomain</groupId>
+            <artifactId>ix-dcsdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.opsdomain</groupId>
+            <artifactId>ix-opsdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.customerdomain</groupId>
+            <artifactId>ix-customerdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.namelinkdomain</groupId>
+            <artifactId>ix-namelinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
             <groupId>sabre.ixtoolkit</groupId>
             <artifactId>ix-client-impl</artifactId>
             <version>${platform.version}</version>
         </dependency>
 
-
+        <!-- Test tools -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
