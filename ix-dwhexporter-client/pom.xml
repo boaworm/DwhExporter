@@ -76,7 +76,17 @@
         </dependency>
         <dependency>
             <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
             <artifactId>ix-opsbookinglinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
