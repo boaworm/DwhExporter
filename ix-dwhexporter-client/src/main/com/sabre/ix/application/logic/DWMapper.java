@@ -236,12 +236,15 @@ public class DWMapper {
         Set<Long> serviceLineIDs = new HashSet<Long>();
         List<ServiceLine> serviceLines = new ArrayList<ServiceLine>();
 
+        Map<Long, ServiceLine> allServiceLines = new HashMap<Long, ServiceLine>();
+
         for (BookingNameItem bookingNameItem : bn.getBookingNameItems()) {
             for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
                 if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
                     serviceLineIDs.add(serviceLine.getServiceLineId());
                     serviceLines.add(serviceLine);
                 }
+                allServiceLines.put(serviceLine.getServiceLineId(), serviceLine);
             }
         }
         for (ServiceLine serviceLine : bn.getServiceLines()) {
@@ -249,32 +252,31 @@ public class DWMapper {
                 serviceLineIDs.add(serviceLine.getServiceLineId());
                 serviceLines.add(serviceLine);
             }
-        }
-        /*
-        for (BookingName bookingName : booking.getBookingNames()) {
-            for (BookingNameItem bookingNameItem : bookingName.getBookingNameItems()) {
-                for (ServiceLine serviceLine : bookingNameItem.getServiceLines()) {
-                    if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
-                        serviceLineIDs.add(serviceLine.getServiceLineId());
-                        serviceLines.add(serviceLine);
-                    }
-                }
-            }
-            for (ServiceLine serviceLine : bookingName.getServiceLines()) {
-                if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
-                    serviceLineIDs.add(serviceLine.getServiceLineId());
-                    serviceLines.add(serviceLine);
-                }
-            }
 
+            allServiceLines.put(serviceLine.getServiceLineId(), serviceLine);
         }
-        */
+
         for (ServiceLine serviceLine : booking.getServiceLines()) {
             if (serviceLine.getChargeableItemId() == chargeableItem.getChargeableItemId() && !serviceLineIDs.contains(serviceLine.getServiceLineId())) {
                 serviceLineIDs.add(serviceLine.getServiceLineId());
                 serviceLines.add(serviceLine);
             }
+
+            allServiceLines.put(serviceLine.getServiceLineId(), serviceLine);
         }
+
+        for (ChargeableItemCoupon coupon : chargeableItem.getChargeableItemCoupons()) {
+
+            if (!serviceLineIDs.contains(coupon.getServiceLineId())) {
+                // Possible a new one we should add...
+                ServiceLine serviceLine = allServiceLines.get(coupon.getServiceLineId());
+                if(serviceLine != null) {
+                    serviceLineIDs.add(serviceLine.getServiceLineId());
+                    serviceLines.add(serviceLine);
+                }
+            }
+        }
+
         return serviceLines;
     }
 
