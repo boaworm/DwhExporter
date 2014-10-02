@@ -42,6 +42,17 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>internal-repo-for-sqljdbc</id>
+            <url>http://maven.sabre.com/content/repositories/clojars/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
     </repositories>
 
 
@@ -108,6 +119,18 @@
             <groupId>sabre.ixtoolkit</groupId>
             <artifactId>ix-client-impl</artifactId>
             <version>${platform.version}</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>microsoft</groupId>
+            <artifactId>sqljdbc</artifactId>
+            <version>2.0</version>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>com.microsoft</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>3.0</version>
         </dependency>
 
         <!-- Test tools -->
