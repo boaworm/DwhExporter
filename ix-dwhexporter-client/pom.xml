@@ -48,21 +48,43 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
         </dependency>
+
         <dependency>
             <groupId>sabre.domains.bookingdomain</groupId>
             <artifactId>ix-bookingdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.bookingdomain</groupId>
+            <artifactId>ix-bookingdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>sabre.domains.dcsdomain</groupId>
             <artifactId>ix-dcsdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsdomain</groupId>
+            <artifactId>ix-dcsdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>sabre.domains.opsdomain</groupId>
+            <artifactId>ix-opsdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
             <groupId>sabre.domains.opsdomain</groupId>
             <artifactId>ix-opsdomain-client</artifactId>
             <version>${platform.version}</version>
+            <classifier>sources</classifier>
         </dependency>
+
         <dependency>
             <groupId>sabre.domains.opsbookinglinkdomain</groupId>
             <artifactId>ix-opsbookinglinkdomain</artifactId>
@@ -70,9 +92,23 @@
         </dependency>
         <dependency>
             <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
             <artifactId>ix-opsbookinglinkdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
         <dependency>
             <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
             <artifactId>ix-dcsbookinglinkdomain</artifactId>
@@ -80,24 +116,71 @@
         </dependency>
         <dependency>
             <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
             <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
         <dependency>
             <groupId>sabre.domains.customerdomain</groupId>
             <artifactId>ix-customerdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.customerdomain</groupId>
+            <artifactId>ix-customerdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>sabre.domains.namelinkdomain</groupId>
             <artifactId>ix-namelinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.namelinkdomain</groupId>
+            <artifactId>ix-namelinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>sabre.ixtoolkit</groupId>
+            <artifactId>ix-client-api</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.ixtoolkit</groupId>
+            <artifactId>ix-client-api</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>sabre.ixtoolkit</groupId>
+            <artifactId>ix-client-impl</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
             <groupId>sabre.ixtoolkit</groupId>
             <artifactId>ix-client-impl</artifactId>
             <version>${platform.version}</version>
+            <classifier>sources</classifier>
         </dependency>
+
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>sqljdbc4</artifactId>
