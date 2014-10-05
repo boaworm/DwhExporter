@@ -16,35 +16,14 @@
     <artifactId>ix-dwhexporter-client</artifactId>
     <packaging>jar</packaging>
     <name>DataWarehouseExporter Client</name>
-    <!--
-    <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public-jdk7.runtime</url>
-    -->
 
+
+    <!-- May need to upload sqljdbc4 to Nexus locally -->
+    <!-- Grab it from: http://www.microsoft.com/en-us/download/confirmation.aspx?id=11774 -->
     <repositories>
         <repository>
-            <id>ix-public-repositories</id>
-            <!-- This one is used for releases -->
-            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>ix-public-snapshot-repository</id>
-            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/repositories/ix-snapshot-jdk7.runtime/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>internal-repo-for-sqljdbc</id>
-            <url>http://maven.sabre.com/content/repositories/clojars/</url>
+            <url>http://maven.somewhere.com/content/repositories/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -52,7 +31,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-
     </repositories>
 
 
@@ -120,17 +98,10 @@
             <artifactId>ix-client-impl</artifactId>
             <version>${platform.version}</version>
         </dependency>
-        <!--
         <dependency>
-            <groupId>microsoft</groupId>
-            <artifactId>sqljdbc</artifactId>
-            <version>2.0</version>
-        </dependency>
-        -->
-        <dependency>
-            <groupId>com.microsoft</groupId>
+            <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>sqljdbc4</artifactId>
-            <version>3.0</version>
+            <version>4.0</version>
         </dependency>
 
         <!-- Test tools -->
