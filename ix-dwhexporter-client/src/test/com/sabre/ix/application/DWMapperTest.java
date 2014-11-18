@@ -70,20 +70,23 @@ public class DWMapperTest {
     List<Integer> multirow;
 
     private String testdataPath = "will be autodiscovered during setup";
+    private String configPath = "will be autodiscovered during setup";
 
     @Before
     public void setup() throws IOException, DocumentException {
         String hostName = InetAddress.getLocalHost().getHostName();
         if (hostName.contains("htlinux")) {
             testdataPath = "/home/henrik/src/DwhExporter/testdata/";
+            configPath = "/home/henrik/src/DwhExporter/config";
         } else if (hostName.contains("montecito")) {
             testdataPath = "/Volumes/2TB/src/DwhExporter/testdata/";
-        } else if (hostName.contains("H8460305022460")) {
-            testdataPath = "C:\\src\\DwhExporter\\testdata\\";
+            configPath = "/Volumes/2TB/src/DwhExporter/config";
         } else if (hostName.contains("H9470305477081")) {
             testdataPath = "C:\\src\\DwhExporter\\testdata\\";
+            configPath = "c:/src/DwhExporter/config";
         } else {
             testdataPath = "C:\\dev\\DwhExporter\\testdata\\";
+            configPath = "c:/dev/DwhExporter/DwhExporter/config";
         }
 
         mockMetaModel = prepareMetaModel(DocumentHelper.parseText(loadTestData("metamodel.xml")));
@@ -2470,13 +2473,13 @@ public class DWMapperTest {
             String rloc = fileName.substring(0, 6);
             try {
                 Context liveDBContext = ContextFactory.createContext();
-                Context liveWSContext = ContextFactory.createContext(new File("C:/dev/DwhExporter/DwhExporter/config/contextConfiguration_WS.xml"));
+                Context liveWSContext = ContextFactory.createContext(new File(configPath + "/contextConfiguration_WS.xml"));
                 BookingServices liveDBBookingServices = (BookingServices) liveDBContext.getDomainServices(Booking.class);
                 BookingServices liveWSBookingServices = (BookingServices) liveWSContext.getDomainServices(Booking.class);
                 List<Booking> bookings = liveWSBookingServices.retrieveByCCL("Booking.Rloc=\"" + rloc + "\"");
                 assertThat("Expected exactly one booking when querying by CCL and RLOC=" + rloc, bookings.size(), equalTo(1));
                 Booking liveWSBooking = bookings.get(0);
-                Booking liveDBBooking  = liveDBBookingServices.retrieveById(liveWSBooking.getBookingId());
+                Booking liveDBBooking = liveDBBookingServices.retrieveById(liveWSBooking.getBookingId());
 
                 String xmlString = liveDBBooking.toXml();
                 writeFile(rloc, xmlString);
