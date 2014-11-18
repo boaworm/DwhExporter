@@ -6,6 +6,7 @@ import com.sabre.ix.application.logic.DWMapper;
 import com.sabre.ix.application.output.ExportDBConnectionHandler;
 import com.sabre.ix.client.Booking;
 import com.sabre.ix.client.context.Context;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -203,7 +204,7 @@ public class DataWarehouseExporter {
 
                 sw.start();
                 log.debug("About to load booking " + bookingId + " from ODS");
-                booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DwhExporterBooking2");
+                booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DwhExporterBooking");
                 //booking = context.getDomainServices(Booking.class).retrieveById(bookingId, "DwhExporterBooking2");
 
                 log.debug("booking " + bookingId + " with " + booking.getBookingNames().size() + " name loaded in " + sw.getTime() + " ms");
@@ -214,7 +215,7 @@ public class DataWarehouseExporter {
             }
             if (booking != null) {
 
-                log.info("Handling booking " + booking.getRloc() + "/" + booking.getBookingId());
+                log.info("Handling booking " + booking.getRloc() + "/" + booking.getBookingId() + "/" + DateFormatUtils.format(booking.getBookingDate(), "yyyy-MM-dd HH:mm:SS"));
                 try {
                     sw.reset();
                     sw.start();
