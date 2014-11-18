@@ -33,7 +33,7 @@
         </repository>
         <repository>
             <id>ix-public-snapshot-repository</id>
-            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/repositories/ix-snapshot-jdk7.runtime/</url>
+            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public-jdk7.runtime/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
