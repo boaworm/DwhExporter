@@ -833,7 +833,7 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWith(), equalTo("2331140477"));
         assertThat(row.getIssInConnWithCpn(), equalTo("1"));
 
-        row = fileDataRaws.get(1);
+        row = fileDataRaws.get(3);
         assertThat(row.getDocumentNo(), equalTo("8204640286"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getPaxname(), equalTo("BONA/BIANCA"));
@@ -845,14 +845,14 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWith(), equalTo("2331140477"));
         assertThat(row.getIssInConnWithCpn(), equalTo("2"));
 
-        multirow = Arrays.asList(2, 3);
+        multirow = Arrays.asList(6, 7);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("2331140477"));
             assertThat(row.getDocumentClass(), equalTo("PAX"));
         }
 
-        row = fileDataRaws.get(4);
+        row = fileDataRaws.get(8);
         assertThat(row.getDocumentNo(), equalTo("8204640287"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getPaxname(), equalTo("RAUTMANN/BJOERN"));
@@ -864,7 +864,7 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWith(), equalTo("2331140476"));
         assertThat(row.getIssInConnWithCpn(), equalTo("1"));
 
-        row = fileDataRaws.get(5);
+        row = fileDataRaws.get(11);
         assertThat(row.getDocumentNo(), equalTo("8204640287"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getPaxname(), equalTo("RAUTMANN/BJOERN"));
@@ -876,7 +876,7 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWith(), equalTo("2331140476"));
         assertThat(row.getIssInConnWithCpn(), equalTo("2"));
 
-        multirow = Arrays.asList(6, 7);
+        multirow = Arrays.asList(14, 15);
         for (int rownum : multirow) {
             row = fileDataRaws.get(rownum);
             assertThat(row.getDocumentNo(), equalTo("2331140476"));
@@ -991,9 +991,9 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("8F6Y2M"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(8));
+        assertThat(fileDataRaws.size(), equalTo(14));
 
-        row = fileDataRaws.get(1);
+        row = fileDataRaws.get(0);
         assertThat(row.getDocumentNo(), equalTo("8204640770"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getPaxname(), equalTo("SCHROEDER/HENRY"));
@@ -1006,7 +1006,7 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWithCpn(), equalTo("1"));
 
 
-        row = fileDataRaws.get(2);
+        row = fileDataRaws.get(3);
         assertThat(row.getDocumentNo(), equalTo("8204640770"));
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getPaxname(), equalTo("SCHROEDER/HENRY"));
@@ -2272,7 +2272,7 @@ public class DWMapperTest {
         assertThat(booking.getRloc(), equalTo("2WKW66"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(4));
+        assertThat(fileDataRaws.size(), equalTo(2));
 
         row = fileDataRaws.get(0);
         assertThat(row.getDocumentNo(), equalTo("2340280451"));
