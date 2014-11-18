@@ -1407,7 +1407,7 @@ public class DWMapperTest {
         assertThat(row.getMcoreason(), equalTo("UKWN"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:CCVI414711XXXXXX0056/0416*CV/A90964C]"));
 
-        row = fileDataRaws.get(2);
+        row = fileDataRaws.get(1);
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getTixDepApt(), equalTo("BCN"));
@@ -1430,7 +1430,7 @@ public class DWMapperTest {
         assertThat(row.getIssInConnWith(), nullValue());
         //assertThat(row.getIssInConnWithCpn(), nullValue());   //diff: 3             //TODO IssInConnWithCpn
 
-        row = fileDataRaws.get(4);
+        row = fileDataRaws.get(5);
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getTixDepApt(), equalTo("TXL"));
@@ -1438,7 +1438,7 @@ public class DWMapperTest {
         assertThat(row.getMcoreason(), equalTo("UKWN"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:CCVI414711XXXXXX0056/0416*CV/A90964C]"));
 
-        row = fileDataRaws.get(5);
+        row = fileDataRaws.get(4);
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("A"));
         assertThat(row.getTixDepApt(), equalTo("TXL"));
