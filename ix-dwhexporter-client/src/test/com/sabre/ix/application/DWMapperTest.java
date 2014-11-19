@@ -1304,7 +1304,8 @@ public class DWMapperTest {
         assertThat(row.getTixFlightDt(), equalTo("100514"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-8206067154/DTAB/EUR13.90/26MAR14/BERAB08IB/23496605"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:ELV/DE43200505501009776921/JULIA BUECHSENMANN*A]"));
-        assertThat(row.getMcoreason(), equalTo("UKWN"));
+        //assertThat(row.getMcoreason(), equalTo("UKWN"));
+        assertThat(row.getMcoreason(), equalTo("VEPD"));
         assertThat(row.getMcoreasonSubCode(), equalTo("EPD"));
         assertThat(row.getIssInConnWith(), nullValue());
         assertThat(row.getIssInConnWithCpn(), nullValue());
@@ -1314,7 +1315,8 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
-        assertThat(row.getMcoreason(), equalTo("UKWN"));
+        assertThat(row.getMcoreason(), equalTo("VEPD"));
+        //assertThat(row.getMcoreason(), equalTo("UKWN"));
 
 
     }
@@ -1339,7 +1341,8 @@ public class DWMapperTest {
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-8205584670/DTAB/EUR6.90/27JAN14/PMIAB08IB/78492735"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:CCVI427784XXXXXX7291/0114*CV/A040357]"));
-        assertThat(row.getMcoreason(), equalTo("UKWN"));
+        //assertThat(row.getMcoreason(), equalTo("UKWN"));
+        assertThat(row.getMcoreason(), equalTo("VEPB"));
         assertThat(row.getMcoreasonSubCode(), equalTo("EPB"));
         assertThat(row.getIssInConnWith(), nullValue());
         assertThat(row.getIssInConnWithCpn(), nullValue());
@@ -1365,7 +1368,8 @@ public class DWMapperTest {
         assertThat(row.getTixFlightDt(), equalTo("40514"));
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-8205893364/DTAB/EUR27.90/04MAR14/BERAB08IB/23496605"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:ELV/DE62354500001202078729/CAROLINE HOERSKEN*A]"));
-        assertThat(row.getMcoreason(), equalTo("UKWN"));
+        assertThat(row.getMcoreason(), equalTo("VRNI"));
+        //assertThat(row.getMcoreason(), equalTo("UKWN"));
         assertThat(row.getMcoreasonSubCode(), equalTo("RNI"));
         assertThat(row.getIssInConnWith(), nullValue());
         assertThat(row.getIssInConnWithCpn(), nullValue());
@@ -1375,7 +1379,8 @@ public class DWMapperTest {
         assertThat(row.getDocumentClass(), equalTo("MCO"));
         assertThat(row.getEmdtreatedAs(), equalTo("S"));
         assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
-        assertThat(row.getMcoreason(), equalTo("UKWN"));
+        //assertThat(row.getMcoreason(), equalTo("UKWN"));
+        assertThat(row.getMcoreason(), equalTo("VRNI"));
 
     }
 

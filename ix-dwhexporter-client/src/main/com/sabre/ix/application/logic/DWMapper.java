@@ -270,7 +270,7 @@ public class DWMapper {
             if (!serviceLineIDs.contains(coupon.getServiceLineId())) {
                 // Possible a new one we should add...
                 ServiceLine serviceLine = allServiceLines.get(coupon.getServiceLineId());
-                if(serviceLine != null) {
+                if (serviceLine != null) {
                     serviceLineIDs.add(serviceLine.getServiceLineId());
                     serviceLines.add(serviceLine);
                 }
@@ -344,7 +344,16 @@ public class DWMapper {
                     FileDataRaw row = new FileDataRaw();
                     populateMCOFields(chargeableItem, booking, name, item, sLine, tstRow, row, itemRows);
 
-                    row.setMcoreason(ensureLength(sLine.getSecondaryType(), 100));
+                    if (item != null && item.getType() != null &&  item.getType().equalsIgnoreCase("IU")) {
+                        // As of 12.1, we correctly associate a service line to these chargeables. Thus there is now
+                        // a secondary code that is being used. Given that the code is always UKWN, this if/else
+                        // falls back to pulling the aircraft type for all IU segments
+                        // Here we say that if the type is UI, we use the aircraft code (which is now an insurance type)
+                        row.setMcoreason(ensureLength(item.getAircraftType(), 100));
+                    } else {
+                        row.setMcoreason(ensureLength(sLine.getSecondaryType(), 100));
+                    }
+
                     row.setMiscellaneousChargeOrderFreetext(ensureLength(sLine.getFreeText(), 999));
                     if (sLine.getServiceLineTypeCode().equalsIgnoreCase("SEA")) {
                         SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
