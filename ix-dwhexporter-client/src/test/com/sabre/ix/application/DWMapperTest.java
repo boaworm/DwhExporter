@@ -1935,44 +1935,95 @@ public class DWMapperTest {
         fileDataRaws = mapper.mapBooking(booking);
         assertThat(fileDataRaws.size(), equalTo(10));
 
-        row = fileDataRaws.get(2);
-        assertThat(row.getDocumentNo(), equalTo("8205568856"));
-        assertThat(row.getTixDepApt(), equalTo("FRA"));
-        assertThat(row.getTixDestApt(), nullValue());
-        assertThat(row.getSegNoTech(), equalTo(4));
-        assertThat(row.getDocumentClass(), equalTo("MCO"));
-        assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
-        assertThat(row.getFcmi(), equalTo("0"));
+        int rowsWithDocumentNumbersEndingIn55 = 0;
+        int rowsWithDocumentNumbersEndingIn56 = 0;
+
+        // printRows(fileDataRaws);
+
+        for (int i = 0; i < fileDataRaws.size(); ++i) {
+            FileDataRaw row = fileDataRaws.get(i);
+            if(row.getDocumentNo() == null) {
+                // This happens because there is no coupon tying the TSM with 8205568856
+                // to the IU segment. Unclear why this happens... I was unable to reproduce
+                // it in a fit-test.
+                fail("Discovered a row without a document number: " + row);
+            } else if (row.getDocumentNo().equalsIgnoreCase("8205568855") && row.getDocumentClass().equalsIgnoreCase("MCO")) {
+                assertThat(row.getDocumentNo(), equalTo("8205568855"));
+                assertThat(row.getTixDepApt(), equalTo("FRA"));
+                assertThat(row.getTixDestApt(), nullValue());
+                assertThat(row.getSegNoTech(), equalTo(3));
+                assertThat(row.getDocumentClass(), equalTo("MCO"));
+                assertThat(row.getEmdtreatedAs(), equalTo("S"));
+                assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
+                assertThat(row.getFcmi(), equalTo("0"));
+                assertThat(row.getMcoreason(), equalTo("VRND"));
+                assertThat(row.getMcoreasonSubCode(), equalTo("RND"));
+
+                row = fileDataRaws.get(++i);
+                assertThat(row.getDocumentNo(), equalTo("8205568855"));
+                assertThat(row.getTixDepApt(), equalTo("FRA"));
+                assertThat(row.getTixDestApt(), nullValue());
+                assertThat(row.getSegNoTech(), equalTo(3));
+                assertThat(row.getDocumentClass(), equalTo("MCO"));
+                assertThat(row.getEmdtreatedAs(), equalTo("S"));
+                assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
+                assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
+                assertThat(row.getMcoreason(), equalTo("VRND"));
+                assertThat(row.getMcoreasonSubCode(), equalTo("RND"));
+
+                row = fileDataRaws.get(++i);
+                assertThat(row.getDocumentNo(), equalTo("8205568855"));
+                assertThat(row.getTixDepApt(), equalTo("FRA"));
+                assertThat(row.getTixDestApt(), nullValue());
+                assertThat(row.getSegNoTech(), equalTo(3));
+                assertThat(row.getDocumentClass(), equalTo("MCO"));
+                assertThat(row.getEmdtreatedAs(), equalTo("S"));
+                assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
+                assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:16] [FreeText:ELV/DE47120300000017338328/JENNIFER TURBA*A]"));
+                assertThat(row.getMcoreason(), equalTo("VRND"));
+                assertThat(row.getMcoreasonSubCode(), equalTo("RND"));
+
+                rowsWithDocumentNumbersEndingIn55 += 3;
+
+            } else if (row.getDocumentNo().equalsIgnoreCase("8205568856") && row.getDocumentClass().equalsIgnoreCase("MCO")) {
+
+                assertThat(row.getDocumentNo(), equalTo("8205568856"));
+                assertThat(row.getTixDepApt(), equalTo("FRA"));
+                assertThat(row.getTixDestApt(), nullValue());
+                assertThat(row.getSegNoTech(), equalTo(4));
+                assertThat(row.getDocumentClass(), equalTo("MCO"));
+                assertThat(row.getEmdtreatedAs(), equalTo("S"));
+                assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
+                assertThat(row.getFcmi(), equalTo("0"));
+
+                row = fileDataRaws.get(++i);
+                assertThat(row.getDocumentNo(), equalTo("8205568856"));
+                assertThat(row.getTixDepApt(), equalTo("FRA"));
+                assertThat(row.getTixDestApt(), nullValue());
+                assertThat(row.getSegNoTech(), equalTo(4));
+                assertThat(row.getDocumentClass(), equalTo("MCO"));
+                assertThat(row.getEmdtreatedAs(), equalTo("S"));
+                assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
+                assertThat(row.getFcmi(), equalTo("0"));
+
+                row = fileDataRaws.get(++i);
+                assertThat(row.getDocumentNo(), equalTo("8205568856"));
+                assertThat(row.getTixDepApt(), equalTo("FRA"));
+                assertThat(row.getTixDestApt(), nullValue());
+                assertThat(row.getSegNoTech(), equalTo(4));
+                assertThat(row.getDocumentClass(), equalTo("MCO"));
+                assertThat(row.getEmdtreatedAs(), equalTo("S"));
+                assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
+
+                rowsWithDocumentNumbersEndingIn56 += 3;
+            } else {
+                // Ignore it
+            }
+        }
 
 
-        row = fileDataRaws.get(3);
-        assertThat(row.getDocumentNo(), equalTo("8205568856"));
-        assertThat(row.getTixDepApt(), equalTo("FRA"));
-        assertThat(row.getTixDestApt(), nullValue());
-        assertThat(row.getSegNoTech(), equalTo(4));
-        assertThat(row.getDocumentClass(), equalTo("MCO"));
-        assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
-
-        row = fileDataRaws.get(6);
-        assertThat(row.getDocumentNo(), equalTo("8205568855"));
-        assertThat(row.getTixDepApt(), equalTo("FRA"));
-        assertThat(row.getTixDestApt(), nullValue());
-        assertThat(row.getSegNoTech(), equalTo(3));
-        assertThat(row.getDocumentClass(), equalTo("MCO"));
-        assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getFopinformationFreetext(), equalTo("ELV/DE47120300000017338328/JENNIFER TURBA*A"));
-        assertThat(row.getFcmi(), equalTo("0"));
-        row = fileDataRaws.get(7);
-        assertThat(row.getDocumentNo(), equalTo("8205568855"));
-        assertThat(row.getTixDepApt(), equalTo("FRA"));
-        assertThat(row.getTixDestApt(), nullValue());
-        assertThat(row.getSegNoTech(), equalTo(3));
-        assertThat(row.getDocumentClass(), equalTo("MCO"));
-        assertThat(row.getEmdtreatedAs(), equalTo("S"));
-        assertThat(row.getMiscellaneousChargeOrderFreetext(), equalTo("LFT: [SubjectQualifier:3] [Type:P18] [FreeText:AB]"));
-
+        assertThat(rowsWithDocumentNumbersEndingIn55, equalTo(3));
+        assertThat(rowsWithDocumentNumbersEndingIn56, equalTo(3));
 
     }
 
@@ -2518,6 +2569,7 @@ public class DWMapperTest {
             System.out.println("getMiscellaneousInformationFreetext " + row.getMiscellaneousInformationFreetext());
             System.out.println("getOrigIssueInformationFreetext " + row.getOrigIssueInformationFreetext());
             System.out.println("getFopinformationFreetext " + row.getFopinformationFreetext());
+            System.out.println("getParentPnr " + row.getParentPnr());
             System.out.println("");
         }
     }

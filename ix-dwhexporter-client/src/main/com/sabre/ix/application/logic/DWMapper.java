@@ -354,16 +354,14 @@ public class DWMapper {
                         row.setMcoreason(ensureLength(sLine.getSecondaryType(), 100));
                     }
 
-                    row.setMiscellaneousChargeOrderFreetext(ensureLength(sLine.getFreeText(), 999));
+                    row.setMiscellaneousChargeOrderFreetext(ensureLength(SBRFreeTextParser.removeLinebreaks(sLine.getFreeText()), 999));
                     if (sLine.getServiceLineTypeCode().equalsIgnoreCase("SEA")) {
-                        SBRFreeTextParser parser = new SBRFreeTextParser(sLine.getFreeText());
+                        SBRFreeTextParser parser = new SBRFreeTextParser(SBRFreeTextParser.removeLinebreaks(sLine.getFreeText()));
                         handleSEA(row, sLine, parser);
                     }
 
-                    //these two line replace  the code below
-                    ServiceLine ticketingLine = null;
-                    ticketingLine = getRelevantTicketingLineNew(booking, sLine, item, name);
-
+                    //this line replaces the code below
+                    ServiceLine ticketingLine = getRelevantTicketingLineNew(booking, sLine, item, name);
 
                     /*
                     //we get the ticket fields by finding the FA line that has a reference to this service line:
@@ -538,7 +536,7 @@ public class DWMapper {
             return ticketingLine;
         }
 
-        if (ticketingLine == null && item != null) {
+        if (item != null) {
             //searchline may be a service line related to an MCO, but has no Reference: in free text (e.g. FP,FV,FZ)
             //get service lines related to the same chargeable item
             if (sLine.getBookingNameItemId() == 0) {
@@ -1052,13 +1050,14 @@ public class DWMapper {
         //#MH 07/01/14 - if no chargeableItem found, we item my belong to an INF - logic to retrieve ChargeableItem for Infants
 
         Booking booking = item.getBookingName().getBooking();
+        FOUND_CI_LABEL:
         for (ChargeableItem chargeableItemEntity : item.getBookingName().getChargeableItems()) {
             if (!isForInfant(chargeableItemEntity)) {          //assigning INF TST's like below causes duplicates
                 for (ChargeableItemCoupon couponEntity : chargeableItemEntity.getChargeableItemCoupons()) {
                     BookingNameItem bookingNameItem = getBookingNameItemById(booking, couponEntity.getBookingNameItemId());
                     if (bookingNameItem != null && bookingNameItem.getCrsSegmentLineNum() == item.getCrsSegmentLineNum()) {
                         chargeableItem = chargeableItemEntity;
-                        break;
+                        break FOUND_CI_LABEL;
                     }
                 }
             }
@@ -1344,7 +1343,7 @@ public class DWMapper {
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("OP")) {
             row.setOptionFreetext(ensureLength(wrap(row.getOptionFreetext()) + freeText, 999));
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("TK")) {
-            row.setTicketFreetext(ensureLength(wrap(row.getTicketFreetext()) + sLine.getFreeText(), 999));
+            row.setTicketFreetext(ensureLength(wrap(row.getTicketFreetext()) + SBRFreeTextParser.removeLinebreaks(sLine.getFreeText()), 999));
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("AP")) {
             handleAP(row, freeText);
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("APE")) {
@@ -1356,9 +1355,9 @@ public class DWMapper {
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("APH")) {
             row.setCustPhonePrivate(ensureLength(wrap(row.getCustPhonePrivate()) + freeText, 100));
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("AM") || sLine.getServiceLineTypeCode().equalsIgnoreCase("AM/")) {
-            handleAM(row, sLine.getFreeText(), freeText);
+            handleAM(row,SBRFreeTextParser.removeLinebreaks(sLine.getFreeText()), freeText);
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("AB") || sLine.getServiceLineTypeCode().equalsIgnoreCase("AB/")) {
-            handleAB(row, sLine.getFreeText(), freeText);
+            handleAB(row,SBRFreeTextParser.removeLinebreaks(sLine.getFreeText()), freeText);
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("RM")) {
             row.setGeneralRemarkFreetext(ensureLength(wrap(row.getGeneralRemarkFreetext()) + freeText, 999));
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("RC")) {
@@ -1370,9 +1369,9 @@ public class DWMapper {
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("RP")) {
             row.setRoutingPartyFreetext(ensureLength(wrap(row.getRoutingPartyFreetext()) + freeText, 999));
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("SK")) {
-            row.setSpecialKeywordsFreetext(ensureLength(wrap(row.getSpecialKeywordsFreetext()) + sLine.getFreeText(), 999));
+            row.setSpecialKeywordsFreetext(ensureLength(wrap(row.getSpecialKeywordsFreetext()) +SBRFreeTextParser.removeLinebreaks(sLine.getFreeText()), 999));
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("SSR")) {
-            row.setSpecialServiceRequestFreetext(ensureLength(wrap(row.getSpecialServiceRequestFreetext()) + sLine.getFreeText(), 999));
+            row.setSpecialServiceRequestFreetext(ensureLength(wrap(row.getSpecialServiceRequestFreetext()) +SBRFreeTextParser.removeLinebreaks(sLine.getFreeText()), 999));
             if (sLine.getSecondaryType() != null && sLine.getSecondaryType().equalsIgnoreCase("DOCS")) {
                 String comps[] = freeText.split("/");
                 row.setTixPassportNoFreetext(ensureLength(freeText, 999));
@@ -1381,7 +1380,7 @@ public class DWMapper {
                 }
             }
         } else if (sLine.getServiceLineTypeCode().equalsIgnoreCase("AI")) {
-            row.setAccountingInformationFreetext(ensureLength(wrap(row.getAccountingInformationFreetext()) + sLine.getFreeText(), 999));
+            row.setAccountingInformationFreetext(ensureLength(wrap(row.getAccountingInformationFreetext()) +SBRFreeTextParser.removeLinebreaks(sLine.getFreeText()), 999));
         }
     }
 

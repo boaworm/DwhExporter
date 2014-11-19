@@ -12,11 +12,15 @@ import java.util.regex.Pattern;
  */
 public class SBRFreeTextParser {
 
+    public static String removeLinebreaks(String s) {
+        return s.replaceAll("\n","").trim();
+    }
+
     private String freeText;
     private Map<String, String> pairs = new HashMap<String, String>();
 
     public SBRFreeTextParser(String freeText) {
-        this.freeText = freeText;
+        this.freeText = removeLinebreaks(freeText);
         parse();
     }
 
