@@ -16,221 +16,146 @@
     <artifactId>ix-dwhexporter-client</artifactId>
     <packaging>jar</packaging>
     <name>DataWarehouseExporter Client</name>
-    <!--
-    <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public-jdk7.runtime</url>
-    -->
-
-    <repositories>
-        <repository>
-            <id>ix-public-repositories</id>
-            <url>http://172.17.23.63:8081/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>ix-public-snapshot-repository</id>
-            <url>http://ci-ix.sgdcelab.sabre.com:8001/nexus/content/groups/public-jdk7.runtime/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
 
     <dependencies>
         <!-- No need for versions on child dependencies -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.6</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>travelocity</groupId>
-            <artifactId>elogging</artifactId>
-            <version>1.22</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
-            <version>3.6.10.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-commons-annotations</artifactId>
-            <version>3.2.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.12.1.GA</version>
-        </dependency>
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>13.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>jaxen</groupId>
-            <artifactId>jaxen</artifactId>
-            <version>1.1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.jcs</groupId>
-            <artifactId>jcs</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>3.2.5.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.6</version>
-        </dependency>
-        <dependency>
-            <groupId>antlr</groupId>
-            <artifactId>antlr</artifactId>
-            <version>2.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>jta</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>calidris.database</groupId>
-            <artifactId>ci-booking</artifactId>
-            <version>${platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>calidris.database</groupId>
-            <artifactId>ci-dbschema</artifactId>
-            <version>${platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>calidris.database</groupId>
-            <artifactId>ci-hibernatedao</artifactId>
-            <version>${platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>calidris.database</groupId>
-            <artifactId>ci-legacydao</artifactId>
-            <version>${platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>calidris.database</groupId>
-            <artifactId>ci-security-core</artifactId>
-            <version>${platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>calidris.libraries</groupId>
-            <artifactId>ci-javalib</artifactId>
-            <version>${platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>calidris.libraries</groupId>
-            <artifactId>ci-dblib</artifactId>
-            <version>${platform.version}</version>
-        </dependency>
+
+
         <dependency>
             <groupId>sabre.domains.bookingdomain</groupId>
             <artifactId>ix-bookingdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.bookingdomain</groupId>
+            <artifactId>ix-bookingdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>sabre.domains.dcsdomain</groupId>
             <artifactId>ix-dcsdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
+        <dependency>
+            <groupId>sabre.domains.dcsdomain</groupId>
+            <artifactId>ix-dcsdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
         <dependency>
             <groupId>sabre.domains.opsdomain</groupId>
             <artifactId>ix-opsdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.opsdomain</groupId>
+            <artifactId>ix-opsdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>sabre.domains.opsbookinglinkdomain</groupId>
             <artifactId>ix-opsbookinglinkdomain</artifactId>
             <version>${platform.version}</version>
         </dependency>
+        <!-- Note: We cannot have the DOMAIN source, as you get a duplicate .hbm.xml file
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+        -->
         <dependency>
             <groupId>sabre.domains.opsbookinglinkdomain</groupId>
             <artifactId>ix-opsbookinglinkdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
+        <!-- Note: We cannot have the DOMAIN source, as you get a duplicate .hbm.xml file
+        <dependency>
+            <groupId>sabre.domains.opsbookinglinkdomain</groupId>
+            <artifactId>ix-opsbookinglinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+        -->
         <dependency>
             <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
             <artifactId>ix-dcsbookinglinkdomain</artifactId>
             <version>${platform.version}</version>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+        -->
         <dependency>
             <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
             <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
+            <groupId>sabre.domains.dcsbookinglinkdomain</groupId>
+            <artifactId>ix-dcsbookinglinkdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>sabre.domains.customerdomain</groupId>
             <artifactId>ix-customerdomain-client</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.domains.customerdomain</groupId>
+            <artifactId>ix-customerdomain-client</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>sabre.domains.namelinkdomain</groupId>
+            <artifactId>ix-namelinkdomain-client</artifactId>
             <version>${platform.version}</version>
         </dependency>
         <dependency>
             <groupId>sabre.domains.namelinkdomain</groupId>
             <artifactId>ix-namelinkdomain-client</artifactId>
             <version>${platform.version}</version>
+            <classifier>sources</classifier>
         </dependency>
+
+        <dependency>
+            <groupId>sabre.ixtoolkit</groupId>
+            <artifactId>ix-client-api</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>sabre.ixtoolkit</groupId>
+            <artifactId>ix-client-api</artifactId>
+            <version>${platform.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
         <dependency>
             <groupId>sabre.ixtoolkit</groupId>
             <artifactId>ix-client-impl</artifactId>
@@ -238,58 +163,26 @@
         </dependency>
         <dependency>
             <groupId>sabre.ixtoolkit</groupId>
-            <artifactId>ix-client-api</artifactId>
+            <artifactId>ix-client-impl</artifactId>
             <version>${platform.version}</version>
+            <classifier>sources</classifier>
         </dependency>
-        <dependency>
-            <groupId>sabre.ixplatform</groupId>
-            <artifactId>ix-platform-api</artifactId>
-            <version>${platform.version}</version>
-        </dependency>
+
         <!-- Test tools -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-parent</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-generator</artifactId>
-            <version>1.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-integration</artifactId>
-            <version>1.3</version>
+            <artifactId>hamcrest-all</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
-            -->
-        <dependency>
-            <groupId>org.codehaus.woodstox</groupId>
-            <artifactId>woodstox-core-asl</artifactId>
-            <version>4.2.0</version>
         </dependency>
 
     </dependencies>

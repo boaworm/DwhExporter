@@ -44,8 +44,7 @@
       <jcsProperty key="jcs.default.elementattributes.IsLateral" value="true"/> 
     </jcsProperties> 
   </distributedCacheDataLoader>
-    <databaseDataLoader databaseXmlPath="c:/dev/DwhExporter/DwhExporter/config/database.xml"/>
-    <!--rootDataHandler className='com.sabre.ix.client.datahandler.IXDatabaseAwareClientDataHandlerImpl'/-->
-
-    <rootDataHandler className='com.sabre.ix.client.datahandler.IXClientDataHandlerImpl'/>
+    <databaseDataLoader databaseXmlPath="c:/src/DwhExporter/config/database.xml"/>
+    <rootDataHandler className='com.sabre.ix.client.datahandler.IXDatabaseAwareClientDataHandlerImpl'/>
+    <!--rootDataHandler className='com.sabre.ix.client.datahandler.IXClientDataHandlerImpl'/-->
 </contextConfiguration>

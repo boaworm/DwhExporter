@@ -2548,8 +2548,8 @@ public class DWMapperTest {
                 Booking liveWSBooking = bookings.get(0);
                 Booking liveDBBooking = liveDBBookingServices.retrieveById(liveWSBooking.getBookingId());
 
-                //String xmlString = liveDBBooking.toXml();
-                String xmlString = liveWSBooking.toXml(); // Writing WS Booking to file, not DB booking
+                String xmlString = liveDBBooking.toXml();
+                //String xmlString = liveWSBooking.toXml(); // Writing WS Booking to file, not DB booking
                 writeFile(rloc, xmlString);
                 return xmlString;
             } catch (Exception e) {
