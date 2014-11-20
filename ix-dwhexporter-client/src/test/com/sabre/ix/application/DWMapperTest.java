@@ -2326,40 +2326,51 @@ public class DWMapperTest {
     @Test
     public void verify_TST_with_INF_2WKW66() throws IOException {
 
-        //2GJIXE
         booking = new Booking(bookingServices, loadTestData("2WKW66.xml"));
         assertThat(booking.getRloc(), equalTo("2WKW66"));
 
         fileDataRaws = mapper.mapBooking(booking);
-        assertThat(fileDataRaws.size(), equalTo(2));
+        assertThat(fileDataRaws.size(), equalTo(4));
 
-        row = fileDataRaws.get(0);
+        int rowCount = 0;
+
+        row = fileDataRaws.get(rowCount++);
         assertThat(row.getDocumentNo(), equalTo("2340280451"));
         assertThat(row.getFarebaseCode(), equalTo("SNCRT"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("0.00"));
         assertThat(row.getFareCalc(), equalTo("DUS AB BER0.00AB DUS0.00EUR0.00END"));
+        assertThat(row.getPaxfirstName(), equalTo("ZOE FEE"));
+        assertThat(row.getPaxlastName(), equalTo("FIEBACK"));
 
-        row = fileDataRaws.get(1);
+        row = fileDataRaws.get(rowCount++);
         assertThat(row.getDocumentNo(), equalTo("2340280451"));
         assertThat(row.getFarebaseCode(), equalTo("LNCRT"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("0.00"));
         assertThat(row.getFareCalc(), equalTo("DUS AB BER0.00AB DUS0.00EUR0.00END"));
+        assertThat(row.getPaxfirstName(), equalTo("ZOE FEE"));
+        assertThat(row.getPaxlastName(), equalTo("FIEBACK"));
 
-        row = fileDataRaws.get(2);
+
+        row = fileDataRaws.get(rowCount++);
         assertThat(row.getDocumentNo(), equalTo("4639515248"));
         assertThat(row.getFarebaseCode(), equalTo("SNCRT"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("268.32"));
         assertThat(row.getFareCalc(), equalTo("DUS AB BER46.50AB DUS76.50EUR123.00END"));
+        assertThat(row.getPaxfirstName(), equalTo("CAROLIN B"));
+        assertThat(row.getPaxlastName(), equalTo("FIEBACK"));
 
-        row = fileDataRaws.get(3);
+
+        row = fileDataRaws.get(rowCount++);
         assertThat(row.getDocumentNo(), equalTo("4639515248"));
         assertThat(row.getFarebaseCode(), equalTo("LNCRT"));
         assertThat(row.getFcmi(), equalTo("0"));
         assertThat(row.getSectorTotalFare(), equalTo("268.32"));
         assertThat(row.getFareCalc(), equalTo("DUS AB BER46.50AB DUS76.50EUR123.00END"));
+        assertThat(row.getPaxfirstName(), equalTo("CAROLIN B"));
+        assertThat(row.getPaxlastName(), equalTo("FIEBACK"));
 
 
     }
@@ -2416,7 +2427,7 @@ public class DWMapperTest {
         assertThat(row.getFarebaseCode(), equalTo("YIDZL3R1"));
         assertThat(row.getTixFlightDt(), equalTo("40514"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
-        ;
+
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2339188938/ETAB/EUR95.78/10APR14/BERAB0111/23498915"));
         assertThat(row.getFopinformationFreetext(), equalTo("CVI426354XXXXXX8970/0118*CV/A162598"));
 
@@ -2428,7 +2439,7 @@ public class DWMapperTest {
         assertThat(row.getFarebaseCode(), equalTo("YIDZL1R1"));
         assertThat(row.getTixFlightDt(), equalTo("40514"));
         assertThat(row.getDocumentClass(), equalTo("PAX"));
-        ;
+
         assertThat(row.getTixInformationFreetext(), equalTo("PAX 745-2339188938/ETAB/EUR95.78/10APR14/BERAB0111/23498915"));
         assertThat(row.getFopinformationFreetext(), equalTo("CVI426354XXXXXX8970/0118*CV/A162598"));
 
@@ -2537,7 +2548,8 @@ public class DWMapperTest {
                 Booking liveWSBooking = bookings.get(0);
                 Booking liveDBBooking = liveDBBookingServices.retrieveById(liveWSBooking.getBookingId());
 
-                String xmlString = liveDBBooking.toXml();
+                //String xmlString = liveDBBooking.toXml();
+                String xmlString = liveWSBooking.toXml(); // Writing WS Booking to file, not DB booking
                 writeFile(rloc, xmlString);
                 return xmlString;
             } catch (Exception e) {
