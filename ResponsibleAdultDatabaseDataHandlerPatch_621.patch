@@ -1,0 +1,99 @@
+Index: ../ASx/Core/Toolkit/ix-client-impl/src/main/com/sabre/ix/client/datahandler/DatabaseDataHandlerImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../ASx/Core/Toolkit/ix-client-impl/src/main/com/sabre/ix/client/datahandler/DatabaseDataHandlerImpl.java	(revision 73932)
++++ ../ASx/Core/Toolkit/ix-client-impl/src/main/com/sabre/ix/client/datahandler/DatabaseDataHandlerImpl.java	(revision )
+@@ -2,7 +2,10 @@
+ 
+ import com.calidris.integrityserver.database.elementmanager.CIBooking;
+ import com.calidris.integrityserver.database.elementmanager.CIBookingMapper;
++import com.calidris.integrityserver.database.elementmanager.CIBookingName;
++import com.calidris.integrityserver.framework.DataElementHandle;
+ import com.calidris.java.sql.DBConnectionFactory;
++import com.calidris.logging.Logger;
+ import com.calidris.schema.deployer.ASxApplication;
+ import com.sabre.asx.client.schema.ClientRule;
+ import com.sabre.ix.client.area.GeographicAreaData;
+@@ -13,6 +16,10 @@
+ import com.sabre.ix.client.spi.*;
+ import com.sabre.ix.platform.cache.CacheHandler;
+ import org.apache.commons.io.FileUtils;
++import org.dom4j.Document;
++import org.dom4j.DocumentException;
++import org.dom4j.DocumentHelper;
++import org.dom4j.Element;
+ 
+ import java.io.File;
+ import java.io.IOException;
+@@ -26,6 +33,7 @@
+  * Copyright (C) Sabre Inc
+  */
+ public class DatabaseDataHandlerImpl implements DataHandler {
++    private static final Logger log = Logger.getLogger(DatabaseDataHandlerImpl.class);
+ 
+     public DatabaseDataHandlerImpl(ContextConfiguration contextConfiguration) {
+         String databaseXmlPath = contextConfiguration.getDatabaseConfig().attribute("databaseXmlPath").getText();
+@@ -125,7 +133,7 @@
+             com.calidris.integrityserver.framework.DataElementHandle dataElementHandle = CIBookingMapper.getInstance().findBookingByBookingID(bookingId);
+ 
+             CIBooking ciBooking = (CIBooking) dataElementHandle;
+-            final String ciBookingXml = ciBooking.toXml();
++            final String ciBookingXml = serializeToXMLAndAugmentWithEntityLinks(ciBooking);
+             return new ArrayList<String>() {{
+                 add(ciBookingXml);
+             }};
+@@ -134,6 +142,52 @@
+         } else {
+             throw new UnsupportedOperationException("DatabaseDataHandlerImpl does not support method: " + method);
+         }
++    }
++
++    private String serializeToXMLAndAugmentWithEntityLinks(CIBooking ciBooking) {
++        String cleanXml = ciBooking.toXml();
++
++        Document domDoc = null;
++        try {
++
++            // Lets see if there is some entity link(s)
++            for (CIBookingName ciBookingName : ciBooking.getNames()) {
++                DataElementHandle ciBookingNameResponsibleAdult = ciBookingName.getLinkedEntityInstance("RESPONSIBLEADULT");
++                if (ciBookingNameResponsibleAdult != null) {
++                    // We need to clone this data over to elsewhere
++                    if (domDoc == null) {
++                        domDoc = DocumentHelper.parseText(cleanXml);
++                    }
++
++                    // Now we have a document, lets see if we can find the matching name
++                    long ciBookingNameIDofInfant = ciBookingName.getBookingNameID();
++                    List<Element> bookingNameElementList = domDoc.getRootElement().elements("bookingName");
++                    for (Element nameCandidateElement : bookingNameElementList) {
++                        Element candidateInfantNameElement = nameCandidateElement.element("bookingNameId");
++                        if (Long.parseLong(candidateInfantNameElement.getText().trim()) == ciBookingNameIDofInfant) {
++                            // Found the right infant, apply the value
++                            CIBookingName rAdult = (CIBookingName) ciBookingNameResponsibleAdult;
++
++                            String bookingIdOfResponsibleAdult = Long.toString(rAdult.getBookingNameID());
++                            Element newResponsibleAdultAttribute = nameCandidateElement.addElement("responsibleAdult");
++                            newResponsibleAdultAttribute.setText(bookingIdOfResponsibleAdult);
++
++                            // Finally, bail out
++                            break;
++                        }
++                    }
++
++                }
++            }
++
++
++        } catch (DocumentException e) {
++            log.warn("Caught an exception while searching for responsible adults. Returning without any of that data", e);
++            return cleanXml;
++        }
++
++        return domDoc == null ? cleanXml : domDoc.asXML();
++
+     }
+ 
+     @Override
